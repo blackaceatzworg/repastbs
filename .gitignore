@@ -1,0 +1,5 @@
+*.class
+/release
+/output
+/target
+package.html

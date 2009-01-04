@@ -1,0 +1,24 @@
+import org.repastbs.actions.AbstractAction;
+
+class DeleteAction extends AbstractAction {
+	
+	public DeleteAction() {
+		super("Delete");
+	}
+	
+	public Object execute (Object parameters ) {
+		actualComponent = global.repast.getActualComponent();
+		if(actualComponent == null) {
+			global.repast.showErrorDialog("Please select model component to remove");
+			return null;
+		}
+		if(!actualComponent.isRemovable()) {
+			global.repast.showErrorDialog("Actual component can't be removed");
+			return null;
+		}
+		global.repast.getMainFrame().removeComponent(actualComponent);
+		return null;
+	}
+}
+
+return new DeleteAction();

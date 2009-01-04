@@ -1,0 +1,3 @@
+import org.repastbs.component.display.layout.FruchmanReingoldLayout;
+
+return new FruchmanReingoldLayout();

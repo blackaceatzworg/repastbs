@@ -1,0 +1,24 @@
+import org.repastbs.actions.AbstractAction;
+
+class UpdateFrameTitle extends AbstractAction {
+	
+	public UpdateFrameTitle() {
+		super("UpdateFrameTitle");
+	}
+	
+	public Object execute (Object parameters ) {
+		model = global.repast.getModel();
+		modelSaved = ((Boolean)global.repast.getProperty("modelSaved")).booleanValue();
+		modelFile = (File)global.repast.getProperty("modelFile");
+		
+		if(model == null)
+			return null;
+		
+		global.repast.getMainFrame().setTitle("Repast BS ["+(modelSaved?"":"*")+(modelFile==null?"New":modelFile.getName())
+				+" - "+model.getName()+"]");
+				
+		return null;
+	}
+}
+
+return new UpdateFrameTitle();

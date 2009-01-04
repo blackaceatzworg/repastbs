@@ -1,0 +1,3 @@
+import org.repastbs.editors.NetworkDisplayEditor;
+
+return new NetworkDisplayEditor();

@@ -1,0 +1,22 @@
+import org.repastbs.actions.AbstractAction;
+
+class MetalAction extends AbstractAction {
+	
+	public MetalAction() {
+		super("Metal");
+	}
+	public Object execute (Object parameters ) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+			global.repast.getActionManager().executeAction("UpdateLookAndFeel");
+			return null;
+		}
+		catch(Exception x)
+		{
+			x.printStackTrace();
+			return null;
+		}
+	}
+}
+
+return new MetalAction();

@@ -1,0 +1,3 @@
+import org.repastbs.editors.NetworkAgentEditor;
+
+return new NetworkAgentEditor();

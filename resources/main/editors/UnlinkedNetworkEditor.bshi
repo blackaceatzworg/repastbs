@@ -1,0 +1,33 @@
+import org.repastbs.editors.StringEditor;
+import org.repastbs.component.network.type.UnlinkedNetwork;
+
+class NetworkTypeEditor extends StringEditor {
+	
+	UnlinkedNetwork unlinkedNetwork;
+	
+	public NetworkTypeEditor() {
+		super("Unlinked network",false);
+		setLabel("Number of agents: ");
+	}
+	
+	public Class getSupportedClass() {
+		return UnlinkedNetwork.class;
+	}
+	
+	public void setEditedValue(org.repastbs.component.Component component) {
+		if(!(component instanceof UnlinkedNetwork))
+			throw new IllegalArgumentException("Edited value not supported by UnlinkedNetworkEditor");
+		unlinkedNetwork = (UnlinkedNetwork)component;
+		valueField.setText(unlinkedNetwork.getNodeCount().getDefaultValue());
+	}
+	
+	/**
+	 * @see org.repastbs.editors.Editor#getEditedValue()
+	 */
+	public org.repastbs.component.Component getEditedValue() {
+		unlinkedNetwork.getNodeCount().setDefaultValue(valueField.getText());
+		return unlinkedNetwork;
+	}
+}
+
+return new NetworkTypeEditor();

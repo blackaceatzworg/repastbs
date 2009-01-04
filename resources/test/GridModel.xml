@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model class="org.repastbs.model.GridModel" displayName="Grid model" name="GridModel">
+  <description></description>
+  <variables class="org.repastbs.component.VariablesComponent">
+    <variable name="space" class="uchicago.src.sim.space.Object2DGrid" accesible="false" parameter="false"></variable>
+    <variable name="agentGroupNumAgents" class="int" defaultValue="5000" accesible="true" parameter="true"></variable>
+  </variables>
+  <actions class="org.repastbs.component.ActionsComponent">
+    <action name="initAgents" returnType="">
+      <imports></imports>
+      <source></source>
+    </action>
+    <action name="randomAddToSpace" returnType="">
+      <imports>uchicago.src.sim.gui
+uchicago.src.sim.space
+uchicago.src.sim.util
+org.repastbs.component.grid
+</imports>      <source>int width = $2.getSizeX() - 1;
+int height = $2.getSizeY() - 1;
+int x, y;
+do {
+x = Random.uniform.nextIntFromTo(0, width);
+y = Random.uniform.nextIntFromTo(0, height);
+} while ($2.getObjectAt(x, y) != null);
+$1.setX(x);
+$1.setY(y);
+$2.putObjectAt(x, y, $1);
+</source>      <parameters>        <parameter>org.repastbs.component.grid.DefaultGridAgent</parameter>
+        <parameter>uchicago.src.sim.space.Object2DGrid</parameter>
+      </parameters>
+    </action>
+  </actions>
+  <schedule class="org.repastbs.component.ScheduleComponent"></schedule>
+  <agents class="org.repastbs.component.AgentsComponent">
+    <agent class="org.repastbs.component.grid.GridAgent" group="agentGroup" name="GridAgent">
+      <actions class="org.repastbs.component.ActionsComponent">
+        <action name="getVonNeumannNeighbors" returnType="java.util.Vector">
+          <imports>java.util</imports>
+          <source>return space.getVonNeumannNeighbors(x, y, false);</source>
+        </action>
+        <action name="getVonNeumannNeighbors" returnType="java.util.Vector">
+          <imports>java.util</imports>
+          <source>return space.getVonNeumannNeighbors(x, y, $1, $1, false);</source>
+          <parameters>
+            <parameter>int</parameter>
+          </parameters>
+        </action>
+        <action name="getMooreNeighbors" returnType="java.util.Vector">
+          <imports>java.util</imports>
+          <source>return space.getMooreNeighbors(x, y, false);</source>
+        </action>
+        <action name="getMooreNeighbors" returnType="java.util.Vector">
+          <imports>java.util</imports>
+          <source>return space.getMooreNeighbors(x, y, $1, $1, false);</source>
+          <parameters>
+            <parameter>int</parameter>
+          </parameters>
+        </action>
+        <action name="moveIfEmpty" returnType="boolean">
+          <imports></imports>
+          <source>if (space.getObjectAt($1, $2) == null) {
+	move($1, $2);
+	return true;
+} 
+return false;
+</source>          <parameters>            <parameter>int</parameter>
+            <parameter>int</parameter>
+          </parameters>
+        </action>
+        <action name="move" returnType="void">
+          <imports></imports>
+          <source>space.putObjectAt(x, y, null);
+space.putObjectAt($1, $2, this);
+if (torus) {
+$1 = ((Object2DTorus)space).xnorm($1);
+$2 = ((Object2DTorus)space).ynorm($2);
+}
+x = $1;
+y = $2;
+</source>          <parameters>            <parameter>int</parameter>
+            <parameter>int</parameter>
+          </parameters>
+        </action>
+      </actions>
+      <variables class="org.repastbs.component.VariablesComponent">
+        <variable name="space" class="uchicago.src.sim.space.Object2DGrid" accesible="true" parameter="false"></variable>
+        <variable name="x" class="int" accesible="true" parameter="false"></variable>
+        <variable name="y" class="int" accesible="true" parameter="false"></variable>
+        <variable name="torus" class="boolean" defaultValue="false" accesible="true" parameter="false"></variable>
+      </variables>
+      <schedule class="org.repastbs.component.ScheduleComponent"></schedule>
+    </agent>
+  </agents>
+  <gridSpace class="org.repastbs.component.grid.GridSpace" width="100" height="100"></gridSpace>
+  <gridDisplay class="org.repastbs.component.display.GridDisplay">
+    <color class="org.repastbs.component.ColorComponent">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+    </color>
+    <actions class="org.repastbs.component.ActionsComponent">
+      <action name="updateDisplay" returnType="">
+        <imports></imports>
+        <source>surface.updateDisplay();</source>
+      </action>
+    </actions>
+    <schedule class="org.repastbs.component.ScheduleComponent">
+      <scheduledAction action="updateDisplay" execution="0" tick="1" executeLast="false" index="-1" class="org.repastbs.component.ScheduledAction"></scheduledAction>
+    </schedule>
+  </gridDisplay>
+</model>

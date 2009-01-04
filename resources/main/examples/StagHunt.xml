@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model class="org.repastbs.model.NetworkModel" displayName="Stag Hunt with Switch" name="SwitchingStagHunt">
+  <description>From Skyrms and Pemantle, "A Dynamic Model of Social Network
+Formation." Proceedings of the National Academy of Sciences, August 1,
+2000, vol. 97, no. 16., pp. 9340 - 9346.
+
+The basic idea here is that every iteration of the simulation each
+agent chooses another agent at random to form a link with. The choice
+of whom to form a link with is determined by a vector of weights each
+agent has assigned to all the other agents. Each element of the vector
+corresponds the weight of another agent. The probabilty that agent i
+will form a link with j is the current weight of j divided by the sum
+of the entire vector of weights. When a link is formed that agent is
+reinforced, that is,  some value is added to the current
+weight of that agent.
+
+Stag hunt with switch indexes the reinforcement to the following payoff matix:
+
+            | Hunt Stag | Hunt Rabbit
+------------+-----------+-- -------
+Hunt Stag   | (1, 1)    | (0, .75)
+------------+------+----------
+Hunt Rabbit | (.75, 0)  | (.75, .75)
+------------+-----------+----------
+
+Half the agents begin as stag hunters and half as rabbit hunters. If a
+stag hunter i forms a link with a stag hunter j then each is updated
+in the other's weight vector by 1. If rabbit hunter forms a link with a
+stag hunter then the stag hunter's weight in the rabbit hunter's
+vector is increased by .75 and the rabbit hunter's weight in the stag
+hunter's vector is increased by 0. And so on for the other cells in
+the payoff matrix.
+
+After all the agent's have played
+the game and formed new links. Each agent is given the opportunity to
+switch to the strategy that yielded the best payoff. An agent will
+switch according to a user specified probability.
+
+This also implements discounting the past.
+
+Note that this is probably not how Skyrms and Pemantle implemented
+switching.
+
+You can also discount the past in this simulation.</description>
+  <variables class="org.repastbs.component.VariablesComponent">
+    <variable name="pastDiscount" class="java.lang.Float" defaultValue="1.0" accesible="true" parameter="true"></variable>
+    <variable name="switchPercent" class="java.lang.Float" defaultValue="0.1" accesible="true" parameter="true"></variable>
+    <variable name="nodesSize" class="int" defaultValue="40" accesible="true" parameter="true"></variable>
+    <variable name="nodesDensity" class="double" defaultValue="0.3" accesible="true" parameter="true"></variable>
+    <variable name="nodesAllowLoops" class="boolean" defaultValue="false" accesible="true" parameter="true"></variable>
+    <variable name="nodesSymmetric" class="boolean" defaultValue="false" accesible="true" parameter="true"></variable>
+  </variables>
+  <actions class="org.repastbs.component.ActionsComponent">
+    <action name="initAgents" returnType="java.lang.Void">
+      <imports>uchicago.src.sim.games
+java.util
+java.awt</imports>
+      <source>PayoffMatrix payoffmatrix = new PayoffMatrix(2, 2);
+payoffmatrix.setPayoff(0, 0, (float) 1, (float) 1);
+payoffmatrix.setPayoff(0, 1, (float) 0, 0.75F);
+payoffmatrix.setPayoff(1, 0, 0.75F, (float) 0);
+payoffmatrix.setPayoff(1, 1, 0.75F, 0.75F);
+Iterator iterator = nodes.iterator();
+while (iterator.hasNext()) {
+    NetworkAgent agent = (NetworkAgent) iterator.next();
+    agent.setDiscount(pastDiscount);
+    agent.setMatrix(payoffmatrix);
+    agent.init();
+}
+int i = 0;
+for (int j = nodes.size() / 2; i &lt; j; i++) {
+    NetworkAgent agent = (NetworkAgent) nodes.get(i);
+    agent.setStrategy(GameAgent.RIGHT);
+    agent.setColor(Color.GREEN);
+}
+</source>    </action>    <action name="switch1" returnType="java.lang.Void">      <imports>java.awt
+java.util
+uchicago.src.sim.util
+uchicago.src.sim.games</imports>
+      <source>int i = GameAgent.NULL;
+Color color = Color.BLUE;
+Iterator iterator = nodes.iterator();
+while (iterator.hasNext()) {
+    NetworkAgent agent = (NetworkAgent) iterator.next();
+    float f = uchicago.src.sim.util.Random.uniform.nextFloatFromTo(0.0F, 1.0F);
+    if (!(f &gt; switchPercent.floatValue())) {
+	if (i == GameAgent.NULL) {
+	    i = GameUtilities.getBestStrategy(getAgentList());
+	    if (i == GameAgent.RIGHT)
+		color = Color.green;
+	}
+	agent.setStrategy(i);
+	agent.setColor(color);
+    }
+}</source>
+    </action>
+  </actions>
+  <schedule class="org.repastbs.component.ScheduleComponent">
+    <scheduledAction action="initAgents" execution="0" tick="10" executeLast="false" index="-1" class="org.repastbs.component.ScheduledAction"></scheduledAction>
+    <scheduledAction action="switch1" execution="0" tick="2" executeLast="false" index="-1" class="org.repastbs.component.ScheduledAction"></scheduledAction>
+  </schedule>
+  <agents class="org.repastbs.component.AgentsComponent">
+    <agent class="org.repastbs.component.network.NetworkAgent" group="nodes" name="NetworkAgent">
+      <variables class="org.repastbs.component.VariablesComponent">
+        <variable name="discount" class="java.lang.Float" defaultValue="1.0" accesible="true" parameter="false"></variable>
+        <variable name="matrix" class="uchicago.src.sim.games.PayoffMatrix" defaultValue="" accesible="true" parameter="false"></variable>
+        <variable name="linker" class="uchicago.src.sim.network.Linker" defaultValue="" accesible="true" parameter="false"></variable>
+        <variable name="strategy" class="int" defaultValue="" accesible="true" parameter="false"></variable>
+        <variable name="payoff" class="float" defaultValue="" accesible="true" parameter="false"></variable>
+      </variables>
+      <actions class="org.repastbs.component.ActionsComponent">
+        <action name="init" returnType="java.lang.Void">
+          <imports>uchicago.src.sim.network</imports>
+          <source>UniformReinforcement ur = new UniformReinforcement(((SwitchingStagHunt)getModel()).getNodes(), (float) 1, this);
+ur.setPastDiscount(discount.floatValue());
+linker = new Linker(ur);
+</source>        </action>        <action name="step" returnType="java.lang.Void">          <imports></imports>          <source>this.clearOutEdges();
+linker.init();
+NetworkAgent agent = (NetworkAgent) linker.getNodeForLink();
+this.addOutEdge(new DefaultDrawableEdge(this, agent));
+float f
+    = matrix.getColPayoff(this.getStrategy(), agent.getStrategy());
+float f1
+    = matrix.getRowPayoff(this.getStrategy(), agent.getStrategy());
+agent.setPayoff(f);
+this.setPayoff(f1);
+linker.update(agent,f1);
+agent.getLinker().update(this, f);
+</source>        </action>      </actions>      <schedule class="org.repastbs.component.ScheduleComponent">        <scheduledAction action="step" execution="0" tick="2" executeLast="false" index="-1" class="org.repastbs.component.ScheduledAction"></scheduledAction>      </schedule>      <interface class="org.repastbs.component.interfaces.GameAgentInterface"></interface>      <networkType class="org.repastbs.component.network.type.RandomDensityNetwork">        <sizeVar>nodesSize</sizeVar>
+        <densityVar>nodesDensity</densityVar>
+        <allowLoopsVar>nodesAllowLoops</allowLoopsVar>
+        <symmetricVar>nodesSymmetric</symmetricVar>
+      </networkType>
+    </agent>
+  </agents>
+  <networkDisplay class="org.repastbs.component.display.NetworkDisplay" width="400" height="400">
+    <actions class="org.repastbs.component.ActionsComponent">
+      <action name="updateDisplay" returnType="java.lang.Void">
+        <imports></imports>
+        <source>surface.updateDisplay();</source>
+      </action>
+    </actions>
+    <schedule class="org.repastbs.component.ScheduleComponent">
+      <scheduledAction action="updateDisplay" execution="0" tick="1" executeLast="false" index="-1" class="org.repastbs.component.ScheduledAction"></scheduledAction>
+    </schedule>
+    <circularLayout class="org.repastbs.component.display.layout.CircularLayout">
+      <margin>6</margin>
+    </circularLayout>
+  </networkDisplay>
+</model>

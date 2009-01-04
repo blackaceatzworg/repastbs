@@ -1,0 +1,3 @@
+import org.repastbs.model.NetworkModel;
+
+return new NetworkModel();

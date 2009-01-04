@@ -1,0 +1,15 @@
+import org.repastbs.actions.AbstractAction;
+
+class InitAction extends AbstractAction {
+	
+	public InitAction() {
+		super("Init");
+	}
+	
+	public Object execute (Object parameters ) {
+		global.repast.getActionManager().executeAction("New");
+		return null;
+	}
+}
+
+return new InitAction();

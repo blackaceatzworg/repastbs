@@ -1,0 +1,59 @@
+import org.repastbs.actions.AbstractAction;
+import org.repastbs.gui.XMLFileFilter;
+import org.repastbs.Utils;
+
+import org.dom4j.io.XMLWriter;
+import org.dom4j.io.OutputFormat;
+
+class SaveAction extends AbstractAction {
+	
+	public SaveAction() {
+		super("Save");
+	}
+	
+	public Object execute (Object parameters ) {
+		fc = new JFileChooser();
+		fc.setFileFilter(new XMLFileFilter());
+		if(parameters==null)
+			saveAs = false;
+		else
+			saveAs = (Boolean)parameters.booleanValue();
+		modelFile = (File)global.repast.getProperty("modelFile");
+		if(!saveAs && modelFile == null)
+			saveAs = true;
+		int returnVal = JFileChooser.APPROVE_OPTION;
+		if(saveAs) {
+			returnVal = fc.showSaveDialog(global.repast.getMainFrame());
+			modelFile = fc.getSelectedFile();
+		}
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				//Using SAX
+				if(Utils.getExtension(modelFile)==null || 
+						!Utils.getExtension(modelFile).equals(Utils.xml))
+					modelFile = new File(modelFile.getAbsolutePath()+".xml");
+				FileWriter fw = new FileWriter(modelFile);
+				OutputFormat format = OutputFormat.createPrettyPrint();
+				format.setNewLineAfterDeclaration(true);
+				format.setTrimText(false);
+				format.setNewlines(true);
+				format.setXHTML(true);
+				XMLWriter xmlWriter = new XMLWriter(fw, format);
+				xmlWriter.startDocument();
+				global.repast.getModel().writeToXML(xmlWriter);
+				xmlWriter.endDocument();
+				xmlWriter.close();
+				fw.close();
+				global.repast.setProperty("modelSaved",new Boolean(true));
+				global.repast.setProperty("modelFile",modelFile);
+				global.repast.getActionManager().executeAction("UpdateFrameTitle");
+			} catch (Exception e) {
+				global.repast.showErrorDialog("Error occured while saving model: "+e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+}
+
+return new SaveAction();

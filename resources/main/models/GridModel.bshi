@@ -1,0 +1,3 @@
+import org.repastbs.model.GridModel;
+
+return new GridModel();

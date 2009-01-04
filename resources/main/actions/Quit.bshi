@@ -1,0 +1,28 @@
+import org.repastbs.actions.AbstractAction;
+import org.repastbs.RepastBS;
+
+class QuitAction extends AbstractAction {
+	
+	public QuitAction() {
+		super("Quit");
+	}
+	
+	public Object execute (Object parameters ) {
+		modelSaved = (Boolean)global.repast.getProperty("modelSaved");
+		if(modelSaved==null)
+			modelSaved = new Boolean(true);
+		model = global.repast.getModel();
+		if(!modelSaved.booleanValue()) {
+			int result = global.repast.showChooseDialog("Save model","Model "+model
+				+" has not been saved. Save current changes?");
+			if(result == JOptionPane.YES_OPTION)
+				global.repast.getActionManager().executeAction("Save");
+			else if (result == JOptionPane.CANCEL_OPTION)
+				return null;
+		}
+		System.exit(0);
+		return null;
+	}
+}
+
+return new QuitAction();

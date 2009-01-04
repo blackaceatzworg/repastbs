@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model class="org.repastbs.model.NetworkModel" displayName="Network model" name="NetworkModel">
+  <description></description>
+  <variables class="org.repastbs.component.VariablesComponent">
+    <variable name="nodesCount" class="int" defaultValue="40" accesible="true" parameter="true"></variable>
+  </variables>
+  <actions class="org.repastbs.component.ActionsComponent">
+    <action name="initAgents" returnType="java.lang.Void">
+      <imports></imports>
+      <source></source>
+    </action>
+    <action name="initAgents" returnType="xx">
+      <imports></imports>
+      <source></source>
+    </action>
+  </actions>
+  <schedule class="org.repastbs.component.ScheduleComponent"></schedule>
+  <agents class="org.repastbs.component.AgentsComponent">
+    <agent class="xx" group="nodes" name="NetworkAgent">
+      <actions class="org.repastbs.component.ActionsComponent"></actions>
+      <variables class="org.repastbs.component.VariablesComponent"></variables>
+      <schedule class="org.repastbs.component.ScheduleComponent"></schedule>
+      <networkType class="org.repastbs.component.network.type.UnlinkedNetwork">
+        <countVar>nodesCount</countVar>
+      </networkType>
+      <interface class="org.repastbs.component.interfaces.GameAgentInterface"></interface>
+    </agent>
+  </agents>
+  <networkDisplay class="xx" width="400" height="400">
+    <actions class="org.repastbs.component.ActionsComponent">
+      <action name="updateDisplay" returnType="java.lang.Void">
+        <imports></imports>
+        <source>surface.updateDisplay();</source>
+      </action>
+    </actions>
+    <schedule class="org.repastbs.component.ScheduleComponent">
+      <scheduledAction action="updateDisplay" execution="0" tick="1" executeLast="false" index="-1" class="org.repastbs.component.ScheduledAction"></scheduledAction>
+    </schedule>
+    <circularLayout class="org.repastbs.component.display.layout.CircularLayout">
+      <margin>6</margin>
+    </circularLayout>
+  </networkDisplay>
+</model>

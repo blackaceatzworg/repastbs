@@ -1,0 +1,3 @@
+import org.repastbs.component.network.type.RandomDensityNetwork;
+
+return new RandomDensityNetwork();

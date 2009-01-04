@@ -1,0 +1,5 @@
+BeanShell is a free software project. It's continued development
+depends on the interest and support of users and developers like you.
+The source code is available for you to use and extend or integrate
+into your software freely under either the terms of the Sun Public
+License or the GNU Lesser Public License.

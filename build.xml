@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<project name="Repast BS" default="Main Build">
+  <property name="version" value="0.1"></property>
+  <target name="Main Build" >
+	<echo message="Building Repast BS..."/>
+  </target>
+  
+  <target name="Make Release" >
+  	<echo message="Building Repast BS Release..."/>
+  </target>
+  
+  <target name="Compile" description="Compiles the Repast BS">
+    <echo message="Compiling..."/>
+    <javac srcdir="src/main" destdir="target" source="1.6" target="1.6"/>
+  </target>
+    
+  <target name="Clean">
+    <echo message="Cleaning..."/>
+    <delete dir="target"/>
+    <mkdir dir="target"/>
+  </target>
+  
+  <target name="Make Jar" depends="Compile" >
+    <echo message="Building Repast BS Jar..."/>
+    <mkdir dir="release"/>
+    <jar destfile="release/repastbs.jar" manifest="resources/main/manifest"  basedir="target" includes="org/repastbs/**,properties/**">
+    </jar>
+  </target>
+  
+  <target name="Make release" depends="Make Jar" >
+  	<echo message="Building Repast BS Release.."/>
+    <delete file="release/RepastBS-${version}.zip"/>
+    <zip destfile="release/RepastBS-${version}.zip">
+        <zipfileset dir="target/actions" prefix="actions"/>
+        <zipfileset dir="target/components" prefix="components"/>
+        <zipfileset dir="target/editors" prefix="editors"/>
+      	<zipfileset dir="target/examples" prefix="examples"/>
+      	<zipfileset dir="target/icons" prefix="icons"/>
+        <zipfileset dir="target/licenses" prefix="licenses"/>
+      	<zipfileset dir="target/models" prefix="models"/>
+      	<zipfileset dir="release" includes="repastbs.jar" fullpath="repastbs.jar"/>
+      	<zipfileset dir="lib" prefix="lib"/>
+      </zip>
+  </target>
+</project>

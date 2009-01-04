@@ -1,0 +1,15 @@
+import org.repastbs.actions.AbstractAction;
+
+class SaveAsAction extends AbstractAction {
+	
+	public SaveAsAction() {
+		super("SaveAs");
+	}
+	
+	public Object execute (Object parameters ) {
+		global.repast.getActionManager().executeAction("Save",new Boolean(true));
+		return null;
+	}
+}
+
+return new SaveAsAction();

@@ -1,0 +1,45 @@
+import org.repastbs.actions.AbstractAction;
+import org.repastbs.gui.ModelChooser;
+
+class NewAction extends AbstractAction {
+	
+	public NewAction() {
+		super("New");
+	}
+	
+	public Object execute (Object parameters ) {
+		modelSaved = (Boolean)global.repast.getProperty("modelSaved");
+		if(modelSaved == null)
+			modelSaved = new Boolean(true);
+
+		if(!modelSaved.booleanValue()) {
+			int result = global.repast.showChooseDialog("Save model","Model "+global.repast.getModel()
+				+" has not been saved. Save current changes?");
+			if(result == JOptionPane.YES_OPTION)
+				global.repast.getActionManager().executeAction("Save");
+			else if (result == JOptionPane.CANCEL_OPTION)
+				return null;
+		}
+		global.repast.setModel(null);
+		ModelChooser chooser = new ModelChooser(global.repast.getMainFrame(),
+			global.repast.getModelTemplates());
+		chooser.setVisible(true);
+		try {
+			if(chooser.getSelectedModel()!=null) {
+				global.repast.setModel(chooser.getSelectedModel().getClass().newInstance());
+				global.repast.getModel().createNew();
+			} else
+				global.repast.setModel(null);
+		} catch (Exception e) {
+			global.repast.showErrorDialog("Error creating new model: "+e.getMessage());
+			e.printStackTrace();
+		}
+		global.repast.getMainFrame().refreshModel();
+		global.repast.setProperty("modelFile",null);
+		global.repast.setProperty("modelSaved",false);
+		global.repast.getActionManager().executeAction("UpdateFrameTitle");
+		return null;
+	}
+}
+
+return new NewAction();

@@ -1,0 +1,21 @@
+import org.repastbs.actions.AbstractAction;
+import org.repastbs.editors.Editor;
+import java.util.Iterator;
+
+class UpdateLookAndFeel extends AbstractAction {
+	
+	public UpdateLookAndFeel() {
+		super("UpdateLookAndFeel");
+	}
+	
+	public Object execute (Object parameters ) {
+		SwingUtilities.updateComponentTreeUI(global.repast.getMainFrame());
+		for (Iterator iter = global.repast.getEditorManager().getEditors().iterator(); iter.hasNext();) {
+			Editor editor = (Editor) iter.next();
+			SwingUtilities.updateComponentTreeUI(editor.getEditorPanel());
+		}
+		return null;
+	}
+}
+
+return new UpdateLookAndFeel();

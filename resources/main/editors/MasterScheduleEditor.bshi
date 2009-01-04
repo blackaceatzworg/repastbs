@@ -1,0 +1,3 @@
+import org.repastbs.editors.MasterScheduleEditor;
+
+return new MasterScheduleEditor();

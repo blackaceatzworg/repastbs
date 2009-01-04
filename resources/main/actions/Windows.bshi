@@ -1,0 +1,22 @@
+import org.repastbs.actions.AbstractAction;
+
+class WindowsAction extends AbstractAction {
+	
+	public WindowsAction() {
+		super("Windows");
+	}
+	public Object execute (Object parameters ) {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			global.repast.getActionManager().executeAction("UpdateLookAndFeel");
+			return null;
+		}
+		catch(Exception x)
+		{
+			x.printStackTrace();
+			return null;
+		}
+	}
+}
+
+return new WindowsAction();

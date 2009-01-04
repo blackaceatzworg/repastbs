@@ -1,0 +1,44 @@
+import org.repastbs.actions.AbstractAction;
+import org.repastbs.gui.XMLFileFilter;
+
+import org.dom4j.Document;
+import org.dom4j.io.SAXReader;
+import org.dom4j.Node;
+
+class OpenAction extends AbstractAction {
+	
+	public OpenAction() {
+		super("Open");
+	}
+	
+	public Object execute (Object parameters ) {
+		JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
+		fc.setFileFilter(new XMLFileFilter());
+		int returnVal = fc.showOpenDialog(global.repast.getMainFrame());
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				model = null;
+				//using DOM
+				SAXReader reader = new SAXReader();
+				Document document = reader.read(fc.getSelectedFile());
+				document.normalize();
+				Node root = document.selectSingleNode("//model");
+				Class modelClass = Class.forName(root.valueOf("@class"));
+				model = (Model)modelClass.newInstance();
+				model.createFromXML(root);
+				global.repast.setModel(model);
+				global.repast.setProperty("modelFile",fc.getSelectedFile());
+				global.repast.setProperty("modelSaved",true);
+				global.repast.getActionManager().executeAction("UpdateFrameTitle");
+			} catch (Exception e) {
+				global.repast.showErrorDialog("Error occured while loading model: "+e.getMessage());
+				e.printStackTrace();
+			}
+		}		
+		if(global.repast.getModel()!=null)
+			global.repast.getMainFrame().refreshModel();
+		return global.repast.getModel();
+	}
+}
+
+return new OpenAction();

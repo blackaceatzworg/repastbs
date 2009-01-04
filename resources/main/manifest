@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: properties/ lib/bsh-2.0b4.jar lib/repast.jar lib/javassist.jar lib/dom4j-1.6.1.jar lib/colt.jar lib/jaxen-1.1.jar lib/jode-1.1.1-embedded.jar lib/trove.jar
+Main-Class: org.repastbs.RepastBS

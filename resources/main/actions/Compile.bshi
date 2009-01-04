@@ -1,0 +1,23 @@
+import org.repastbs.actions.AbstractAction;
+
+class CompileAction extends AbstractAction {
+	
+	public CompileAction() {
+		super("Compile");
+	}
+	
+	public Object execute (Object parameters ) {
+		if(global.repast.getModel()==null) {
+			global.repast.showErrorDialog("Create or load model first");
+			return null;
+		}
+		global.repast.getModel().generateFields();
+		global.repast.getModel().generateMethods();
+		global.repast.getModel().getGenerator().saveToByteCode("output");
+		global.repast.getModel().getGenerator().saveSourceCode("output");
+		global.repast.showDialog("Compile succesfull", "Compile", JOptionPane.INFORMATION_MESSAGE);		
+		return null;
+	}
+}
+
+return new CompileAction();

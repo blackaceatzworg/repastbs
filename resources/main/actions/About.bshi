@@ -1,0 +1,20 @@
+import org.repastbs.actions.AbstractAction;
+
+class AboutAction extends AbstractAction {
+	
+	public AboutAction() {
+		super("About");
+	}
+	
+	public Object execute (Object parameters ) {
+		global.repast.showMessageDialog(
+			"Repast BS - modeling tool for repast\n"+
+ 			"Author:  ¼udovít Hajzer\n"+
+ 			"Master’S Thesis: Development of a Modular Modeling Environment for Repast\n"+
+			"Supervisor: MSc. Ladislav Samuelis, CSc.\n"+
+			"Consultant: László Gulyás, Ph.D.\n");
+		return null;
+	}
+}
+
+return new AboutAction();

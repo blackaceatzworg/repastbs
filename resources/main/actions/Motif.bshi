@@ -1,0 +1,22 @@
+import org.repastbs.actions.AbstractAction;
+
+class MotifAction extends AbstractAction {
+	
+	public MotifAction() {
+		super("Motif");
+	}
+	public Object execute (Object parameters ) {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+			global.repast.getActionManager().executeAction("UpdateLookAndFeel");
+			return null;
+		}
+		catch(Exception x)
+		{
+			x.printStackTrace();
+			return null;
+		}
+	}
+}
+
+return new MotifAction();
