@@ -1,3 +1,11 @@
+/**
+ * File: MappedComponent.java
+ * Program: Repast BS
+ * Author:  Ľudovít Hajzer, Zdenko Osina
+ * Master's Thesis:	System Repast
+ * Supervisor: Ing. Ladislav Samuelis, CSc.
+ * Consultant: László Gulyás, Ph.D.
+ */
 package org.repastbs.component;
 
 import javax.xml.bind.annotation.XmlAccessType;

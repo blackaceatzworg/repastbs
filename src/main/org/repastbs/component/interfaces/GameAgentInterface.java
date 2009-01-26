@@ -1,10 +1,10 @@
 /**
  * File: GameAgentInterface.java
  * Program: Repast BS
- * Author:  ¼udovít Hajzer
- * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
- * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: László Gulyás, Ph.D.
+ * Author:  Ä½udovÃ­t Hajzer, Zdenko Osina
+ * Master's Thesis:	System Repast
+ * Supervisor: Ing. Ladislav Samuelis, CSc.
+ * Consultant: LÃ¡szlÃ³ GulyÃ¡s, Ph.D.
  */
 package org.repastbs.component.interfaces;
 
@@ -15,7 +15,7 @@ import org.repastbs.dynamic.DynamicGenerator;
  * Implementation of component interface
  * This interfaces implements uchicago.src.sim.games.GameAgent 
  * interface in generated class
- * @author ¼udovít Hajzer
+ * @author ï¿½udovï¿½t Hajzer
  *
  */
 public class GameAgentInterface extends AbstractComponentInterface {

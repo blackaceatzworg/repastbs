@@ -1,10 +1,10 @@
 /**
  * File: MasterSchedule.java
  * Program: Repast BS
- * Author:  ¼udovít Hajzer
- * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
- * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: László Gulyás, Ph.D.
+ * Author:  Ä½udovÃ­t Hajzer, Zdenko Osina
+ * Master's Thesis:	System Repast
+ * Supervisor: Ing. Ladislav Samuelis, CSc.
+ * Consultant: LÃ¡szlÃ³ GulyÃ¡s, Ph.D.
  */
 package org.repastbs.component;
 
@@ -23,7 +23,7 @@ import org.repastbs.dynamic.DynamicGenerator;
 
 /**
  * Master schedule is responsible for generation of all schedules in model
- * @author ¼udovít Hajzer
+ * @author ï¿½udovï¿½t Hajzer
  *
  */
 public class MasterSchedule extends AbstractComponent implements DynamicChanger {

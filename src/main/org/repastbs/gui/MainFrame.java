@@ -103,7 +103,7 @@ public class MainFrame extends JFrame implements TreeSelectionListener, TreeMode
 		addToolbarButton("Compile", "Compile model", "Compile");
 		addToolbarButton("Run","Run simulation", "Run");
 		toolBar.addSeparator(new Dimension(10,32));
-		addToolbarButton("Marshaller","Marshallingg model","Marshalling");
+		addToolbarButton("Marshaller","Marshalling model","Marshalling");
 		addToolbarButton("Unmarshaller","Unmarshalling model","UnMarshalling");
 
 		toolBar.setFloatable(false);

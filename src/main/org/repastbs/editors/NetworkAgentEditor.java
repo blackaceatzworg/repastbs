@@ -1,10 +1,10 @@
 /**
  * File: NetworkAgentEditor.java
  * Program: Repast BS
- * Author:  ¼udovít Hajzer
- * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
- * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: László Gulyás, Ph.D.
+ * Author:  Ä½udovÃ­t Hajzer, Zdenko Osina
+ * Master's Thesis:	System Repast
+ * Supervisor: Ing. Ladislav Samuelis, CSc.
+ * Consultant: LÃ¡szlÃ³ GulyÃ¡s, Ph.D.
  */
 package org.repastbs.editors;
 
@@ -24,7 +24,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing NetworkAgent components
- * @author  ¼udovít Hajzer
+ * @author  ï¿½udovï¿½t Hajzer
  */
 public class NetworkAgentEditor extends AbstractEditor implements ActionListener {
 	

@@ -1,10 +1,10 @@
 /**
  * File: AbstractComponent.java
  * Program: Repast BS
- * Author:  �udov�t Hajzer
- * Master�S Thesis:	Development of a Modular Modeling Environment for Repast
- * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: L�szl� Guly�s, Ph.D.
+ * Author:  Ľudovít Hajzer, Zdenko Osina
+ * Master's Thesis:	System Repast
+ * Supervisor: Ing. Ladislav Samuelis, CSc.
+ * Consultant: László Gulyás, Ph.D.
  */
 package org.repastbs.component;
 
