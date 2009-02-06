@@ -31,9 +31,7 @@ public class MarshallAction extends AbstractAction {
 		Component data = repastBS.getModel();
         JAXBContext context;
         try {
-
             //context = JAXBContext.newInstance(AbstractComponent.class);
-
             context = JAXBContext.newInstance(MappedComponent.class);
 
             Marshaller marshaller = context.createMarshaller();
@@ -42,8 +40,8 @@ public class MarshallAction extends AbstractAction {
             toMarshall.setName(data.getName());
             marshaller.marshal(toMarshall, System.out);
         } catch (JAXBException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	System.out.println("marshalling model exception");
+        	e.printStackTrace();
         }
 		return null;
 	}

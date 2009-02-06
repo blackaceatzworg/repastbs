@@ -1,16 +1,15 @@
 /**
  * File: AllTests.java
  * Program: Repast BS
- * Author:  Ä½udovÃ­t Hajzer, Zdenko Osina
- * Master's Thesis:	System Repast
- * Supervisor: Ing. Ladislav Samuelis, CSc.
- * Consultant: LÃ¡szlÃ³ GulyÃ¡s, Ph.D.
- */
-package org.repastbs.test;
+ * Author:  ¼udovít Hajzer
+ * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
+ * Supervisor: MSc. Ladislav Samuelis, CSc.
+ * Consultant: László Gulyás, Ph.D.
+ */package org.repastbs.test;
 
 /**
  * Class that runs all tests
- * @author ï¿½udovï¿½t Hajzer
+ * @author ¼udovít Hajzer
  *
  */
 public class AllTests {

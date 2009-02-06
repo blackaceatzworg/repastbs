@@ -1,10 +1,10 @@
 /**
  * File: ManagersTest.java
  * Program: Repast BS
- * Author:  Ä½udovÃ­t Hajzer, Zdenko Osina
- * Master's Thesis:	System Repast
- * Supervisor: Ing. Ladislav Samuelis, CSc.
- * Consultant: LÃ¡szlÃ³ GulyÃ¡s, Ph.D.
+ * Author:  ¼udovít Hajzer
+ * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
+ * Supervisor: MSc. Ladislav Samuelis, CSc.
+ * Consultant: László Gulyás, Ph.D.
  */
 package org.repastbs.test;
 
@@ -40,7 +40,7 @@ import org.repastbs.editors.NoEditor;
 
 /**
  * Unit test to test managers funcionality
- * @author ï¿½udovï¿½t Hajzer
+ * @author ¼udovít Hajzer
  *
  */
 @RunWith(JMock.class)

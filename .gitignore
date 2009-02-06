@@ -3,3 +3,6 @@
 /output
 /target
 package.html
+CVS
+.cvsignore
+repastbs.nsi

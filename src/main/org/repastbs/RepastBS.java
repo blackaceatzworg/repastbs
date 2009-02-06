@@ -25,8 +25,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.repastbs.actions.Action;
 import org.repastbs.actions.ActionManager;
-import org.repastbs.actions.MarshallAction;
-import org.repastbs.actions.UnMarshallAction;
 import org.repastbs.component.Component;
 import org.repastbs.component.ComponentManager;
 import org.repastbs.editors.Editor;
@@ -88,9 +86,7 @@ public class RepastBS implements ActionListener, WindowListener {
 		registerActions();
 		registerModels();
 		registerIcons(new File("./icons"));
-		
 		registerComponents(new File("./components"));
-		actionManager.registerAction(new MarshallAction(this));
 	}
 
 	/**
@@ -112,7 +108,7 @@ public class RepastBS implements ActionListener, WindowListener {
 		variableTypes.add(String.class);
 
 		RepastBS main = new RepastBS();
-		main.getActionManager();
+		//main.getActionManager();
 		MainFrame mainFrame = new MainFrame(main);
 		main.setMainFrame(mainFrame);
 		registerEditors(main);
@@ -121,7 +117,6 @@ public class RepastBS implements ActionListener, WindowListener {
 		mainFrame.addWindowListener(main);
 		mainFrame.refreshModel();
 		actionManager.executeAction("Init");
-		actionManager.registerAction(new UnMarshallAction());
 	}
 
 	/**
@@ -148,6 +143,7 @@ public class RepastBS implements ActionListener, WindowListener {
 
 				try {
 					Action action = (Action)interpreter.source(actions[i].getAbsolutePath());
+					System.out.println("Registrujem akciu: " + actions[i].getAbsolutePath());
 					actionManager.registerAction(action);
 				} catch (EvalError x) {
 					showErrorDialog("Error registering action "

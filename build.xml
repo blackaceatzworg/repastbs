@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project name="Repast BS" default="Main Build">
-  <property name="version" value="0.1"></property>
+  <property name="version" value="0.1.1"></property>
   <target name="Main Build" >
 	<echo message="Building Repast BS..."/>
   </target>

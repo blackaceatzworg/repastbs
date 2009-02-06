@@ -1,0 +1,3 @@
+import org.repastbs.actions.MarshallAction;
+
+return new MarshallAction(global.repast);

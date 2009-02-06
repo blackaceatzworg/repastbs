@@ -32,7 +32,8 @@ public class UnMarshallAction extends AbstractAction {
 //            unmarshaller.unmarshal(data, System.out);
         } catch (JAXBException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+        	System.out.println("unmarshalling model exception");
+        	e.printStackTrace();
         }
         System.out.println("UnMarshalling model");
 		return null;
