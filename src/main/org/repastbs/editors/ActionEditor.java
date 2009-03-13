@@ -36,7 +36,7 @@ import org.repastbs.gui.models.VariablesModel;
 
 /**
  * Editor used for editing/creating Action components
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class ActionEditor extends AbstractEditor implements ActionListener, 
 	ItemListener, Editor {
@@ -177,9 +177,9 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 			throw new IllegalArgumentException("Edited value not supported by Actions Editor");
 		action = (Action)component;
 		name.setText(action.getName());
-		returnType.setSelectedItem(action.getReturnType());
-		source.setText(action.getSource());
-		imports.setText(action.getImports());
+		returnType.setSelectedItem(action.getActionprop().getReturnType());
+		source.setText(action.getActionprop().getSource());
+		imports.setText(action.getActionprop().getImports());
 		variablesModel.clear();
 		Component parent = (Component)action.getParent();
 		if(parent != null) {
@@ -214,10 +214,10 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 		if(creator)
 			action=new Action();
 		action.setName(name.getText());
-		action.setSource(source.getText());
-		action.setImports(imports.getText());
+		action.getActionprop().setSource(source.getText());
+		action.getActionprop().setImports(imports.getText());
 		if(returnType.getSelectedItem()!=null)
-		action.setReturnType(returnType.getSelectedItem().toString());
+		action.getActionprop().setReturnType(returnType.getSelectedItem().toString());
 		return action;
 	}
 

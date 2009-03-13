@@ -13,7 +13,7 @@ import org.xml.sax.ContentHandler;
 
 /**
  * XML Serializable represents clas that can be saved/loaded to XML file
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public interface XMLSerializable {

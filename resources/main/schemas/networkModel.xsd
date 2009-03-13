@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://repastbs/networkModel"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:net="http://repastbs/networkModel"
+    xmlns:com="http://repastbs/components">
+
+    <xsd:import namespace="http://repastbs/components"
+        schemaLocation="component.xsd"/>
+
+    <xsd:element name="NetworkModelProp">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Variable" type="com:VariableProp"/>
+                <xsd:element name="ScheduledAction" type="com:ScheduledActionProp"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

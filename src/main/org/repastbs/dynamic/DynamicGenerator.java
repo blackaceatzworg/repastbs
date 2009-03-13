@@ -10,7 +10,7 @@ package org.repastbs.dynamic;
 
 /**
  * Interface representig dynamic generator of class,  it has methods to easily generate classes
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public interface DynamicGenerator {
 	

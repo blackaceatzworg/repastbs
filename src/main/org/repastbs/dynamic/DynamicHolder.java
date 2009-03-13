@@ -11,7 +11,7 @@ package org.repastbs.dynamic;
 /**
  * Holder represent object that generates class. 
  * It has associated generator, which is used to generate result class
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public interface DynamicHolder {

@@ -27,7 +27,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Variables component is container holding Variable components
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class VariablesComponent extends AbstractComponent implements DynamicChanger, XMLSerializable {
@@ -115,7 +115,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 		Enumeration e = children();
 		while(e.hasMoreElements()) {
 			Variable v = (Variable)e.nextElement();
-			if(v.isParameter())
+			if(v.getVariableprop().isParameter())
 				result.add(v);
 		}
 

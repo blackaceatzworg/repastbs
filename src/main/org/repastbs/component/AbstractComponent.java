@@ -52,7 +52,7 @@ import org.repastbs.model.Model;
 
 /**
  * Simple implementation of Component interface, it implements  needed methods, so extending classes must not. Every Component should extend this class and override methods, they need to change.
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public abstract class AbstractComponent extends DefaultMutableTreeNode implements Component {
 	

@@ -27,7 +27,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Abstract implementation of Model interface,  all model templates should extend this class to implement specific model templates
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public abstract class AbstractModel extends AbstractComponent implements Model, ComponentListener {
 

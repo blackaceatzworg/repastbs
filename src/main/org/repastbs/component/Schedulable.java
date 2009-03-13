@@ -11,7 +11,7 @@ package org.repastbs.component;
 /**
  * All components, which allow Schedule component as its child
  * must implement this interface
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public interface Schedulable {

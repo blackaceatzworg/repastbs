@@ -1,10 +1,10 @@
 /**
  * File: RepastBSDialog.java
  * Program: Repast BS
- * Author:  ¼udovít Hajzer
- * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
- * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: László Gulyás, Ph.D.
+ * Author:  Ä½udovÃ­t Hajzer, Zdenko Osina
+ * Master's Thesis:	System Repast
+ * Supervisor: Ing. Ladislav Samuelis, CSc.
+ * Consultant: LÃ¡szlÃ³ GulyÃ¡s, Ph.D.
  */
 package org.repastbs.gui;
 
@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 
 /**
  * Class to implement some basic gridbag layout capabilities
- * @author ¼udovít Hajzer
+ * @author Ä½udovÃ­t Hajzer
  *
  */
 public class RepastBSDialog extends JDialog {

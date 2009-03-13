@@ -42,7 +42,8 @@ public class Utils {
      * @return class based on class name
      * @throws ClassNotFoundException
      */
-    public static Class getClass(String className) throws ClassNotFoundException {
+    @SuppressWarnings("unchecked")
+	public static Class getClass(String className) throws ClassNotFoundException {
     	if(className.compareTo("boolean")==0)
 			return boolean.class;
     	else if(className.compareTo("char")==0)

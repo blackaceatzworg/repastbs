@@ -16,7 +16,7 @@ import org.repastbs.xml.XMLSerializable;
 
 /**
  * Model interface represents repast model,  it is component, dynamic holder, xml serializable and schedulable
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public interface Model extends Component, DynamicHolder, XMLSerializable, Schedulable {
 	

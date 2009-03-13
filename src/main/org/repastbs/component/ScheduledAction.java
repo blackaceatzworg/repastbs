@@ -9,6 +9,7 @@
 package org.repastbs.component;
 
 import org.dom4j.Node;
+import org.repastbs.generated.ScheduledActionProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -18,7 +19,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Represents single action scheduled for execution in repast
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class ScheduledAction extends AbstractComponent implements XMLSerializable, Comparable<ScheduledAction> {
 	
@@ -34,6 +35,10 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	public static final int AT_PAUSE = 4;
 	/** */
 	public static final String ID = "SCHEDULE";
+	
+	@SuppressWarnings("unused")
+	private ScheduledActionProp sap = new ScheduledActionProp();
+	
 	/** */
 	private static final long serialVersionUID = 9024887132319543857L;
 	

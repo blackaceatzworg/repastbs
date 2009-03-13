@@ -23,7 +23,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Actions component is container, which contains action components
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class ActionsComponent extends AbstractComponent implements DynamicChanger, XMLSerializable {

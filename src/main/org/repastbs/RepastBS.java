@@ -63,11 +63,13 @@ public class RepastBS implements ActionListener, WindowListener {
 	/**
 	 * possible return types
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<Class> returnTypes = new LinkedList<Class>();
 
 	/**
 	 * possible variable types
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<Class> variableTypes = new LinkedList<Class>();
 
 
@@ -81,12 +83,12 @@ public class RepastBS implements ActionListener, WindowListener {
 		} catch (EvalError e) {
 			showErrorDialog("Failed to set Repast global variable for Beanshell interpreter");
 		}
-		
 		System.out.println(System.getProperty ("java.class.path"));
 		registerActions();
 		registerModels();
 		registerIcons(new File("./icons"));
 		registerComponents(new File("./components"));
+		System.out.println("Registred component: " + componentManager.getComponentCount());
 	}
 
 	/**
@@ -112,6 +114,7 @@ public class RepastBS implements ActionListener, WindowListener {
 		MainFrame mainFrame = new MainFrame(main);
 		main.setMainFrame(mainFrame);
 		registerEditors(main);
+		System.out.println("Registred editors: " + editorManager.getEditorCount());
 		
 		mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		mainFrame.addWindowListener(main);
@@ -198,6 +201,7 @@ public class RepastBS implements ActionListener, WindowListener {
 				}
 				try {
 					Component component = (Component)interpreter.source(components[i].getAbsolutePath());
+					System.out.println("Registrujem komponent: " + components[i].getAbsolutePath());
 					componentManager.registerComponent(component);
 				} catch (EvalError x) {
 					showErrorDialog("Error registering component "
@@ -226,6 +230,7 @@ public class RepastBS implements ActionListener, WindowListener {
 
 				try {
 					Model model = (Model)interpreter.source(models[i].getAbsolutePath());
+					System.out.println("Registrujem model: " + models[i].getAbsolutePath());
 					modelTemplates.add(model);
 				} catch (EvalError x) {
 					showErrorDialog("Error registering model "

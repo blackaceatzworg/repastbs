@@ -34,7 +34,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Component which creates simple network display in result model
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class NetworkDisplay extends AbstractComponent implements DynamicChanger, XMLSerializable, Schedulable {
 

@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Actions are managed by action manager, 
  * which provides methods to execute actions
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class ActionManager {

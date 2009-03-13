@@ -23,11 +23,13 @@ public class UnMarshallAction extends AbstractAction {
 
 	public Object execute(Object component) {
 
+		@SuppressWarnings("unused")
 		Component data = (Component)component;
         JAXBContext context;
         try {
             context = JAXBContext.newInstance(AbstractComponent.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
+            @SuppressWarnings("unused")
+			Unmarshaller unmarshaller = context.createUnmarshaller();
 //            unmarshaller.setProperty(Unmarshaller.JAXB_FORMATTED_OUTPUT, true);
 //            unmarshaller.unmarshal(data, System.out);
         } catch (JAXBException e) {

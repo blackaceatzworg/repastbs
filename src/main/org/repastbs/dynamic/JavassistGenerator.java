@@ -24,7 +24,7 @@ import jode.decompiler.Decompiler;
 
 /**
  * Implementation of dynamic generator, it uses Javassist and Jode
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class JavassistGenerator implements DynamicGenerator {
 

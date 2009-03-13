@@ -29,7 +29,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Component which creates simple grid display in result model
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class GridDisplay extends AbstractComponent implements DynamicChanger, XMLSerializable, Schedulable {
 

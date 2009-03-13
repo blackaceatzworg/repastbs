@@ -24,7 +24,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Agents component is container, which contains agents
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class AgentsComponent extends AbstractComponent implements DynamicChanger, XMLSerializable {

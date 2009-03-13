@@ -23,7 +23,7 @@ import org.repastbs.dynamic.JavassistGenerator;
 
 /**
  * Grid model template
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class GridModel extends AbstractModel {

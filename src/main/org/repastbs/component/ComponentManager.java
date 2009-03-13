@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * Component manager manages all available components registered in Repast BS
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class ComponentManager {
 	
@@ -77,6 +77,7 @@ public class ComponentManager {
 	 * @param id
 	 * @return list of components with given id
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Component> getComponentsById(String id) {
 		List<Component> list = new ArrayList<Component>();
 		for (Iterator iter = getComponents().iterator(); iter.hasNext();) {

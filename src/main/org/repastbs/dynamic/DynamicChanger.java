@@ -10,7 +10,7 @@ package org.repastbs.dynamic;
 
 /**
  * Dynamic changer changes dynamic holder using holder's generator
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public interface DynamicChanger {

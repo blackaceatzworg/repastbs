@@ -21,7 +21,7 @@ import org.repastbs.dynamic.JavassistGenerator;
 
 /**
  * Network model template
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class NetworkModel extends AbstractModel {

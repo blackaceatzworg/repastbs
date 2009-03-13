@@ -14,6 +14,7 @@ import org.dom4j.Node;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.ActionProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -23,7 +24,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Basic model action, action is generated as method in generated class
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class Action extends AbstractComponent implements DynamicChanger, XMLSerializable {
 	
@@ -33,12 +34,8 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 	/** */
 	public static final String ID = "ACTION";
 
-	private String imports;
-	
-	private String returnType;
-	
-	private String source;
-	
+	private ActionProp actionprop = new ActionProp();
+
 	private boolean changeSignature = true;
 
 	/**
@@ -65,64 +62,18 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 	 */
 	public Action(String name, String imports, String source, String returnType) {
 		super(name);
-		this.imports = imports==null?"":imports;
-		this.source = source;
-		this.returnType = returnType;
+		this.actionprop.setImports(imports==null?"":imports);
+		this.actionprop.setSource(source);
+		this.actionprop.setReturnType(returnType);
 		setId(ID);
 	}
 
-	/**
-	 * Returns the imports needed by this action
-	 * @return  the imports
-	 * @uml.property  name="imports"
-	 */
-	public String getImports() {
-		return imports;
+	public ActionProp getActionprop() {
+		return actionprop;
 	}
 
-	/**
-	 * Sets imports needed by this action
-	 * @param imports  the imports to set
-	 * @uml.property  name="imports"
-	 */
-	public void setImports(String imports) {
-		this.imports = imports==null?"":imports;
-	}
-
-	/**
-	 * Returns return type of this action
-	 * @return  the returnType
-	 * @uml.property  name="returnType"
-	 */
-	public String getReturnType() {
-		return returnType;
-	}
-
-	/**
-	 * Sets return type of this action
-	 * @param returnType  the returnType to set
-	 * @uml.property  name="returnType"
-	 */
-	public void setReturnType(String returnType) {
-		this.returnType = returnType;
-	}
-
-	/**
-	 * Return source code of method for this action
-	 * @return  the source
-	 * @uml.property  name="source"
-	 */
-	public String getSource() {
-		return source;
-	}
-
-	/**
-	 * Sets source code of method for this action
-	 * @param source  the source to set
-	 * @uml.property  name="source"
-	 */
-	public void setSource(String source) {
-		this.source = source;
+	public void setActionprop(ActionProp actionprop) {
+		this.actionprop = actionprop;
 	}
 
 	/**
@@ -149,11 +100,11 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute("", "name", "name", "CDATA", getName());
-		atts.addAttribute("", "returnType", "returnType", "CDATA", getReturnType());
+		atts.addAttribute("", "returnType", "returnType", "CDATA", actionprop.getReturnType());
 		try {
 			SAXUtils.start(handler, "action", atts);
-			SAXUtils.text(handler, "imports", getImports());
-			SAXUtils.text(handler, "source", getSource());
+			SAXUtils.text(handler, "imports", actionprop.getImports());
+			SAXUtils.text(handler, "source", actionprop.getSource());
 			List<Component> parameters = getChildsById(ActionParameter.ID);
 			if(parameters.size()>0) {
 				SAXUtils.start(handler, "parameters");
@@ -174,9 +125,9 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 	 */
 	public void createFromXML(Node node) throws XMLSerializationException {
 		this.setName(node.valueOf("@name"));
-		this.setReturnType(node.valueOf("@returnType"));
-		this.setImports(node.valueOf("imports/text()"));
-		this.setSource(node.valueOf("source/text()"));
+		this.actionprop.setReturnType(node.valueOf("@returnType"));
+		this.actionprop.setImports(node.valueOf("imports/text()"));
+		this.actionprop.setSource(node.valueOf("source/text()"));
 		List parameters = node.selectNodes("parameters/parameter");
 		for (int i = 0; i < parameters.size(); i++) {
 			ActionParameter param = new ActionParameter();
@@ -197,16 +148,16 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 	 */
 	public void createNew() {
 		this.setName("newAction");
-		this.setReturnType(null);
-		this.setImports("");
-		this.setSource("");
+		this.actionprop.setReturnType(null);
+		this.actionprop.setImports("");
+		this.actionprop.setSource("");
 	}
 
 	/**
 	 * @see org.repastbs.dynamic.DynamicChanger#generateFields(org.repastbs.dynamic.DynamicGenerator)
 	 */
 	public void generateFields(DynamicGenerator generator) throws DynamicException {
-		StringTokenizer st = new StringTokenizer(imports,"\n");
+		StringTokenizer st = new StringTokenizer(actionprop.getImports(),"\n");
 		while(st.hasMoreTokens()) {
 			String token = st.nextToken();
 			generator.addImport(token);
@@ -216,11 +167,11 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 		String[] paramTypes = new String[params.size()];
 		for (int i = 0; i < params.size(); i++) {
 			paramNames[i] = "param"+i;
-			paramTypes[i] = ((ActionParameter)params.get(i)).getType();
+			paramTypes[i] = ((ActionParameter)params.get(i)).getActionparameterprop().getType();
 		}
 		//add empty method declaration
-		generator.addMethod(getName(), (returnType==null || returnType.compareTo("")==0)?"void":returnType,
-				paramNames, paramTypes, returnType==null?"":"return null;");	
+		generator.addMethod(getName(), (actionprop.getReturnType()==null || actionprop.getReturnType().compareTo("")==0)?"void":actionprop.getReturnType(),
+				paramNames, paramTypes, actionprop.getReturnType()==null?"":"return null;");	
 	}
 
 	/**
@@ -230,8 +181,8 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 		List<Component> params = getChildsById(ActionParameter.ID);
 		String[] paramTypes = new String[params.size()];
 		for (int i = 0; i < params.size(); i++)
-			paramTypes[i] = ((ActionParameter)params.get(i)).getType();
-		generator.insertBefore(getName(), paramTypes, getSource());
+			paramTypes[i] = ((ActionParameter)params.get(i)).getActionparameterprop().getType();
+		generator.insertBefore(getName(), paramTypes, actionprop.getSource());
 	}
 	
 	/**

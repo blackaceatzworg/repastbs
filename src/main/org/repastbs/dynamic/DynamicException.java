@@ -10,7 +10,7 @@ package org.repastbs.dynamic;
 
 /**
  * Exception thrown when some dynamic operation didn't succeed
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class DynamicException extends Exception {

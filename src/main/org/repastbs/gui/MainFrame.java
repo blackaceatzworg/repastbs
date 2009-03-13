@@ -1,10 +1,10 @@
 /**
  * File: MainFrame.java
  * Program: Repast BS
- * Author:  �udov�t Hajzer
- * Master�S Thesis:	Development of a Modular Modeling Environment for Repast
- * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: L�szl� Guly�s, Ph.D.
+ * Author:  Ľudovít Hajzer, Zdenko Osina
+ * Master's Thesis:	System Repast
+ * Supervisor: Ing. Ladislav Samuelis, CSc.
+ * Consultant: László Gulyás, Ph.D.
  */
 package org.repastbs.gui;
 
@@ -41,7 +41,7 @@ import org.repastbs.gui.models.ModelComponentsCellRenderer;
 
 /**
  * Main frame window
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class MainFrame extends JFrame implements TreeSelectionListener, TreeModelListener, EditorListener {
 
@@ -49,7 +49,6 @@ public class MainFrame extends JFrame implements TreeSelectionListener, TreeMode
 	private static final long serialVersionUID = 5382554624792970269L;
 
 	RepastBS repast;
-
 
 	JTree modelComponents;
 	DefaultTreeModel componentsModel;
@@ -82,12 +81,12 @@ public class MainFrame extends JFrame implements TreeSelectionListener, TreeMode
 
 		split = new JSplitPane();
 		java.awt.Component scroll = SwingUtils.createScrollComponent(modelComponents);
-		scroll.setMinimumSize(new Dimension(100,100));
+		scroll.setMinimumSize(new Dimension(250,100));
 		split.setLeftComponent(scroll);
 		split.setRightComponent(editorPanel);
 		split.setDividerLocation(150);
 		split.setContinuousLayout(true);
-		modelComponents.setMinimumSize(new Dimension(100,100));
+		modelComponents.setMinimumSize(new Dimension(250,100));
 		//scrollPane.setMinimumSize(new Dimension(100,100));
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
@@ -118,7 +117,7 @@ public class MainFrame extends JFrame implements TreeSelectionListener, TreeMode
 		split.setDividerSize(4);
 
 		cancel.addActionListener(repast);
-		setSize(700,450);
+		setSize(800,450);
 		setLocationRelativeTo(null);
 		setTitle("Repast BS");
 	}

@@ -9,6 +9,7 @@
 package org.repastbs.component;
 
 import org.dom4j.Node;
+import org.repastbs.generated.ActionParameterProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -17,7 +18,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Class representing action parameter
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class ActionParameter extends AbstractComponent implements XMLSerializable {
 	
@@ -27,8 +28,8 @@ public class ActionParameter extends AbstractComponent implements XMLSerializabl
 	/**  */
 	public static final String ID = "ACTION_PARAMETER";
 	
-	private String type;
-	
+	private ActionParameterProp actionparameterprop = new ActionParameterProp();
+
 	/**
 	 * 
 	 */
@@ -41,38 +42,30 @@ public class ActionParameter extends AbstractComponent implements XMLSerializabl
 	 */
 	public ActionParameter(String type) {
 		super("Parameter");
-		this.type = type;
+		this.actionparameterprop.setType(type);
 		setId(ID);
 	}
 
-	/**
-	 * @return  the type
-	 * @uml.property  name="type"
-	 */
-	public String getType() {
-		return type;
+	public ActionParameterProp getActionparameterprop() {
+		return actionparameterprop;
 	}
 
-	/**
-	 * @param type  the type to set
-	 * @uml.property  name="type"
-	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setActionparameterprop(ActionParameterProp actionparameterprop) {
+		this.actionparameterprop = actionparameterprop;
 	}
 
 	/**
 	 * @see org.repastbs.component.Component#createNew()
 	 */
 	public void createNew() throws Exception {
-		type = "java.lang.Object";
+		actionparameterprop.setType("java.lang.Object");
 	}
 
 	/**
 	 * @see org.repastbs.xml.XMLSerializable#createFromXML(org.dom4j.Node)
 	 */
 	public void createFromXML(Node node) throws XMLSerializationException {
-		this.setType(node.valueOf("text()"));
+		this.actionparameterprop.setType(node.valueOf("text()"));
 	}
 
 	/**
@@ -80,7 +73,7 @@ public class ActionParameter extends AbstractComponent implements XMLSerializabl
 	 */
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		try {
-			SAXUtils.text(handler, "parameter", getType());
+			SAXUtils.text(handler, "parameter", actionparameterprop.getType());
 		} catch (SAXException e) {
 			throw new XMLSerializationException("ActionParameter.writeToXML: "+e.getMessage(),e);
 		}
@@ -90,6 +83,6 @@ public class ActionParameter extends AbstractComponent implements XMLSerializabl
 	 * @see org.repastbs.component.AbstractComponent#toString()
 	 */
 	public String toString() {
-		return getName() + " "+getType();
+		return getName() + " "+actionparameterprop.getType();
 	}
 }

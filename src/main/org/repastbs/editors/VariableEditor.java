@@ -39,7 +39,7 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 	JTextField name = new JTextField();
 	JComboBox type = new JComboBox();
 	JTextField defaultValue = new JTextField();
-	JCheckBox accesible = new JCheckBox();
+	JCheckBox accessible = new JCheckBox();
 	JCheckBox parameter = new JCheckBox();
 	
 	/**
@@ -67,7 +67,7 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 		add(0,2,1,1,1,1,new JLabel("Default value: ", JLabel.RIGHT),p);
 		add(1,2,1,1,100,1,defaultValue,p);
 		add(0,3,1,1,1,1,new JLabel("Accessible: ", JLabel.RIGHT),p);
-		add(1,3,1,1,100,1,accesible,p);
+		add(1,3,1,1,100,1,accessible,p);
 		add(0,4,1,1,1,1,new JLabel("Parameter: ", JLabel.RIGHT),p);
 		add(1,4,1,1,100,1,parameter,p);
 		p.setBorder(BorderFactory.createTitledBorder(creator?"Variable creator":"Variable editor"));
@@ -96,16 +96,16 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 			throw new IllegalArgumentException("Edited value not supported by Variable Editor");
 		variable = (Variable)component;
 		name.setText(variable.getName());
-		type.setSelectedItem(variable.getType());
-		if(variable.getDefaultValue()!=null)
-			defaultValue.setText(variable.getDefaultValue().toString());
+		type.setSelectedItem(variable.getVariableprop().getType());
+		if(variable.getVariableprop().getDefaultValue()!=null)
+			defaultValue.setText(variable.getVariableprop().getDefaultValue().toString());
 		else
 			defaultValue.setText("");
-		accesible.setSelected(variable.isAccesible());
-		parameter.setSelected(variable.isParameter());
+		accessible.setSelected(variable.getVariableprop().isAccessible());
+		parameter.setSelected(variable.getVariableprop().isParameter());
 		name.setEditable(variable.isRemovable());
 		type.setEnabled(variable.isRemovable());
-		accesible.setEnabled(variable.isRemovable());
+		accessible.setEnabled(variable.isRemovable());
 		parameter.setEnabled(variable.isRemovable());
 	}
 
@@ -116,10 +116,10 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 		if(creator)
 			variable=new Variable("");
 		variable.setName(name.getText());
-		variable.setType((String)type.getSelectedItem());
-		variable.setDefaultValue(defaultValue.getText());
-		variable.setAccesible(accesible.isSelected());
-		variable.setParameter(parameter.isSelected());
+		variable.getVariableprop().setType((String)type.getSelectedItem());
+		variable.getVariableprop().setDefaultValue(defaultValue.getText());
+		variable.getVariableprop().setAccessible(accessible.isSelected());
+		variable.getVariableprop().setParameter(parameter.isSelected());
 		return variable;
 	}
 
@@ -147,6 +147,7 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		if(creator)
 			return VariablesComponent.class;

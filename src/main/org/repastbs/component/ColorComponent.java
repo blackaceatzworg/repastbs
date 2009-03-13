@@ -10,6 +10,7 @@ package org.repastbs.component;
 
 import java.awt.Color;
 import org.dom4j.Node;
+import org.repastbs.generated.ColorComponentProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -28,6 +29,9 @@ public class ColorComponent extends AbstractComponent implements XMLSerializable
 	
 	/** */
 	public static final String ID = "COLOR";
+
+	@SuppressWarnings("unused")
+	private ColorComponentProp ccp = new ColorComponentProp();
 
 	private Color color;
 

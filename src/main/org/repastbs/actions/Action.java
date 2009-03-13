@@ -10,7 +10,7 @@ package org.repastbs.actions;
 
 /**
  * Action represents user action, or any action user defines
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public interface Action {

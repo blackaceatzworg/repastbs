@@ -14,7 +14,7 @@ import org.repastbs.editors.Editor;
 
 /**
  * Core interface, represents single component,  every module in Repast BS should implement this interface
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public interface Component extends MutableTreeNode {
 
