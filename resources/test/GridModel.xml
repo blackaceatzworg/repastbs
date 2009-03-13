@@ -3,8 +3,8 @@
 <model class="org.repastbs.model.GridModel" displayName="Grid model" name="GridModel">
   <description></description>
   <variables class="org.repastbs.component.VariablesComponent">
-    <variable name="space" class="uchicago.src.sim.space.Object2DGrid" accesible="false" parameter="false"></variable>
-    <variable name="agentGroupNumAgents" class="int" defaultValue="5000" accesible="true" parameter="true"></variable>
+    <variable name="space" class="uchicago.src.sim.space.Object2DGrid" accessible="false" parameter="false"></variable>
+    <variable name="agentGroupNumAgents" class="int" defaultValue="5000" accessible="true" parameter="true"></variable>
   </variables>
   <actions class="org.repastbs.component.ActionsComponent">
     <action name="initAgents" returnType="">
@@ -84,10 +84,10 @@ y = $2;
         </action>
       </actions>
       <variables class="org.repastbs.component.VariablesComponent">
-        <variable name="space" class="uchicago.src.sim.space.Object2DGrid" accesible="true" parameter="false"></variable>
-        <variable name="x" class="int" accesible="true" parameter="false"></variable>
-        <variable name="y" class="int" accesible="true" parameter="false"></variable>
-        <variable name="torus" class="boolean" defaultValue="false" accesible="true" parameter="false"></variable>
+        <variable name="space" class="uchicago.src.sim.space.Object2DGrid" accessible="true" parameter="false"></variable>
+        <variable name="x" class="int" accessible="true" parameter="false"></variable>
+        <variable name="y" class="int" accessible="true" parameter="false"></variable>
+        <variable name="torus" class="boolean" defaultValue="false" accessible="true" parameter="false"></variable>
       </variables>
       <schedule class="org.repastbs.component.ScheduleComponent"></schedule>
     </agent>

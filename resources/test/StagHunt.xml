@@ -44,12 +44,12 @@ switching.
 
 You can also discount the past in this simulation.</description>
   <variables class="org.repastbs.component.VariablesComponent">
-    <variable name="pastDiscount" class="java.lang.Float" defaultValue="1.0" accesible="true" parameter="true"></variable>
-    <variable name="switchPercent" class="java.lang.Float" defaultValue="0.1" accesible="true" parameter="true"></variable>
-    <variable name="nodesSize" class="int" defaultValue="40" accesible="true" parameter="true"></variable>
-    <variable name="nodesDensity" class="double" defaultValue="0.3" accesible="true" parameter="true"></variable>
-    <variable name="nodesAllowLoops" class="boolean" defaultValue="false" accesible="true" parameter="true"></variable>
-    <variable name="nodesSymmetric" class="boolean" defaultValue="false" accesible="true" parameter="true"></variable>
+    <variable name="pastDiscount" class="java.lang.Float" defaultValue="1.0" accessible="true" parameter="true"></variable>
+    <variable name="switchPercent" class="java.lang.Float" defaultValue="0.1" accessible="true" parameter="true"></variable>
+    <variable name="nodesSize" class="int" defaultValue="40" accessible="true" parameter="true"></variable>
+    <variable name="nodesDensity" class="double" defaultValue="0.3" accessible="true" parameter="true"></variable>
+    <variable name="nodesAllowLoops" class="boolean" defaultValue="false" accessible="true" parameter="true"></variable>
+    <variable name="nodesSymmetric" class="boolean" defaultValue="false" accessible="true" parameter="true"></variable>
   </variables>
   <actions class="org.repastbs.component.ActionsComponent">
     <action name="initAgents" returnType="java.lang.Void">
@@ -103,11 +103,11 @@ while (iterator.hasNext()) {
   <agents class="org.repastbs.component.AgentsComponent">
     <agent class="org.repastbs.component.network.NetworkAgent" group="nodes" name="NetworkAgent">
       <variables class="org.repastbs.component.VariablesComponent">
-        <variable name="discount" class="java.lang.Float" defaultValue="1.0" accesible="true" parameter="false"></variable>
-        <variable name="matrix" class="uchicago.src.sim.games.PayoffMatrix" defaultValue="" accesible="true" parameter="false"></variable>
-        <variable name="linker" class="uchicago.src.sim.network.Linker" defaultValue="" accesible="true" parameter="false"></variable>
-        <variable name="strategy" class="int" defaultValue="" accesible="true" parameter="false"></variable>
-        <variable name="payoff" class="float" defaultValue="" accesible="true" parameter="false"></variable>
+        <variable name="discount" class="java.lang.Float" defaultValue="1.0" accessible="true" parameter="false"></variable>
+        <variable name="matrix" class="uchicago.src.sim.games.PayoffMatrix" defaultValue="" accessible="true" parameter="false"></variable>
+        <variable name="linker" class="uchicago.src.sim.network.Linker" defaultValue="" accessible="true" parameter="false"></variable>
+        <variable name="strategy" class="int" defaultValue="" accessible="true" parameter="false"></variable>
+        <variable name="payoff" class="float" defaultValue="" accessible="true" parameter="false"></variable>
       </variables>
       <actions class="org.repastbs.component.ActionsComponent">
         <action name="init" returnType="java.lang.Void">

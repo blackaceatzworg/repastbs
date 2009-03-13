@@ -36,7 +36,6 @@
 
     <xsd:complexType name="VariableProp">
         <xsd:sequence>
-            <xsd:element name="name" type="xsd:string"/>
             <xsd:element name="type" type="xsd:string"/>
             <xsd:element name="defaultValue" type="xsd:string"/>
             <xsd:element name="accessible" type="xsd:boolean"/>

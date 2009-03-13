@@ -3,7 +3,7 @@
 <model class="org.repastbs.model.NetworkModel" displayName="Network model" name="NetworkModel">
   <description></description>
   <variables class="org.repastbs.component.VariablesComponent">
-    <variable name="nodesCount" class="int" defaultValue="40" accesible="true" parameter="true"></variable>
+    <variable name="nodesCount" class="int" defaultValue="40" accessible="true" parameter="true"></variable>
   </variables>
   <actions class="org.repastbs.component.ActionsComponent">
     <action name="initAgents" returnType="java.lang.Void">

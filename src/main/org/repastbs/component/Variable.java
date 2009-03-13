@@ -34,7 +34,7 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	
 	/** */
 	public static final String ID = "VARIABLE";
-	
+
 	/**
 	 * @param name 
 	 * 
@@ -47,17 +47,17 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	 * @param name
 	 * @param type
 	 * @param defaultValue
-	 * @param accesible
+	 * @param accessible
 	 * @param parameter
 	 */
 	public Variable(String name, String type, String defaultValue, 
-			boolean accesible, boolean parameter) {
+			boolean accessible, boolean parameter) {
 		super(name);
 		this.variableprop.setType(type);
 		if(type==null)
 			this.variableprop.setType("");
 		this.variableprop.setDefaultValue(defaultValue);
-		this.variableprop.setAccessible(accesible);
+		this.variableprop.setAccessible(accessible);
 		this.variableprop.setParameter(parameter);
 		setId(ID);
 	}

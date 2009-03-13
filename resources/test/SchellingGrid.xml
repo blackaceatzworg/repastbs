@@ -13,8 +13,8 @@ location.</description>
   <variables class="org.repastbs.component.VariablesComponent">
     <variable name="space" class="uchicago.src.sim.space.Object2DGrid" defaultValue="" accesible="false" parameter="false"></variable>
     <variable name="agentGroupNumAgents" class="int" defaultValue="5000" accesible="true" parameter="true"></variable>
-    <variable name="tolerance" class="double" defaultValue="0.4" accesible="true" parameter="true"></variable>
-    <variable name="perGreen" class="double" defaultValue="0.7" accesible="true" parameter="true"></variable>
+    <variable name="tolerance" class="double" defaultValue="0.4" accessible="true" parameter="true"></variable>
+    <variable name="perGreen" class="double" defaultValue="0.7" accessible="true" parameter="true"></variable>
   </variables>
   <actions class="org.repastbs.component.ActionsComponent">
     <action name="initAgents" returnType="">
@@ -117,12 +117,12 @@ $2.putObjectAt(x, y, $1);
         </action>
       </actions>
       <variables class="org.repastbs.component.VariablesComponent">
-        <variable name="space" class="uchicago.src.sim.space.Object2DGrid" defaultValue="" accesible="true" parameter="false"></variable>
-        <variable name="x" class="int" defaultValue="" accesible="true" parameter="false"></variable>
-        <variable name="y" class="int" defaultValue="" accesible="true" parameter="false"></variable>
-        <variable name="torus" class="boolean" defaultValue="false" accesible="true" parameter="false"></variable>
-        <variable name="type" class="int" defaultValue="" accesible="true" parameter="true"></variable>
-        <variable name="tolerance" class="double" defaultValue="0.6" accesible="true" parameter="true"></variable>
+        <variable name="space" class="uchicago.src.sim.space.Object2DGrid" defaultValue="" accessible="true" parameter="false"></variable>
+        <variable name="x" class="int" defaultValue="" accessible="true" parameter="false"></variable>
+        <variable name="y" class="int" defaultValue="" accessible="true" parameter="false"></variable>
+        <variable name="torus" class="boolean" defaultValue="false" accessible="true" parameter="false"></variable>
+        <variable name="type" class="int" defaultValue="" accessible="true" parameter="true"></variable>
+        <variable name="tolerance" class="double" defaultValue="0.6" accessible="true" parameter="true"></variable>
       </variables>
       <schedule class="org.repastbs.component.ScheduleComponent">
         <scheduledAction action="step" execution="0" tick="1" executeLast="false" index="-1" class="org.repastbs.component.ScheduledAction"></scheduledAction>
