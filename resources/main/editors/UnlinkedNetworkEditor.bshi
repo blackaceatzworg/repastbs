@@ -18,7 +18,7 @@ class NetworkTypeEditor extends StringEditor {
 		if(!(component instanceof UnlinkedNetwork))
 			throw new IllegalArgumentException("Edited value not supported by UnlinkedNetworkEditor");
 		unlinkedNetwork = (UnlinkedNetwork)component;
-		valueField.setText(unlinkedNetwork.getNodeCount().getDefaultValue());
+		valueField.setText(unlinkedNetwork.getNodeCount().getVariableprop().getDefaultValue());
 	}
 	
 	/**
