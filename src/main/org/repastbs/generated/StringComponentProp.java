@@ -15,16 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ActionParameterProp complex type.
+ * <p>Java class for StringComponentProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ActionParameterProp">
+ * &lt;complexType name="StringComponentProp">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="large" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,36 +35,54 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ActionParameterProp", propOrder = {
-    "type"
+@XmlType(name = "StringComponentProp", propOrder = {
+    "value",
+    "large"
 })
-public class ActionParameterProp {
+public class StringComponentProp {
 
     @XmlElement(required = true)
-    protected String type;
+    protected String value;
+    protected boolean large;
 
     /**
-     * Gets the value of the type property.
+     * Gets the value of the value property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getType() {
-        return type;
+    public String getValue() {
+        return value;
     }
 
     /**
-     * Sets the value of the type property.
+     * Sets the value of the value property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setType(String value) {
-        this.type = value;
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    /**
+     * Gets the value of the large property.
+     * 
+     */
+    public boolean isLarge() {
+        return large;
+    }
+
+    /**
+     * Sets the value of the large property.
+     * 
+     */
+    public void setLarge(boolean value) {
+        this.large = value;
     }
 
 }

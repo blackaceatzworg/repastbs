@@ -10,6 +10,7 @@
     <xsd:element name="NetworkModelProp">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element name="StringComponent" type="com:StringComponentProp"/>
                 <xsd:element name="Variable" type="com:VariableProp"/>
                 <xsd:element name="ScheduledAction" type="com:ScheduledActionProp"/>
             </xsd:sequence>

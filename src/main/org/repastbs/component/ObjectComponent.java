@@ -10,7 +10,7 @@ package org.repastbs.component;
 
 /**
  * Simple object component which holds object as its value, it has no functionality, should be extended by other compoennts
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class ObjectComponent extends AbstractComponent {
 

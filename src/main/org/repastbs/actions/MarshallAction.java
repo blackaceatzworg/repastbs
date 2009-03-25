@@ -13,12 +13,14 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.repastbs.RepastBS;
+import org.repastbs.generated.StringComponentProp;
 import org.repastbs.generated.NetworkModelProp;
 import org.repastbs.generated.ScheduledActionProp;
 import org.repastbs.generated.VariableProp;
 
 public class MarshallAction extends AbstractAction {
 	
+	private StringComponentProp abcopr = new StringComponentProp();
 	private VariableProp variable = new VariableProp();
 	private ScheduledActionProp schedule = new ScheduledActionProp();
 //	private RepastBS repastBS;
@@ -38,7 +40,7 @@ public class MarshallAction extends AbstractAction {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             NetworkModelProp toMarshall = new NetworkModelProp();    
-			//toMarshall.setAction(getImports());
+			toMarshall.setStringComponent(abcopr);
             toMarshall.setVariable(variable);
             toMarshall.setScheduledAction(schedule);
             marshaller.marshal(toMarshall, System.out);

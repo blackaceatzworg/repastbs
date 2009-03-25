@@ -13,42 +13,14 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.dynamic.DynamicHolder;
 import org.repastbs.editors.Editor;
+import org.repastbs.generated.AbstractComponentProp;
 import org.repastbs.model.Model;
-
-/**
- * <p>Java class for AbstractComponent complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="AbstractComponent">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AbstractComponent", propOrder = {
-    "name"
-})
 
 /**
  * Simple implementation of Component interface, it implements  needed methods, so extending classes must not. Every Component should extend this class and override methods, they need to change.
@@ -61,9 +33,9 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	
 	private String id="ABSTRACT_COMPONENT";
 	
-	@XmlElement(required = true)
-	private String name;
-	private String description = "No description";
+	private AbstractComponentProp acp = new AbstractComponentProp();
+
+	//private String description = "No description";
 	private boolean editable = true;
 	
 	private boolean removable = true;
@@ -85,7 +57,7 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @param parent 
 	 */
 	public AbstractComponent(String name, AbstractComponent parent) {
-		this.name=name;
+		this.acp.setName(name);
 		setParent(parent);
 	}
 
@@ -109,16 +81,16 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @uml.property  name="name"
 	 */
 	public String getName() {
-		return name;
+		return acp.getName();
 	}
 
 	/**
 	 * Sets name of this component
 	 * @param name  the name to set
 	 * @uml.property  name="name"
-	 */
+	*/
 	public void setName(String name) {
-		this.name = name;
+		this.acp.setName(name);
 	}
 	
 	/**
@@ -251,7 +223,7 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @uml.property  name="description"
 	 */
 	public String getDescription() {
-		return description;
+		return acp.getDescription();
 	}
 
 	/**
@@ -260,7 +232,7 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @uml.property  name="description"
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.acp.setDescription(description);
 	}
 	
 	/**
@@ -300,6 +272,7 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	/**
 	 * @see org.repastbs.component.Component#fireComponentChanged(org.repastbs.component.ComponentEvent)
 	 */
+	@SuppressWarnings("unchecked")
 	public void fireComponentChanged(ComponentEvent e) {
 		for (Iterator iter = listeners.iterator(); iter.hasNext();) {
 			ComponentListener listener = (ComponentListener) iter.next();
