@@ -17,17 +17,16 @@ import org.repastbs.generated.StringComponentProp;
 import org.repastbs.generated.NetworkModelProp;
 import org.repastbs.generated.ScheduledActionProp;
 import org.repastbs.generated.VariableProp;
+import org.repastbs.model.NetworkModel;
+import org.repastbs.test.models.NetworkModelTest;
 
 public class MarshallAction extends AbstractAction {
 	
-	private StringComponentProp abcopr = new StringComponentProp();
-	private VariableProp variable = new VariableProp();
-	private ScheduledActionProp schedule = new ScheduledActionProp();
-//	private RepastBS repastBS;
+	private RepastBS repastBS;
 
 	public MarshallAction(RepastBS repastBS) {
 		super("Marshaller");
-//		this.repastBS = repastBS;
+		this.repastBS = repastBS;
 	}
 
 	public Object execute(Object component) {
@@ -36,15 +35,17 @@ public class MarshallAction extends AbstractAction {
         JAXBContext context;
         try {
             context = JAXBContext.newInstance(NetworkModelProp.class);
-
+            
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            NetworkModelProp toMarshall = new NetworkModelProp();    
-			toMarshall.setStringComponent(abcopr);
-            toMarshall.setVariable(variable);
-            toMarshall.setScheduledAction(schedule);
-            marshaller.marshal(toMarshall, System.out);
-        } catch (JAXBException e) {
+            /*NetworkModelProp toMarshall = new NetworkModelProp();    
+			toMarshall.setDescription(abcopr);
+			variable.setDefaultValue("sdifklsdjfkl");*/
+            /*toMarshall.setVariable(variable);
+            toMarshall.setScheduledAction(schedule);*/
+            
+            marshaller.marshal(repastBS.getModel().getModelProp(), System.out);
+        } catch (Exception e) {
         	System.out.println("marshalling model exception");
         	e.printStackTrace();
 		}

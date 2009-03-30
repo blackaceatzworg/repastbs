@@ -30,7 +30,7 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	private static final long serialVersionUID = 9024887132319543857L;
 	
 	/** */
-	private VariableProp variableprop = new VariableProp();
+	private VariableProp variableProp = new VariableProp();
 	
 	/** */
 	public static final String ID = "VARIABLE";
@@ -53,12 +53,13 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	public Variable(String name, String type, String defaultValue, 
 			boolean accessible, boolean parameter) {
 		super(name);
-		this.variableprop.setType(type);
+		this.variableProp.setType(type);
 		if(type==null)
-			this.variableprop.setType("");
-		this.variableprop.setDefaultValue(defaultValue);
-		this.variableprop.setAccessible(accessible);
-		this.variableprop.setParameter(parameter);
+			this.variableProp.setType("");
+		this.variableProp.setDefaultValue(defaultValue);
+		this.variableProp.setAccessible(accessible);
+		this.variableProp.setParameter(parameter);
+		this.variableProp.setName(name);
 		setId(ID);
 	}
 
@@ -66,16 +67,16 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	 * @return  the type
 	 * @uml.property  name="type"
 	 */
-	public VariableProp getVariableprop() {
-		return variableprop;
+	public VariableProp getVariableProp() {
+		return variableProp;
 	}
 
 	/**
-	 * @param type  the type to set
+	 * @param variableprop 
 	 * @uml.property  name="type"
 	 */
-	public void setVariableprop(VariableProp variableprop) {
-		this.variableprop = variableprop;
+	public void setVariableProp(VariableProp variableprop) {
+		this.variableProp = variableprop;
 	}
 
 	/**
@@ -84,13 +85,13 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		AttributesImpl atts = new AttributesImpl();
 	    atts.addAttribute("", "name", "name", "CDATA", getName());
-	    atts.addAttribute("", "class", "class", "CDATA", variableprop.getType());
-	    if(variableprop.getDefaultValue()!=null)
-	    	atts.addAttribute("", "defaultValue", "defaultValue", "CDATA", variableprop.getDefaultValue().toString());
+	    atts.addAttribute("", "class", "class", "CDATA", variableProp.getType());
+	    if(variableProp.getDefaultValue()!=null)
+	    	atts.addAttribute("", "defaultValue", "defaultValue", "CDATA", variableProp.getDefaultValue().toString());
 	    atts.addAttribute("", "accessible", "accessible", "CDATA", 
-	    		new StringBuffer().append(variableprop.isAccessible()).toString());
+	    		new StringBuffer().append(variableProp.isAccessible()).toString());
 	    atts.addAttribute("", "parameter", "parameter", "CDATA", 
-	    		new StringBuffer().append(variableprop.isParameter()).toString());
+	    		new StringBuffer().append(variableProp.isParameter()).toString());
 	    try {
 			SAXUtils.start(handler, "variable", atts);
 			SAXUtils.end(handler, "variable");
@@ -105,10 +106,10 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	public void createFromXML(Node node) throws XMLSerializationException {
 		this.setName(node.valueOf("@name"));
 		//this.setName(node.valueOf("@name"));  ??? why is twice ???
-		this.variableprop.setType(node.valueOf("@class"));
-		this.variableprop.setDefaultValue(node.valueOf("@defaultValue"));
-		this.variableprop.setAccessible(Boolean.parseBoolean(node.valueOf("@accessible")));
-		this.variableprop.setParameter(Boolean.parseBoolean(node.valueOf("@parameter")));
+		this.variableProp.setType(node.valueOf("@class"));
+		this.variableProp.setDefaultValue(node.valueOf("@defaultValue"));
+		this.variableProp.setAccessible(Boolean.parseBoolean(node.valueOf("@accessible")));
+		this.variableProp.setParameter(Boolean.parseBoolean(node.valueOf("@parameter")));
 	}
 
 	/**
@@ -116,7 +117,7 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	 * @throws DynamicException
 	 */
 	public void changeDynamicClass(DynamicGenerator generator) throws DynamicException {
-		generator.addField(getName(), variableprop.getType(), variableprop.getDefaultValue(), variableprop.isAccessible());
+		generator.addField(getName(), variableProp.getType(), variableProp.getDefaultValue(), variableProp.isAccessible());
 	}
 
 	/**
@@ -124,17 +125,18 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	 */
 	public void createNew() {
 		this.setName("newVariable");
-		this.variableprop.setType("String");
-		this.variableprop.setDefaultValue("");
-		this.variableprop.setAccessible(false);
-		this.variableprop.setParameter(false);
+		this.variableProp.setName("newVariable");
+		this.variableProp.setType("String");
+		this.variableProp.setDefaultValue("");
+		this.variableProp.setAccessible(false);
+		this.variableProp.setParameter(false);
 	}
 
 	/**
 	 * @see org.repastbs.dynamic.DynamicChanger#generateFields(org.repastbs.dynamic.DynamicGenerator)
 	 */
 	public void generateFields(DynamicGenerator generator) throws DynamicException {
-		generator.addField(getName(), variableprop.getType(), variableprop.getDefaultValue(), variableprop.isAccessible());
+		generator.addField(getName(), variableProp.getType(), variableProp.getDefaultValue(), variableProp.isAccessible());
 	}
 
 	/**
@@ -143,4 +145,13 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	public void generateMethods(DynamicGenerator generator) throws DynamicException {
 		//DO NOTHING
 	}
+
+	/**
+	 * @see org.repastbs.component.AbstractComponent#setName(java.lang.String)
+	 */
+	@Override
+	public void setName(String name) {
+		super.setName(name);
+		variableProp.setName(name);
+	}	
 }

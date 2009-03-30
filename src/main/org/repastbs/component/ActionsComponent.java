@@ -14,6 +14,7 @@ import org.dom4j.Node;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.ActionsProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -33,6 +34,8 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	
 	/** */
 	public static final String ID = "ACTIONS";
+	
+	private ActionsProp actionsProp;
 	
 	/**
 	 * default constructor
@@ -84,6 +87,7 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	 */
 	public void addAction(Action a) {
 		super.add(a);
+		actionsProp.getAction().add(a.getActionProp());
 	}
 	
 	/**
@@ -127,6 +131,7 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	 */
 	public void createNew() {
 		removeAllChildren();
+		actionsProp = new ActionsProp();
 	}
 
 	/**
@@ -145,5 +150,19 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 		Enumeration e = getActions();
 		while(e.hasMoreElements())
 			((Action)e.nextElement()).generateMethods(generator);
+	}
+
+	/**
+	 * @return the actionsProp
+	 */
+	public ActionsProp getActionsProp() {
+		return actionsProp;
+	}
+
+	/**
+	 * @param actionsProp the actionsProp to set
+	 */
+	public void setActionsProp(ActionsProp actionsProp) {
+		this.actionsProp = actionsProp;
 	}
 }

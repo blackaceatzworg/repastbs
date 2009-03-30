@@ -156,7 +156,10 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 		}
 			
 		if (e.getActionCommand() == "Create") {
-			fireValueChanged(new EditorEvent(this,getEditedValue(),EditorEvent.VALUE_CREATED));		
+			Action newAction = (Action)getEditedValue();
+			fireValueChanged(new EditorEvent(this,newAction,EditorEvent.VALUE_CREATED));	
+			((ActionsComponent)newAction.getParent()).getActionsProp().getAction().add(
+					newAction.getActionProp());
 		}
 	}		
 
@@ -177,9 +180,9 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 			throw new IllegalArgumentException("Edited value not supported by Actions Editor");
 		action = (Action)component;
 		name.setText(action.getName());
-		returnType.setSelectedItem(action.getActionprop().getReturnType());
-		source.setText(action.getActionprop().getSource());
-		imports.setText(action.getActionprop().getImports());
+		returnType.setSelectedItem(action.getActionProp().getReturnType());
+		source.setText(action.getActionProp().getSource());
+		imports.setText(action.getActionProp().getImports());
 		variablesModel.clear();
 		Component parent = (Component)action.getParent();
 		if(parent != null) {
@@ -214,10 +217,10 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 		if(creator)
 			action=new Action();
 		action.setName(name.getText());
-		action.getActionprop().setSource(source.getText());
-		action.getActionprop().setImports(imports.getText());
+		action.getActionProp().setSource(source.getText());
+		action.getActionProp().setImports(imports.getText());
 		if(returnType.getSelectedItem()!=null)
-		action.getActionprop().setReturnType(returnType.getSelectedItem().toString());
+		action.getActionProp().setReturnType(returnType.getSelectedItem().toString());
 		return action;
 	}
 

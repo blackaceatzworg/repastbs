@@ -13,10 +13,13 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.tree.DefaultTreeModel;
+
 import org.dom4j.Node;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.VariablesProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
@@ -38,6 +41,8 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 
 	/** */
 	public static final String ID = "VARIABLES";
+	
+	private VariablesProp variablesProp;
 
 	/**
 	 * default constructor
@@ -100,6 +105,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	public void addVariable(Variable v) {
 		if(v==null)
 			return;
+		variablesProp.getVariable().add(v.getVariableProp());
 		super.add(v);
 	}
 
@@ -115,7 +121,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 		Enumeration e = children();
 		while(e.hasMoreElements()) {
 			Variable v = (Variable)e.nextElement();
-			if(v.getVariableprop().isParameter())
+			if(v.getVariableProp().isParameter())
 				result.add(v);
 		}
 
@@ -176,6 +182,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	 */
 	public void createNew() {
 		removeAllChildren();
+		variablesProp = new VariablesProp(); 
 	}
 	
 	/**
@@ -218,4 +225,19 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 			}			
 		}
 	}
+
+	/**
+	 * @return the variablesProp
+	 */
+	public VariablesProp getVariablesProp() {
+		return variablesProp;
+	}
+
+	/**
+	 * @param variablesProp the variablesProp to set
+	 */
+	public void setVariablesProp(VariablesProp variablesProp) {
+		this.variablesProp = variablesProp;
+	}
+	
 }

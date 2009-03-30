@@ -18,6 +18,8 @@ import org.repastbs.component.display.NetworkDisplay;
 import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.JavassistGenerator;
+import org.repastbs.generated.ModelProp;
+import org.repastbs.generated.NetworkModelProp;
 
 /**
  * Network model template
@@ -28,6 +30,8 @@ public class NetworkModel extends AbstractModel {
 
 	/** */
 	private static final long serialVersionUID = 6147610689058660846L;
+	
+	private NetworkModelProp networkModelProp;
 	
 	/**
 	 * @throws DynamicException 
@@ -54,17 +58,20 @@ public class NetworkModel extends AbstractModel {
 	 */
 	public void createNew() throws Exception {
 		super.createNew("NetworkModel","Network model");
+		networkModelProp = new NetworkModelProp();
 		displayName.addComponentListener(this);
 		
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
 		variables.createNew();
+		networkModelProp.setVariables(variables.getVariablesProp());
 		
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
-		Action a = actions.createAction("initAgents");
+		Action a = actions.createAction("initAgents","void");
 		a.setRemovable(false);
+		networkModelProp.setActions(actions.getActionsProp());
 		
 		ScheduleComponent scheduleComponent = new ScheduleComponent();
 		add(scheduleComponent);
@@ -90,4 +97,20 @@ public class NetworkModel extends AbstractModel {
 	public boolean isEditable() {
 		return true;
 	}
+
+	/**
+	 * @param networkModelProp the networkModelProp to set
+	 */
+	public void setNetworkModelProp(NetworkModelProp networkModelProp) {
+		this.networkModelProp = networkModelProp;
+	}
+
+	/**
+	 * @see org.repastbs.model.Model#getModelProp()
+	 */
+	public ModelProp getModelProp() {
+		return networkModelProp;
+	}
+	
+	
 }

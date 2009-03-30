@@ -66,13 +66,13 @@ public class GridSpace extends AbstractComponent implements XMLSerializable, Dyn
 		addToSpaceSource.append("$1.setX(x);\n");
 		addToSpaceSource.append("$1.setY(y);\n");
 		addToSpaceSource.append("$2.putObjectAt(x, y, $1);\n");
-		addToSpace.getActionprop().setSource(addToSpaceSource.toString());
+		addToSpace.getActionProp().setSource(addToSpaceSource.toString());
 		addToSpaceSource = new StringBuffer();
 		addToSpaceSource.append("uchicago.src.sim.gui\n");
 		addToSpaceSource.append("uchicago.src.sim.space\n");
 		addToSpaceSource.append("uchicago.src.sim.util\n");
 		addToSpaceSource.append("org.repastbs.component.grid\n");
-		addToSpace.getActionprop().setImports(addToSpaceSource.toString());
+		addToSpace.getActionProp().setImports(addToSpaceSource.toString());
 	}
 
 	/**

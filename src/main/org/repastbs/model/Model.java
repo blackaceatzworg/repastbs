@@ -12,6 +12,7 @@ import javax.swing.tree.DefaultTreeModel;
 import org.repastbs.component.Component;
 import org.repastbs.component.Schedulable;
 import org.repastbs.dynamic.DynamicHolder;
+import org.repastbs.generated.ModelProp;
 import org.repastbs.xml.XMLSerializable;
 
 /**
@@ -32,5 +33,10 @@ public interface Model extends Component, DynamicHolder, XMLSerializable, Schedu
 	 * @return  tree model associated with this model
 	 * @uml.property  name="treeModel"
 	 */
-	public DefaultTreeModel getTreeModel();	
+	public DefaultTreeModel getTreeModel();
+	
+	/**
+	 * @return model prop
+	 */
+	public ModelProp getModelProp();
 }

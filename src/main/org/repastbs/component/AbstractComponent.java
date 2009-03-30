@@ -223,7 +223,7 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @uml.property  name="description"
 	 */
 	public String getDescription() {
-		return acp.getDescription();
+		return "Description";//acp.getDescription();
 	}
 
 	/**
@@ -232,7 +232,7 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @uml.property  name="description"
 	 */
 	public void setDescription(String description) {
-		this.acp.setDescription(description);
+		//this.acp.setDescription(description);
 	}
 	
 	/**

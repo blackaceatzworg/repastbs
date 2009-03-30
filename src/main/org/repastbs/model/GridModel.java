@@ -20,6 +20,7 @@ import org.repastbs.component.grid.GridAgent;
 import org.repastbs.component.grid.GridSpace;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.JavassistGenerator;
+import org.repastbs.generated.ModelProp;
 
 /**
  * Grid model template
@@ -87,5 +88,12 @@ public class GridModel extends AbstractModel {
 		MasterSchedule masterSchedule = new MasterSchedule();
 		add(masterSchedule);
 		masterSchedule.createNew();
+	}
+
+	/**
+	 * @see org.repastbs.model.Model#getModelProp()
+	 */
+	public ModelProp getModelProp() {
+		return null;
 	}
 }

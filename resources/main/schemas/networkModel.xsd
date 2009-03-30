@@ -6,15 +6,29 @@
 
     <xsd:import namespace="http://repastbs/components"
         schemaLocation="component.xsd"/>
+        
+    <xsd:complexType name="ModelProp">
+    </xsd:complexType>
 
     <xsd:element name="NetworkModelProp">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="StringComponent" type="com:StringComponentProp"/>
-                <xsd:element name="Variable" type="com:VariableProp"/>
-                <xsd:element name="ScheduledAction" type="com:ScheduledActionProp"/>
-            </xsd:sequence>
-        </xsd:complexType>
+    	<xsd:complexType>
+    		<xsd:complexContent>
+    			<xsd:extension base="net:ModelProp">
+    				<xsd:sequence>
+    					<xsd:element name="name"
+    						type="com:StringComponentProp" />
+    					<xsd:element name="displayName"
+    						type="com:StringComponentProp" />
+    					<xsd:element name="description"
+    						type="com:StringComponentProp" />
+    					<xsd:element name="variables"
+    						type="com:VariablesProp" />
+    					<xsd:element name="actions"
+    						type="com:ActionsProp" />
+    				</xsd:sequence>
+    			</xsd:extension>
+    		</xsd:complexContent>
+    	</xsd:complexType>
     </xsd:element>
 
 </xsd:schema>

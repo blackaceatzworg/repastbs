@@ -96,13 +96,13 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 			throw new IllegalArgumentException("Edited value not supported by Variable Editor");
 		variable = (Variable)component;
 		name.setText(variable.getName());
-		type.setSelectedItem(variable.getVariableprop().getType());
-		if(variable.getVariableprop().getDefaultValue()!=null)
-			defaultValue.setText(variable.getVariableprop().getDefaultValue().toString());
+		type.setSelectedItem(variable.getVariableProp().getType());
+		if(variable.getVariableProp().getDefaultValue()!=null)
+			defaultValue.setText(variable.getVariableProp().getDefaultValue().toString());
 		else
 			defaultValue.setText("");
-		accessible.setSelected(variable.getVariableprop().isAccessible());
-		parameter.setSelected(variable.getVariableprop().isParameter());
+		accessible.setSelected(variable.getVariableProp().isAccessible());
+		parameter.setSelected(variable.getVariableProp().isParameter());
 		name.setEditable(variable.isRemovable());
 		type.setEnabled(variable.isRemovable());
 		accessible.setEnabled(variable.isRemovable());
@@ -116,10 +116,10 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 		if(creator)
 			variable=new Variable("");
 		variable.setName(name.getText());
-		variable.getVariableprop().setType((String)type.getSelectedItem());
-		variable.getVariableprop().setDefaultValue(defaultValue.getText());
-		variable.getVariableprop().setAccessible(accessible.isSelected());
-		variable.getVariableprop().setParameter(parameter.isSelected());
+		variable.getVariableProp().setType((String)type.getSelectedItem());
+		variable.getVariableProp().setDefaultValue(defaultValue.getText());
+		variable.getVariableProp().setAccessible(accessible.isSelected());
+		variable.getVariableProp().setParameter(parameter.isSelected());
 		return variable;
 	}
 
@@ -138,7 +138,10 @@ public class VariableEditor extends AbstractEditor implements ActionListener {
 			fireValueChanged(new EditorEvent(this,getEditedValue()));
 		}
 		if (e.getActionCommand() == "Create") {
-			fireValueChanged(new EditorEvent(this,getEditedValue(),EditorEvent.VALUE_CREATED));
+			Variable newVariable = getEditedValue();
+			fireValueChanged(new EditorEvent(this,newVariable,EditorEvent.VALUE_CREATED));
+			((VariablesComponent)newVariable.getParent()).getVariablesProp().getVariable().add(
+					newVariable.getVariableProp());
 		}
 		if (e.getActionCommand()== "Cancel" && variable != null)
 			setEditedValue(variable);
