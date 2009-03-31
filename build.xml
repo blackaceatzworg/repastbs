@@ -4,11 +4,11 @@
 
 		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 		  <classpath>
-		    <fileset dir="lib" includes="*.jar" />
+		    <fileset dir="lib" includes="*.jar"/>
 		  </classpath>
 		</taskdef>
 
-		<target name="Main Build" >
+		<target name="Main Build">
 			<echo message="Building Repast BS..."/>
 		</target>
 
@@ -23,20 +23,20 @@
 			<javac srcdir="src/main" destdir="target" source="1.6" target="1.6"/>
 		</target>
 
-		<target name="Run xjc" >
+		<target name="Run xjc">
 			<echo message="Making java classes from xsd files..."/>
 			<xjc schema="resources/main/schemas/component.xsd" destdir="src/main" package="org.repastbs.generated"/>	
 			<xjc schema="resources/main/schemas/networkModel.xsd" destdir="src/main" package="org.repastbs.generated"/>
 		</target>
 
-		<target name="Make Jar" depends="Compile" >
+		<target name="Make Jar" depends="Compile">
 			<echo message="Building Repast BS Jar..."/>
 			<mkdir dir="release"/>
 			<jar destfile="release/repastbs.jar" manifest="resources/main/manifest"  basedir="target" includes="org/repastbs/**,properties/**">
 			</jar>
 		</target>
-  
-		<target name="Make Release" depends="Make Jar" >
+
+		<target name="Make Release" depends="Make Jar">
 			<echo message="Building Repast BS Release.."/>
 			<delete file="release/RepastBS-${version}.zip"/>
 			<zip destfile="release/RepastBS-${version}.zip">

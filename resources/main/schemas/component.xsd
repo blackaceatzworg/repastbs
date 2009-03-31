@@ -2,7 +2,7 @@
 <xsd:schema targetNamespace="http://repastbs/components"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:com="http://repastbs/components">
-    
+
     <xsd:complexType name="AbstractComponentProp">
     	<xsd:attribute name="name" type="xsd:string"/>
     </xsd:complexType>
@@ -15,22 +15,30 @@
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="ScheduledActionProp">
-        <xsd:sequence>
-            <xsd:element name="execution" type="xsd:integer"/>
-            <xsd:element name="tick" type="xsd:integer"/>
-            <xsd:element name="executeLast" type="xsd:boolean"/>
-            <xsd:element name="index" type="xsd:integer"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
     <xsd:complexType name="StringComponentProp">
         <xsd:sequence>
             <xsd:element name="value" type="xsd:string"/>
             <xsd:element name="large" type="xsd:boolean"/>
         </xsd:sequence>
     </xsd:complexType>
-    
+
+	<xsd:complexType name="SchedulesProp">
+        <xsd:sequence>
+        	<xsd:element name="scheduledAction" type="com:ScheduledActionProp" maxOccurs="unbounded" minOccurs="0" nillable="true"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:complexType name="ScheduledActionProp">
+    	<xsd:complexContent>
+    		<xsd:extension base="com:AbstractComponentProp">
+    			<xsd:attribute name="execution" type="xsd:integer"/>
+    			<xsd:attribute name="tick" type="xsd:int"/>
+    			<xsd:attribute name="executeLast" type="xsd:boolean"/>
+    			<xsd:attribute name="index" type="xsd:integer"/>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+
     <xsd:complexType name="VariablesProp">
         <xsd:sequence>
         	<xsd:element name="variable" type="com:VariableProp" maxOccurs="unbounded" minOccurs="0" nillable="true"/>
@@ -40,39 +48,38 @@
     <xsd:complexType name="VariableProp">
     	<xsd:complexContent>
     		<xsd:extension base="com:AbstractComponentProp">
-    			<xsd:attribute name="type" type="xsd:string" />
-    			<xsd:attribute name="defaultValue" type="xsd:string" />
-    			<xsd:attribute name="accessible" type="xsd:boolean" />
-    			<xsd:attribute name="parameter" type="xsd:boolean" />
+    			<xsd:attribute name="type" type="xsd:string"/>
+    			<xsd:attribute name="defaultValue" type="xsd:string"/>
+    			<xsd:attribute name="accessible" type="xsd:boolean"/>
+    			<xsd:attribute name="parameter" type="xsd:boolean"/>
     		</xsd:extension>
     	</xsd:complexContent>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ActionsProp">
         <xsd:sequence>
         	<xsd:element name="action" type="com:ActionProp" maxOccurs="unbounded" minOccurs="0" nillable="true"/>
         </xsd:sequence>
     </xsd:complexType>
 
-
     <xsd:complexType name="ActionProp">
     	<xsd:complexContent>
     		<xsd:extension base="com:AbstractComponentProp">
     			<xsd:sequence>
-		    		<xsd:element name="imports" type="xsd:string" />
-		    		<xsd:element name="source" type="xsd:string" />
+		    		<xsd:element name="imports" type="xsd:string"/>
+		    		<xsd:element name="source" type="xsd:string"/>
 		    		<xsd:element name="parameters" type="com:ActionParameterProp" minOccurs="0" 
 		    			maxOccurs="unbounded" nillable="true"/>
 		    	</xsd:sequence>
-		    	<xsd:attribute name="returnType" type="xsd:string" />
+		    	<xsd:attribute name="returnType" type="xsd:string"/>
     		</xsd:extension>
     	</xsd:complexContent>   	    	
     </xsd:complexType>
-    
+
     <xsd:complexType name="ActionParameterProp">
     	<xsd:sequence>
-    		<xsd:element name="parameter" type="xsd:string" />
+    		<xsd:element name="parameter" type="xsd:string"/>
     	</xsd:sequence>
     </xsd:complexType>
-    
+
 </xsd:schema>

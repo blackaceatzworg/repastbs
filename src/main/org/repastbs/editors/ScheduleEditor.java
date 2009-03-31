@@ -31,7 +31,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing Schedule components
- * @author  �udov�t Hajzer
+ * @author  Ľudovít Hajzer
  */
 public class ScheduleEditor extends AbstractEditor implements ActionListener, ItemListener {
 	
@@ -119,8 +119,8 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 		scheduledAction = (ScheduledAction)component;
 		actions.setSelectedItem(scheduledAction.getAction());
 		execution.setSelectedIndex(scheduledAction.getExecution());
-		tick.setText(""+scheduledAction.getTick());
-		executeLast.setSelected(scheduledAction.isExecuteLast());
+		tick.setText(""+scheduledAction.getScheduledActionProp().getTick());
+		executeLast.setSelected(scheduledAction.getScheduledActionProp().isExecuteLast());
 	}
 
 	/**
@@ -131,8 +131,8 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 			scheduledAction = new ScheduledAction();
 		scheduledAction.setAction((Action)actions.getSelectedItem());
 		scheduledAction.setExecution(execution.getSelectedIndex());
-		scheduledAction.setTick(Integer.parseInt(tick.getText()));
-		scheduledAction.setExecuteLast(executeLast.isSelected());
+		scheduledAction.getScheduledActionProp().setTick(Integer.parseInt(tick.getText()));
+		scheduledAction.getScheduledActionProp().setExecuteLast(executeLast.isSelected());
 		return scheduledAction;
 	}
 
@@ -152,7 +152,9 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 			fireValueChanged(new EditorEvent(this,getEditedValue()));		
 		}
 		if (e.getActionCommand() == "Create") {
-			fireValueChanged(new EditorEvent(this,getEditedValue(),EditorEvent.VALUE_CREATED));		
+			ScheduledAction newSchedule = (ScheduledAction)getEditedValue();
+			fireValueChanged(new EditorEvent(this,getEditedValue(),EditorEvent.VALUE_CREATED));
+			((ScheduleComponent)newSchedule.getParent()).getSchedulesProp().getScheduledAction().add(newSchedule.getScheduledActionProp());
 		}
 		if (e.getActionCommand()== "Cancel" && scheduledAction != null)
 			setEditedValue(scheduledAction);

@@ -23,7 +23,7 @@ import org.repastbs.dynamic.DynamicGenerator;
 
 /**
  * Master schedule is responsible for generation of all schedules in model
- * @author �udov�t Hajzer
+ * @author Ľudovít Hajzer
  *
  */
 public class MasterSchedule extends AbstractComponent implements DynamicChanger {
@@ -134,8 +134,8 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 		try {
 			scheduledActions = this.scheduledActions
 			.get(a.getExecution())
-			.get(new Integer(a.getTick()))
-			.get(new Boolean(a.isExecuteLast()));
+			.get(new Integer(a.getScheduledActionProp().getTick()))
+			.get(new Boolean(a.getScheduledActionProp().isExecuteLast()));
 		} catch(NullPointerException e) {
 			scheduledActions = null;
 		}
@@ -145,7 +145,7 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 
 			scheduledActions = new ArrayList<ScheduledAction>();
 			List<ScheduledAction> otherActions = new ArrayList<ScheduledAction>();
-			if(a.isExecuteLast()) {
+			if(a.getScheduledActionProp().isExecuteLast()) {
 				map.put(new Boolean(true), scheduledActions);
 				map.put(new Boolean(false), otherActions);
 			}
@@ -154,7 +154,7 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 				map.put(new Boolean(true), otherActions);
 			}
 			this.scheduledActions.get(a.getExecution()).put(
-					new Integer(a.getTick()),
+					new Integer(a.getScheduledActionProp().getTick()),
 					map);
 		}
 		return scheduledActions;

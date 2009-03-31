@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ActionsProp complex type.
+ * <p>Java class for SchedulesProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ActionsProp">
+ * &lt;complexType name="SchedulesProp">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="action" type="{http://repastbs/components}ActionProp" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="scheduledAction" type="{http://repastbs/components}ScheduledActionProp" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,41 +36,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ActionsProp", propOrder = {
-    "action"
+@XmlType(name = "SchedulesProp", propOrder = {
+    "scheduledAction"
 })
-public class ActionsProp {
+public class SchedulesProp {
 
     @XmlElement(nillable = true)
-    protected List<ActionProp> action;
+    protected List<ScheduledActionProp> scheduledAction;
 
     /**
-     * Gets the value of the action property.
+     * Gets the value of the scheduledAction property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the action property.
+     * This is why there is not a <CODE>set</CODE> method for the scheduledAction property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAction().add(newItem);
+     *    getScheduledAction().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ActionProp }
+     * {@link ScheduledActionProp }
      * 
      * 
      */
-    public List<ActionProp> getAction() {
-        if (action == null) {
-            action = new ArrayList<ActionProp>();
+    public List<ScheduledActionProp> getScheduledAction() {
+        if (scheduledAction == null) {
+            scheduledAction = new ArrayList<ScheduledActionProp>();
         }
-        return this.action;
+        return this.scheduledAction;
     }
 
 }

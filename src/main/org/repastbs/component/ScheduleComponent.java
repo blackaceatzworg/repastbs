@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.dom4j.Node;
+import org.repastbs.generated.SchedulesProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -33,6 +34,7 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	/** */
 	public static final String ID = "SCHEDULE";
 
+	private SchedulesProp schedulesProp;
 	/**
 	 * default constructor
 	 */
@@ -71,12 +73,14 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	public void addScheduledAction(ScheduledAction s) {
 		if(s==null)
 			return;
+		schedulesProp.getScheduledAction().add(s.getScheduledActionProp());
 		super.add(s);
 	}
 
 	/**
 	 * @see org.repastbs.xml.XMLSerializable#writeToXML(org.xml.sax.ContentHandler)
 	 */
+	@SuppressWarnings("unchecked")
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		try {
 			AttributesImpl atts = new AttributesImpl();
@@ -97,6 +101,7 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	/**
 	 * @see org.repastbs.xml.XMLSerializable#createFromXML(org.dom4j.Node)
 	 */
+	@SuppressWarnings("unchecked")
 	public void createFromXML(Node node) throws XMLSerializationException {
 		List variableNodes = node.selectNodes("scheduledAction");
 		for(int i=0;i<variableNodes.size();i++) {
@@ -128,6 +133,7 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	 */
 	public void createNew() {
 		removeAllChildren();
+		schedulesProp = new SchedulesProp(); 
 	}
 
 	/**
@@ -135,5 +141,13 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	 */
 	public Schedulable getSchedulable() {
 		return (Schedulable)parent;
+	}
+
+	public SchedulesProp getSchedulesProp() {
+		return schedulesProp;
+	}
+
+	public void setSchedulesProp(SchedulesProp schedulesProp) {
+		this.schedulesProp = schedulesProp;
 	}
 }

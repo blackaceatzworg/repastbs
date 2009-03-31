@@ -35,9 +35,8 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	public static final int AT_PAUSE = 4;
 	/** */
 	public static final String ID = "SCHEDULE";
-	
-	@SuppressWarnings("unused")
-	private ScheduledActionProp sap = new ScheduledActionProp();
+
+	private ScheduledActionProp scheduledActionProp = new ScheduledActionProp();
 	
 	/** */
 	private static final long serialVersionUID = 9024887132319543857L;
@@ -45,10 +44,6 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	private Action action;
 	
 	private int execution = EVERY_TICK;
-	
-	private int tick;
-	
-	private boolean executeLast;
 	
 	private int index = -1;
 	
@@ -77,8 +72,8 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 		super(name);
 		this.action = action;
 		this.execution = execution;
-		this.tick = tick;
-		this.executeLast = executeLast;
+		this.scheduledActionProp.setTick(tick);
+		this.scheduledActionProp.setExecuteLast(executeLast);
 		setId(ID);
 	}
 
@@ -89,9 +84,9 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 		AttributesImpl atts = new AttributesImpl();
 	    atts.addAttribute("", "action", "action", "CDATA", ""+getAction().getName());
 	    atts.addAttribute("", "execution", "execution", "CDATA", ""+getExecution());
-	    atts.addAttribute("", "tick", "tick", "CDATA", ""+getTick());
+	    atts.addAttribute("", "tick", "tick", "CDATA", ""+scheduledActionProp.getTick());
 	    atts.addAttribute("", "executeLast", "executeLast", "CDATA", 
-	    		new StringBuffer().append(isExecuteLast()).toString());
+	    		new StringBuffer().append(scheduledActionProp.isExecuteLast()).toString());
 	    atts.addAttribute("", "index", "index", "CDATA",""+getIndex());
 		atts.addAttribute("", "class", "class", "CDATA", getClass().getName());
 	    try {
@@ -120,9 +115,17 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 		
 		//NetworkDisplay a = 
 		this.setExecution(Integer.parseInt(node.valueOf("@execution")));
-		this.setTick(Integer.parseInt(node.valueOf("@tick")));
-		this.setExecuteLast(Boolean.parseBoolean(node.valueOf("@executeLast")));
+		this.scheduledActionProp.setTick(Integer.parseInt(node.valueOf("@tick")));
+		this.scheduledActionProp.setExecuteLast(Boolean.parseBoolean(node.valueOf("@executeLast")));
 		this.setIndex(Integer.parseInt(node.valueOf("@index")));
+	}
+
+	public ScheduledActionProp getScheduledActionProp() {
+		return scheduledActionProp;
+	}
+
+	public void setScheduledActionProp(ScheduledActionProp scheduledActionProp) {
+		this.scheduledActionProp = scheduledActionProp;
 	}
 
 	/**
@@ -149,22 +152,6 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	}
 
 	/**
-	 * @return  the executeLast
-	 * @uml.property  name="executeLast"
-	 */
-	public boolean isExecuteLast() {
-		return executeLast;
-	}
-
-	/**
-	 * @param executeLast  the executeLast to set
-	 * @uml.property  name="executeLast"
-	 */
-	public void setExecuteLast(boolean executeLast) {
-		this.executeLast = executeLast;
-	}
-
-	/**
 	 * @return  the execution
 	 * @uml.property  name="execution"
 	 */
@@ -181,22 +168,6 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	}
 
 	/**
-	 * @return  the tick
-	 * @uml.property  name="tick"
-	 */
-	public int getTick() {
-		return tick;
-	}
-
-	/**
-	 * @param tick  the tick to set
-	 * @uml.property  name="tick"
-	 */
-	public void setTick(int tick) {
-		this.tick = tick;
-	}
-
-	/**
 	 * @see org.repastbs.component.Component#createNew()
 	 */
 	public void createNew() {
@@ -207,10 +178,10 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	 * @see org.repastbs.component.AbstractComponent#getName()
 	 */
 	public String getName() {
-		String result = "Execute "+(isExecuteLast()?"last ":"")+action+ " ";
+		String result = "Execute "+(scheduledActionProp.isExecuteLast()?"last ":"")+action+ " ";
 		switch(execution) {
 			case EVERY_TICK: result+="at every tick"; break;
-			case AT_A_SINGLE_TICK: result+="at tick "+tick; break;
+			case AT_A_SINGLE_TICK: result+="at tick "+scheduledActionProp.getTick(); break;
 			case AT_INTERVAL: result+="at interval"; break;
 			case AT_END: result+="at end"; break;
 			case AT_PAUSE:  result+="at pause"; break;
