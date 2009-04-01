@@ -16,6 +16,7 @@ import org.repastbs.component.IntegerComponent;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.GridSpaceProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -32,6 +33,8 @@ public class GridSpace extends AbstractComponent implements XMLSerializable, Dyn
 	/** */
 	private static final long serialVersionUID = 8179308108473886316L;
 
+	private GridSpaceProp gridSpaceProp = new GridSpaceProp();
+
 	private IntegerComponent spaceWidth;
 	private IntegerComponent spaceHeight;
 
@@ -46,8 +49,10 @@ public class GridSpace extends AbstractComponent implements XMLSerializable, Dyn
 	public void createNew() throws Exception {
 		spaceHeight = new IntegerComponent("Space Height");
 		spaceHeight.setValue(new Integer(100));
+		gridSpaceProp.setHeight(spaceHeight.getIntegerComponentProp());
 		spaceWidth = new IntegerComponent("Space Height");
 		spaceWidth.setValue(new Integer(100));
+		gridSpaceProp.setWidth(spaceWidth.getIntegerComponentProp());
 		add(spaceHeight);
 		add(spaceWidth);
 		ActionsComponent actions = (ActionsComponent)getModel().getChildById(ActionsComponent.ID);
@@ -124,5 +129,19 @@ public class GridSpace extends AbstractComponent implements XMLSerializable, Dyn
 		} catch (DynamicException x) {
 			generator.addMethod("begin", null, null, null, buildMethod);
 		}
+	}
+
+	/**
+	 * @return the gridSpaceProp
+	 */
+	public GridSpaceProp getGridSpaceProp() {
+		return gridSpaceProp;
+	}
+
+	/**
+	 * @param gridSpaceProp the gridSpaceProp to set
+	 */
+	public void setGridSpaceProp(GridSpaceProp gridSpaceProp) {
+		this.gridSpaceProp = gridSpaceProp;
 	}
 }

@@ -8,6 +8,8 @@
  */
 package org.repastbs.component.display;
 
+import java.awt.Color;
+
 import org.dom4j.Node;
 import org.repastbs.component.AbstractComponent;
 import org.repastbs.component.Action;
@@ -19,6 +21,7 @@ import org.repastbs.component.ScheduledAction;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.GridDisplayProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -35,6 +38,8 @@ public class GridDisplay extends AbstractComponent implements DynamicChanger, XM
 
 	/** */
 	private static final long serialVersionUID = 3761529881265810264L;
+	
+	private GridDisplayProp gridDisplayProp = new GridDisplayProp();
 	
 	/** */
 	public static final String ID = "GRID_DISPLAY";
@@ -53,15 +58,17 @@ public class GridDisplay extends AbstractComponent implements DynamicChanger, XM
 	public void createNew() throws Exception {		
 		backGroundColor = new ColorComponent();
 		add(backGroundColor);
+		gridDisplayProp.setColor(null);
 		
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
+		gridDisplayProp.setActions(actions.getActionsProp());
 
 		ScheduleComponent schedule = new ScheduleComponent();
 		add(schedule);
 		schedule.createNew();
-
+		gridDisplayProp.setSchedule(schedule.getScheduleProp());
 
 		Action a = actions.createAction("updateDisplay","","surface.updateDisplay();",null);
 		a.setRemovable(false);
@@ -171,5 +178,19 @@ public class GridDisplay extends AbstractComponent implements DynamicChanger, XM
 		} catch (DynamicException x) {
 			generator.addMethod("begin", null, null, null, "display();");
 		}
+	}
+
+	/**
+	 * @return the gridDisplayProp
+	 */
+	public GridDisplayProp getGridDisplayProp() {
+		return gridDisplayProp;
+	}
+
+	/**
+	 * @param gridDisplayProp the gridDisplayProp to set
+	 */
+	public void setGridDisplayProp(GridDisplayProp gridDisplayProp) {
+		this.gridDisplayProp = gridDisplayProp;
 	}
 }

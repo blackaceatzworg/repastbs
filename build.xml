@@ -27,6 +27,7 @@
 			<echo message="Making java classes from xsd files..."/>
 			<xjc schema="resources/main/schemas/component.xsd" destdir="src/main" package="org.repastbs.generated"/>	
 			<xjc schema="resources/main/schemas/networkModel.xsd" destdir="src/main" package="org.repastbs.generated"/>
+			<xjc schema="resources/main/schemas/gridModel.xsd" destdir="src/main" package="org.repastbs.generated"/>
 		</target>
 
 		<target name="Make Jar" depends="Compile">

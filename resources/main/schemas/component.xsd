@@ -1,115 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://repastbs/components"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:com="http://repastbs/components">
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:com="http://repastbs/components">
 
-    <xsd:complexType name="AbstractComponentProp">
-    	<xsd:attribute name="name" type="xsd:string"/>
-    </xsd:complexType>
+	<xsd:complexType name="AbstractComponentProp">
+		<xsd:attribute name="name" type="xsd:string" />
+	</xsd:complexType>
 
-    <xsd:complexType name="ColorComponentProp">
-        <xsd:sequence>
-            <xsd:element name="red" type="xsd:integer"/>
-            <xsd:element name="green" type="xsd:integer"/>
-            <xsd:element name="blue" type="xsd:integer"/>
-        </xsd:sequence>
-    </xsd:complexType>
+	<xsd:complexType name="ColorComponentProp">
+		<xsd:sequence>
+			<xsd:element name="red" type="xsd:int" />
+			<xsd:element name="green" type="xsd:int" />
+			<xsd:element name="blue" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
 
-    <xsd:complexType name="StringComponentProp">
-        <xsd:sequence>
-            <xsd:element name="value" type="xsd:string"/>
-            <xsd:element name="large" type="xsd:boolean"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    
-    <xsd:complexType name="IntegerComponentProp">
-        <xsd:attribute name="value" type="xsd:int" use="optional"/>
-    </xsd:complexType>
+	<xsd:complexType name="StringComponentProp">
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string" />
+			<xsd:element name="large" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="IntegerComponentProp">
+		<xsd:attribute name="value" type="xsd:int" use="optional" />
+	</xsd:complexType>
 
 	<xsd:complexType name="ScheduleProp">
-        <xsd:sequence>
-        	<xsd:element name="scheduledAction" type="com:ScheduledActionProp" maxOccurs="unbounded" minOccurs="0" nillable="true"/>
-        </xsd:sequence>
-    </xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="scheduledAction" type="com:ScheduledActionProp"
+				maxOccurs="unbounded" minOccurs="0" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
 
 	<xsd:complexType name="ScheduledActionProp">
 		<xsd:attribute name="action" type="xsd:string" />
-		<xsd:attribute name="execution" type="xsd:int" use="required"/>
+		<xsd:attribute name="execution" type="xsd:int" use="required" />
 		<xsd:attribute name="tick" type="xsd:int" />
 		<xsd:attribute name="executeLast" type="xsd:boolean" />
-		<xsd:attribute name="index" type="xsd:int" use="required"/>
+		<xsd:attribute name="index" type="xsd:int" use="required" />
 	</xsd:complexType>
 
-    <xsd:complexType name="VariablesProp">
-        <xsd:sequence>
-        	<xsd:element name="variable" type="com:VariableProp" maxOccurs="unbounded" minOccurs="0" nillable="true"/>
-        </xsd:sequence>
-    </xsd:complexType>
+	<xsd:complexType name="VariablesProp">
+		<xsd:sequence>
+			<xsd:element name="variable" type="com:VariableProp"
+				maxOccurs="unbounded" minOccurs="0" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
 
-    <xsd:complexType name="VariableProp">
-    	<xsd:complexContent>
-    		<xsd:extension base="com:AbstractComponentProp">
-    			<xsd:attribute name="type" type="xsd:string"/>
-    			<xsd:attribute name="defaultValue" type="xsd:string"/>
-    			<xsd:attribute name="accessible" type="xsd:boolean"/>
-    			<xsd:attribute name="parameter" type="xsd:boolean"/>
-    		</xsd:extension>
-    	</xsd:complexContent>
-    </xsd:complexType>
+	<xsd:complexType name="VariableProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:AbstractComponentProp">
+				<xsd:attribute name="type" type="xsd:string" />
+				<xsd:attribute name="defaultValue" type="xsd:string" />
+				<xsd:attribute name="accessible" type="xsd:boolean" />
+				<xsd:attribute name="parameter" type="xsd:boolean" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 
-    <xsd:complexType name="ActionsProp">
-        <xsd:sequence>
-        	<xsd:element name="action" type="com:ActionProp" maxOccurs="unbounded" minOccurs="0" nillable="true"/>
-        </xsd:sequence>
-    </xsd:complexType>
+	<xsd:complexType name="ActionsProp">
+		<xsd:sequence>
+			<xsd:element name="action" type="com:ActionProp"
+				maxOccurs="unbounded" minOccurs="0" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
 
-    <xsd:complexType name="ActionProp">
-    	<xsd:complexContent>
-    		<xsd:extension base="com:AbstractComponentProp">
-    			<xsd:sequence>
-		    		<xsd:element name="imports" type="xsd:string"/>
-		    		<xsd:element name="source" type="xsd:string"/>
-		    		<xsd:element name="parameters" type="com:ActionParameterProp" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
-		    	</xsd:sequence>
-		    	<xsd:attribute name="returnType" type="xsd:string"/>
-    		</xsd:extension>
-    	</xsd:complexContent>	    	
-    </xsd:complexType>
+	<xsd:complexType name="ActionProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:AbstractComponentProp">
+				<xsd:sequence>
+					<xsd:element name="imports" type="xsd:string" />
+					<xsd:element name="source" type="xsd:string" />
+					<xsd:element name="parameters" type="com:ActionParameterProp"
+						minOccurs="0" maxOccurs="unbounded" nillable="true" />
+				</xsd:sequence>
+				<xsd:attribute name="returnType" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 
-    <xsd:complexType name="ActionParameterProp">
-    	<xsd:sequence>
-    		<xsd:element name="parameter" type="xsd:string"/>
-    	</xsd:sequence>
-    </xsd:complexType>
-        
-    <xsd:complexType name="NetworkLayoutProp">
-    </xsd:complexType>
-    
-    <xsd:complexType name="CircularLayoutProp">
-    	<xsd:complexContent>
-    		<xsd:extension base="com:NetworkLayoutProp">
-    			<xsd:sequence>
-		    		<xsd:element name="margin" type="xsd:int" maxOccurs="1" minOccurs="1" nillable="true"/>
-		    	</xsd:sequence>
-    		</xsd:extension>
-    	</xsd:complexContent>
-    </xsd:complexType>
-    
-    <xsd:complexType name="FruchmanReingoldLayoutProp">
-    	<xsd:complexContent>
-    		<xsd:extension base="com:NetworkLayoutProp">
-    			<xsd:sequence>
-		    		<xsd:element name="animate" type="xsd:boolean" maxOccurs="1" minOccurs="1" nillable="false"/>
-		    		<xsd:element name="rescale" type="xsd:boolean" maxOccurs="1" minOccurs="1" nillable="false"/>
-		    		<xsd:element name="updateEveryN" type="xsd:int" maxOccurs="1" minOccurs="1" nillable="false"/>
-		    	</xsd:sequence>
-    		</xsd:extension>
-    	</xsd:complexContent>
-    </xsd:complexType>
+	<xsd:complexType name="ActionParameterProp">
+		<xsd:sequence>
+			<xsd:element name="parameter" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="NetworkLayoutProp">
+	</xsd:complexType>
+
+	<xsd:complexType name="CircularLayoutProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:NetworkLayoutProp">
+				<xsd:sequence>
+					<xsd:element name="margin" type="xsd:int" maxOccurs="1"
+						minOccurs="1" nillable="true" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="FruchmanReingoldLayoutProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:NetworkLayoutProp">
+				<xsd:sequence>
+					<xsd:element name="animate" type="xsd:boolean"
+						maxOccurs="1" minOccurs="1" nillable="false" />
+					<xsd:element name="rescale" type="xsd:boolean"
+						maxOccurs="1" minOccurs="1" nillable="false" />
+					<xsd:element name="updateEveryN" type="xsd:int"
+						maxOccurs="1" minOccurs="1" nillable="false" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="GridSpaceProp">
+		<xsd:sequence>
+			<xsd:element name="width" type="com:IntegerComponentProp" />
+			<xsd:element name="height" type="com:IntegerComponentProp" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GridDisplayProp">
+		<xsd:sequence>
+			<xsd:element name="color" type="com:ColorComponentProp" />
+			<xsd:element name="actions" type="com:ActionsProp" />
+			<xsd:element name="schedule" type="com:ScheduleProp" />
+		</xsd:sequence>
+	</xsd:complexType>
 
 	<xsd:complexType name="NetworkDisplayProp">
 		<xsd:sequence>
-			<xsd:element name="width" type="com:IntegerComponentProp"/>
+			<xsd:element name="width" type="com:IntegerComponentProp" />
 			<xsd:element name="height" type="com:IntegerComponentProp" />
 			<xsd:element name="actions" type="com:ActionsProp" />
 			<xsd:element name="schedule" type="com:ScheduleProp" />

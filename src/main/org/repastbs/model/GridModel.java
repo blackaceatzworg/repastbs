@@ -21,6 +21,7 @@ import org.repastbs.component.grid.GridSpace;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.JavassistGenerator;
 import org.repastbs.generated.ModelProp;
+import org.repastbs.generated.GridModelProp;
 
 /**
  * Grid model template
@@ -31,6 +32,8 @@ public class GridModel extends AbstractModel {
 
 	/** */
 	private static final long serialVersionUID = 6147610689058660846L;
+	
+	private GridModelProp gridModelProp;
 	
 	/**
 	 * @throws DynamicException 
@@ -55,9 +58,11 @@ public class GridModel extends AbstractModel {
 	 */
 	public void createNew() throws Exception {
 		super.createNew("GridModel","Grid model");
+		gridModelProp = new GridModelProp();
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
 		variables.createNew();
+		gridModelProp.setVariables(variables.getVariablesProp());
 		Variable space = variables.createVariable("space", "uchicago.src.sim.space.Object2DGrid", null, false, false, false);
 		space.setEditable(false);
 		
@@ -67,9 +72,11 @@ public class GridModel extends AbstractModel {
 		Action initAgents = actions.createAction("initAgents");
 		initAgents.setRemovable(false);
 		initAgents.setChangeSignature(false);
+		gridModelProp.setActions(actions.getActionsProp());
 				
 		ScheduleComponent scheduleComponent = new ScheduleComponent();
 		add(scheduleComponent);
+		gridModelProp.setSchedule(scheduleComponent.getScheduleProp());
 		
 		AgentsComponent agents = new AgentsComponent();
 		GridAgent agent = new GridAgent("group");
@@ -80,10 +87,12 @@ public class GridModel extends AbstractModel {
 		GridSpace gridSpace = new GridSpace();
 		add(gridSpace);
 		gridSpace.createNew();
+		gridModelProp.setGridSpace(gridSpace.getGridSpaceProp());
 		
 		GridDisplay display = new GridDisplay();
 		add(display);
 		display.createNew();
+		gridModelProp.setGridDisplay(display.getGridDisplayProp());
 		
 		MasterSchedule masterSchedule = new MasterSchedule();
 		add(masterSchedule);
@@ -91,9 +100,23 @@ public class GridModel extends AbstractModel {
 	}
 
 	/**
+	 * @see org.repastbs.component.Component#isEditable()
+	 */
+	public boolean isEditable() {
+		return true;
+	}
+
+	/**
+	 * @param gridModelProp the gridModelProp to set
+	 */
+	public void setGridModelProp(GridModelProp gridModelProp) {
+		this.gridModelProp = gridModelProp;
+	}
+
+	/**
 	 * @see org.repastbs.model.Model#getModelProp()
 	 */
 	public ModelProp getModelProp() {
-		return null;
+		return gridModelProp;
 	}
 }

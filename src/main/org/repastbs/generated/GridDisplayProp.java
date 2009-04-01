@@ -15,20 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for NetworkDisplayProp complex type.
+ * <p>Java class for GridDisplayProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="NetworkDisplayProp">
+ * &lt;complexType name="GridDisplayProp">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="width" type="{http://repastbs/components}IntegerComponentProp"/>
- *         &lt;element name="height" type="{http://repastbs/components}IntegerComponentProp"/>
+ *         &lt;element name="color" type="{http://repastbs/components}ColorComponentProp"/>
  *         &lt;element name="actions" type="{http://repastbs/components}ActionsProp"/>
  *         &lt;element name="schedule" type="{http://repastbs/components}ScheduleProp"/>
- *         &lt;element name="layout" type="{http://repastbs/components}NetworkLayoutProp"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,72 +36,42 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "NetworkDisplayProp", propOrder = {
-    "width",
-    "height",
+@XmlType(name = "GridDisplayProp", propOrder = {
+    "color",
     "actions",
-    "schedule",
-    "layout"
+    "schedule"
 })
-public class NetworkDisplayProp {
+public class GridDisplayProp {
 
     @XmlElement(required = true)
-    protected IntegerComponentProp width;
-    @XmlElement(required = true)
-    protected IntegerComponentProp height;
+    protected ColorComponentProp color;
     @XmlElement(required = true)
     protected ActionsProp actions;
     @XmlElement(required = true)
     protected ScheduleProp schedule;
-    @XmlElement(required = true)
-    protected NetworkLayoutProp layout;
 
     /**
-     * Gets the value of the width property.
+     * Gets the value of the color property.
      * 
      * @return
      *     possible object is
-     *     {@link IntegerComponentProp }
+     *     {@link ColorComponentProp }
      *     
      */
-    public IntegerComponentProp getWidth() {
-        return width;
+    public ColorComponentProp getColor() {
+        return color;
     }
 
     /**
-     * Sets the value of the width property.
+     * Sets the value of the color property.
      * 
      * @param value
      *     allowed object is
-     *     {@link IntegerComponentProp }
+     *     {@link ColorComponentProp }
      *     
      */
-    public void setWidth(IntegerComponentProp value) {
-        this.width = value;
-    }
-
-    /**
-     * Gets the value of the height property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link IntegerComponentProp }
-     *     
-     */
-    public IntegerComponentProp getHeight() {
-        return height;
-    }
-
-    /**
-     * Sets the value of the height property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link IntegerComponentProp }
-     *     
-     */
-    public void setHeight(IntegerComponentProp value) {
-        this.height = value;
+    public void setColor(ColorComponentProp value) {
+        this.color = value;
     }
 
     /**
@@ -152,30 +120,6 @@ public class NetworkDisplayProp {
      */
     public void setSchedule(ScheduleProp value) {
         this.schedule = value;
-    }
-
-    /**
-     * Gets the value of the layout property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link NetworkLayoutProp }
-     *     
-     */
-    public NetworkLayoutProp getLayout() {
-        return layout;
-    }
-
-    /**
-     * Sets the value of the layout property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link NetworkLayoutProp }
-     *     
-     */
-    public void setLayout(NetworkLayoutProp value) {
-        this.layout = value;
     }
 
 }
