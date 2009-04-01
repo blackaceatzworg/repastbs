@@ -24,6 +24,7 @@ import org.repastbs.component.display.layout.NetworkLayout;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.NetworkDisplayProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -40,7 +41,9 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 
 	/** */
 	private static final long serialVersionUID = 3761529881265810264L;
-
+	
+	private NetworkDisplayProp networkDisplayProp = new NetworkDisplayProp();
+	
 	private IntegerComponent width;
 	private IntegerComponent height;
 	private NetworkLayout displayLayout;
@@ -63,19 +66,23 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 		if(width == null)
 			width = new IntegerComponent("Width",400);
 		add(this.width);
+		networkDisplayProp.setWidth(width.getIntegerComponentProp());
+		
 
 		if(height == null)
 			height = new IntegerComponent("Height",400);
 		add(this.height);
+		networkDisplayProp.setHeight(height.getIntegerComponentProp());
 
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
+		networkDisplayProp.setActions(actions.getActionsProp());
 
 		ScheduleComponent schedule = new ScheduleComponent();
 		add(schedule);
 		schedule.createNew();
-
+		networkDisplayProp.setSchedule(schedule.getScheduleProp());
 
 		Action a = actions.createAction("updateDisplay","","surface.updateDisplay();",null);
 		a.setRemovable(false);
@@ -94,6 +101,7 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 			displayLayout = (NetworkLayout)getSupportedLayouts().get(0);
 			add(displayLayout);
 			displayLayout.createNew();
+			networkDisplayProp.setLayout(displayLayout.getNetworkLayoutProp());
 		}		
 	}
 
@@ -253,8 +261,23 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 		add(displayLayout);
 		try {
 			displayLayout.createNew();
+			networkDisplayProp.setLayout(displayLayout.getNetworkLayoutProp());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * @return the networkDisplayProp
+	 */
+	public NetworkDisplayProp getNetworkDisplayProp() {
+		return networkDisplayProp;
+	}
+
+	/**
+	 * @param networkDisplayProp the networkDisplayProp to set
+	 */
+	public void setNetworkDisplayProp(NetworkDisplayProp networkDisplayProp) {
+		this.networkDisplayProp = networkDisplayProp;
+	}	
 }

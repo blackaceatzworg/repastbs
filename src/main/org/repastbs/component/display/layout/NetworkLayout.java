@@ -8,6 +8,8 @@
  */
 package org.repastbs.component.display.layout;
 
+import org.repastbs.generated.NetworkLayoutProp;
+
 /**
  * Common interface for all network layouts
  * @author �udov�t Hajzer
@@ -22,4 +24,9 @@ public interface NetworkLayout extends DisplayLayout {
 	 * @return variable name for this display layout
 	 */
 	public String getVariableName();
+	
+	/**
+	 * @return properties for this layout
+	 */
+	public NetworkLayoutProp getNetworkLayoutProp();
 }

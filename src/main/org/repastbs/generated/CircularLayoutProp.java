@@ -10,22 +10,23 @@ package org.repastbs.generated;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for AbstractComponentProp complex type.
+ * <p>Java class for CircularLayoutProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="AbstractComponentProp">
+ * &lt;complexType name="CircularLayoutProp">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
+ *     &lt;extension base="{http://repastbs/components}NetworkLayoutProp">
+ *       &lt;sequence>
+ *         &lt;element name="margin" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       &lt;/sequence>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -33,38 +34,38 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AbstractComponentProp")
-@XmlSeeAlso({
-    VariableProp.class,
-    ActionProp.class
+@XmlType(name = "CircularLayoutProp", propOrder = {
+    "margin"
 })
-public class AbstractComponentProp {
+public class CircularLayoutProp
+    extends NetworkLayoutProp
+{
 
-    @XmlAttribute
-    protected String name;
+    @XmlElement(required = true, type = Integer.class, nillable = true)
+    protected Integer margin;
 
     /**
-     * Gets the value of the name property.
+     * Gets the value of the margin property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public String getName() {
-        return name;
+    public Integer getMargin() {
+        return margin;
     }
 
     /**
-     * Sets the value of the name property.
+     * Sets the value of the margin property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setMargin(Integer value) {
+        this.margin = value;
     }
 
 }

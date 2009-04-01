@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://repastbs/networkModel"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:net="http://repastbs/networkModel"
-    xmlns:com="http://repastbs/components">
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:net="http://repastbs/networkModel"
+	xmlns:com="http://repastbs/components">
 
-    <xsd:import namespace="http://repastbs/components"
-        schemaLocation="component.xsd"/>
+	<xsd:import namespace="http://repastbs/components"
+		schemaLocation="component.xsd" />
 
-    <xsd:complexType name="ModelProp">
-    </xsd:complexType>
+	<xsd:complexType name="ModelProp">
+	</xsd:complexType>
 
-    <xsd:element name="NetworkModelProp">
-    	<xsd:complexType>
-    		<xsd:complexContent>
-    			<xsd:extension base="net:ModelProp">
-    				<xsd:sequence>
-    					<xsd:element name="name"
-    						type="com:StringComponentProp"/>
-    					<xsd:element name="displayName"
-    						type="com:StringComponentProp"/>
-    					<xsd:element name="description"
-    						type="com:StringComponentProp"/>
-    					<xsd:element name="variables"
-    						type="com:VariablesProp"/>
-    					<xsd:element name="actions"
-    						type="com:ActionsProp"/>
-    					<xsd:element name="schedule"
-							type="com:AbstractComponentProp"/>
-    				</xsd:sequence>
-    			</xsd:extension>
-    		</xsd:complexContent>
-    	</xsd:complexType>
-    </xsd:element>
-
+	<xsd:element name="NetworkModelProp">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="net:ModelProp">
+					<xsd:sequence>
+						<xsd:element name="name" type="com:StringComponentProp" />
+						<xsd:element name="displayName" type="com:StringComponentProp" />
+						<xsd:element name="description" type="com:StringComponentProp" />
+						<xsd:element name="variables" type="com:VariablesProp" />
+						<xsd:element name="actions" type="com:ActionsProp" />
+						<xsd:element name="schedule" type="com:ScheduleProp" />
+						<xsd:element name="networkDisplay" type="com:NetworkDisplayProp" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
 </xsd:schema>

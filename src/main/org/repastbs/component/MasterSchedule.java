@@ -115,6 +115,7 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 	/**
 	 * @param component
 	 */
+	@SuppressWarnings("unchecked")
 	private void processScheduledComponent(ScheduleComponent component) {
 		Enumeration scheduledActions = 
 			((ScheduleComponent)component).children();
@@ -133,7 +134,7 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 		List<ScheduledAction> scheduledActions;
 		try {
 			scheduledActions = this.scheduledActions
-			.get(a.getExecution())
+			.get(a.getScheduledActionProp().getExecution())
 			.get(new Integer(a.getScheduledActionProp().getTick()))
 			.get(new Boolean(a.getScheduledActionProp().isExecuteLast()));
 		} catch(NullPointerException e) {
@@ -153,7 +154,7 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 				map.put(new Boolean(false), scheduledActions);
 				map.put(new Boolean(true), otherActions);
 			}
-			this.scheduledActions.get(a.getExecution()).put(
+			this.scheduledActions.get(a.getScheduledActionProp().getExecution()).put(
 					new Integer(a.getScheduledActionProp().getTick()),
 					map);
 		}
@@ -193,8 +194,8 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 		if(currentActionPosition==0)
 			return;
 		Collections.swap(scheduled, currentActionPosition, currentActionPosition-1);
-		scheduled.get(currentActionPosition).setIndex(currentActionPosition);
-		scheduled.get(currentActionPosition-1).setIndex(currentActionPosition-1);
+		scheduled.get(currentActionPosition).getScheduledActionProp().setIndex(currentActionPosition);
+		scheduled.get(currentActionPosition-1).getScheduledActionProp().setIndex(currentActionPosition-1);
 	}
 
 	/**
@@ -209,8 +210,8 @@ public class MasterSchedule extends AbstractComponent implements DynamicChanger 
 		if(currentActionPosition==scheduled.size()-1)
 			return;
 		Collections.swap(scheduled, currentActionPosition, currentActionPosition+1);
-		scheduled.get(currentActionPosition).setIndex(currentActionPosition);
-		scheduled.get(currentActionPosition+1).setIndex(currentActionPosition+1);
+		scheduled.get(currentActionPosition).getScheduledActionProp().setIndex(currentActionPosition);
+		scheduled.get(currentActionPosition+1).getScheduledActionProp().setIndex(currentActionPosition+1);
 	}
 	
 	private StringBuffer generateMethods(DynamicGenerator generator, int execution, 

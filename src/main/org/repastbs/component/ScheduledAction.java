@@ -43,10 +43,6 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	
 	private Action action;
 	
-	private int execution = EVERY_TICK;
-	
-	private int index = -1;
-	
 	/** */
 	public ScheduledAction () {
 		this(null);
@@ -71,9 +67,13 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 			int tick, boolean executeLast, int index) {
 		super(name);
 		this.action = action;
-		this.execution = execution;
+		if(action!=null) {
+			this.scheduledActionProp.setAction(action.getName());
+		}
+		this.scheduledActionProp.setExecution(execution);
 		this.scheduledActionProp.setTick(tick);
 		this.scheduledActionProp.setExecuteLast(executeLast);
+		this.scheduledActionProp.setIndex(index);
 		setId(ID);
 	}
 
@@ -83,11 +83,11 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		AttributesImpl atts = new AttributesImpl();
 	    atts.addAttribute("", "action", "action", "CDATA", ""+getAction().getName());
-	    atts.addAttribute("", "execution", "execution", "CDATA", ""+getExecution());
+	    atts.addAttribute("", "execution", "execution", "CDATA", ""+scheduledActionProp.getExecution());
 	    atts.addAttribute("", "tick", "tick", "CDATA", ""+scheduledActionProp.getTick());
 	    atts.addAttribute("", "executeLast", "executeLast", "CDATA", 
 	    		new StringBuffer().append(scheduledActionProp.isExecuteLast()).toString());
-	    atts.addAttribute("", "index", "index", "CDATA",""+getIndex());
+	    atts.addAttribute("", "index", "index", "CDATA",""+scheduledActionProp.getIndex());
 		atts.addAttribute("", "class", "class", "CDATA", getClass().getName());
 	    try {
 			SAXUtils.start(handler, "scheduledAction", atts);
@@ -114,16 +114,22 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 		}
 		
 		//NetworkDisplay a = 
-		this.setExecution(Integer.parseInt(node.valueOf("@execution")));
+		this.scheduledActionProp.setExecution(Integer.parseInt(node.valueOf("@execution")));
 		this.scheduledActionProp.setTick(Integer.parseInt(node.valueOf("@tick")));
 		this.scheduledActionProp.setExecuteLast(Boolean.parseBoolean(node.valueOf("@executeLast")));
-		this.setIndex(Integer.parseInt(node.valueOf("@index")));
+		this.scheduledActionProp.setIndex(Integer.parseInt(node.valueOf("@index")));
 	}
 
+	/**
+	 * @return scheduledActionProp
+	 */
 	public ScheduledActionProp getScheduledActionProp() {
 		return scheduledActionProp;
 	}
 
+	/**
+	 * @param scheduledActionProp
+	 */
 	public void setScheduledActionProp(ScheduledActionProp scheduledActionProp) {
 		this.scheduledActionProp = scheduledActionProp;
 	}
@@ -152,22 +158,6 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	}
 
 	/**
-	 * @return  the execution
-	 * @uml.property  name="execution"
-	 */
-	public int getExecution() {
-		return execution;
-	}
-
-	/**
-	 * @param execution  the execution to set
-	 * @uml.property  name="execution"
-	 */
-	public void setExecution(int execution) {
-		this.execution = execution;
-	}
-
-	/**
 	 * @see org.repastbs.component.Component#createNew()
 	 */
 	public void createNew() {
@@ -179,7 +169,7 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	 */
 	public String getName() {
 		String result = "Execute "+(scheduledActionProp.isExecuteLast()?"last ":"")+action+ " ";
-		switch(execution) {
+		switch(scheduledActionProp.getExecution()) {
 			case EVERY_TICK: result+="at every tick"; break;
 			case AT_A_SINGLE_TICK: result+="at tick "+scheduledActionProp.getTick(); break;
 			case AT_INTERVAL: result+="at interval"; break;
@@ -190,29 +180,13 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	}
 
 	/**
-	 * @return  the index
-	 * @uml.property  name="index"
-	 */
-	public int getIndex() {
-		return index;
-	}
-
-	/**
-	 * @param index  the index to set
-	 * @uml.property  name="index"
-	 */
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	/**
 	 * @param other 
 	 * @return negative, 0, or positive value
 	 * @see java.lang.Comparable#compareTo(Object)
 	 * 
 	 */
 	public int compareTo(ScheduledAction other) {
-		return getIndex()-other.getIndex();
+		return this.scheduledActionProp.getIndex()-other.getScheduledActionProp().getIndex();
 	}
 	
 	/**

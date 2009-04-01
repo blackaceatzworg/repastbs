@@ -118,7 +118,7 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 			throw new IllegalArgumentException("Edited value not supported by Schedule editor");
 		scheduledAction = (ScheduledAction)component;
 		actions.setSelectedItem(scheduledAction.getAction());
-		execution.setSelectedIndex(scheduledAction.getExecution());
+		execution.setSelectedIndex(scheduledAction.getScheduledActionProp().getExecution());
 		tick.setText(""+scheduledAction.getScheduledActionProp().getTick());
 		executeLast.setSelected(scheduledAction.getScheduledActionProp().isExecuteLast());
 	}
@@ -130,7 +130,8 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 		if(creator)
 			scheduledAction = new ScheduledAction();
 		scheduledAction.setAction((Action)actions.getSelectedItem());
-		scheduledAction.setExecution(execution.getSelectedIndex());
+		scheduledAction.getScheduledActionProp().setAction(scheduledAction.getAction().getName());
+		scheduledAction.getScheduledActionProp().setExecution(execution.getSelectedIndex());
 		scheduledAction.getScheduledActionProp().setTick(Integer.parseInt(tick.getText()));
 		scheduledAction.getScheduledActionProp().setExecuteLast(executeLast.isSelected());
 		return scheduledAction;
@@ -153,8 +154,8 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 		}
 		if (e.getActionCommand() == "Create") {
 			ScheduledAction newSchedule = (ScheduledAction)getEditedValue();
-			fireValueChanged(new EditorEvent(this,getEditedValue(),EditorEvent.VALUE_CREATED));
-			((ScheduleComponent)newSchedule.getParent()).getSchedulesProp().getScheduledAction().add(newSchedule.getScheduledActionProp());
+			fireValueChanged(new EditorEvent(this,newSchedule,EditorEvent.VALUE_CREATED));
+			((ScheduleComponent)newSchedule.getParent()).getScheduleProp().getScheduledAction().add(newSchedule.getScheduledActionProp());
 		}
 		if (e.getActionCommand()== "Cancel" && scheduledAction != null)
 			setEditedValue(scheduledAction);

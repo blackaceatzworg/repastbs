@@ -15,12 +15,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ModelProp complex type.
+ * <p>Java class for NetworkLayoutProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ModelProp">
+ * &lt;complexType name="NetworkLayoutProp">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *     &lt;/restriction>
@@ -31,11 +31,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ModelProp", namespace = "http://repastbs/networkModel")
+@XmlType(name = "NetworkLayoutProp")
 @XmlSeeAlso({
-    NetworkModelProp.class
+    FruchmanReingoldLayoutProp.class,
+    CircularLayoutProp.class
 })
-public class ModelProp {
+public class NetworkLayoutProp {
 
 
 }

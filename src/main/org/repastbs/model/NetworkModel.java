@@ -75,6 +75,7 @@ public class NetworkModel extends AbstractModel {
 		
 		ScheduleComponent scheduleComponent = new ScheduleComponent();
 		add(scheduleComponent);
+		networkModelProp.setSchedule(scheduleComponent.getScheduleProp());
 		
 		AgentsComponent agents = new AgentsComponent();
 		NetworkAgent agent = new NetworkAgent("group");
@@ -89,6 +90,7 @@ public class NetworkModel extends AbstractModel {
 		NetworkDisplay networkDisplay = new NetworkDisplay();
 		add(networkDisplay);
 		networkDisplay.createNew();
+		networkModelProp.setNetworkDisplay(networkDisplay.getNetworkDisplayProp());
 	}
 	
 	/**

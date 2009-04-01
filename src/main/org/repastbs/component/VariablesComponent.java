@@ -28,6 +28,8 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 /**
  * Variables component is container holding Variable components
  * @author Ľudovít Hajzer
@@ -42,7 +44,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	/** */
 	public static final String ID = "VARIABLES";
 	
-	private VariablesProp variablesProp;
+	private VariablesProp variablesProp = new VariablesProp();
 
 	/**
 	 * default constructor
