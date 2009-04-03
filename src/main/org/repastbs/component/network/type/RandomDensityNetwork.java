@@ -72,6 +72,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setAllowLoops(Variable allowLoops) {
 		this.allowLoops = allowLoops;
+		networkTypeProp.setAllowLoopsVar(allowLoops.getName());
 	}
 
 	/**
@@ -88,6 +89,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setDensity(Variable density) {
 		this.density = density;
+		networkTypeProp.setDensityVar(density.getName());
 	}
 
 	/**
@@ -104,6 +106,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setSize(Variable size) {
 		this.size = size;
+		networkTypeProp.setSizeVar(size.getName());
 	}
 
 	/**
@@ -120,6 +123,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setSymmetric(Variable symmetric) {
 		this.symmetric = symmetric;
+		networkTypeProp.setSymmetricVar(symmetric.getName());
 	}
 	
 	/**
@@ -187,12 +191,16 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 			group.addComponentListener(this);
 		size=v.createVariable(group!=null?group.getValue()+"Size":"size",
 			"int","40",true,true, false);
+		networkTypeProp.setSizeVar(size.getName());
 		density=v.createVariable(group!=null?group.getValue()+"Density":"density",
 				"double","0.3",true,true, false);
+		networkTypeProp.setDensityVar(density.getName());
 		allowLoops=v.createVariable(group!=null?group.getValue()+"AllowLoops":"allowLoops",
 				"boolean","false",true,true, false);
+		networkTypeProp.setAllowLoopsVar(allowLoops.getName());
 		symmetric=v.createVariable(group!=null?group.getValue()+"Symmetric":"symmetric",
 				"boolean","false",true,true, false);
+		networkTypeProp.setSymmetricVar(symmetric.getName());
 	}
 
 	/**
@@ -200,9 +208,13 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void componentChanged(ComponentEvent e) {
 		size.setName(((StringComponent)e.getSource()).getValue()+"Size");
+		networkTypeProp.setSizeVar(size.getName());
 		density.setName(((StringComponent)e.getSource()).getValue()+"Density");
+		networkTypeProp.setDensityVar(density.getName());
 		allowLoops.setName(((StringComponent)e.getSource()).getValue()+"AllowLoops");
+		networkTypeProp.setAllowLoopsVar(allowLoops.getName());
 		symmetric.setName(((StringComponent)e.getSource()).getValue()+"Symmetric");
+		networkTypeProp.setSymmetricVar(symmetric.getName());
 	}
 	
 	/**

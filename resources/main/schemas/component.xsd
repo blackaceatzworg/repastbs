@@ -217,10 +217,10 @@
 		<xsd:complexContent>
 			<xsd:extension base="com:NetworkTypeProp">
 				<xsd:sequence>
-					<xsd:element name="sizeVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="densityVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="allowLoopsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="symmetricVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="colsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="connectRadiusVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="rowsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="wrapAroundVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
 				</xsd:sequence>
 				<xsd:attribute name="agentName" type="xsd:string" use="required"/>
 				<xsd:attribute name="groupName" type="xsd:string" use="required"/>

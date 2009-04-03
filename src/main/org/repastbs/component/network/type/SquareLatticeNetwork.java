@@ -58,6 +58,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setCols(Variable cols) {
 		this.cols = cols;
+		networkTypeProp.setColsVar(cols.getName());
 	}
 
 	/**
@@ -72,6 +73,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setConnectRadius(Variable connectRadius) {
 		this.connectRadius = connectRadius;
+		networkTypeProp.setConnectRadiusVar(connectRadius.getName());
 	}
 
 	/**
@@ -86,6 +88,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setRows(Variable rows) {
 		this.rows = rows;
+		networkTypeProp.setRowsVar(rows.getName());
 	}
 
 	/**
@@ -100,6 +103,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setWrapAround(Variable wrapAround) {
 		this.wrapAround = wrapAround;
+		networkTypeProp.setWrapAroundVar(wrapAround.getName());
 	}
 
 	/**
@@ -163,12 +167,16 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 			group.addComponentListener(this);
 		cols = v.createVariable(group!=null?group.getValue()+"Cols":"cols",
 				"int","10",true,true, false);
+		networkTypeProp.setColsVar(cols.getName());
 		connectRadius = v.createVariable(group!=null?group.getValue()+"ConnectRadius":"connectRadius",
 				"int","1",true,true, false);
+		networkTypeProp.setConnectRadiusVar(connectRadius.getName());
 		rows = v.createVariable(group!=null?group.getValue()+"Rows":"rows",
 				"int","5",true,true, false);
+		networkTypeProp.setRowsVar(rows.getName());
 		wrapAround = v.createVariable(group!=null?group.getValue()+"WrapAround":"wrapAround",
 				"boolean","false",true,true, false);
+		networkTypeProp.setWrapAroundVar(wrapAround.getName());
 	}
 	
 	/**
@@ -188,9 +196,13 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void componentChanged(ComponentEvent e) {
 		cols.setName(((StringComponent)e.getSource()).getValue()+"Cols");
+		networkTypeProp.setColsVar(cols.getName());
 		connectRadius.setName(((StringComponent)e.getSource()).getValue()+"ConnectRadius");
+		networkTypeProp.setConnectRadiusVar(connectRadius.getName());
 		rows.setName(((StringComponent)e.getSource()).getValue()+"Rows");
+		networkTypeProp.setRowsVar(rows.getName());
 		wrapAround.setName(((StringComponent)e.getSource()).getValue()+"WrapAround");
+		networkTypeProp.setWrapAroundVar(wrapAround.getName());
 	}
 
 	/**
