@@ -26,6 +26,7 @@ import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.dynamic.JavassistGenerator;
+import org.repastbs.generated.GridAgentProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializationException;
@@ -43,6 +44,8 @@ public class GridAgent extends AbstractComponent implements
 
 	/** */
 	private static final long serialVersionUID = 3761529881265810264L;
+	
+	private GridAgentProp agentProp;
 	
 	private StringComponent agentName;
 	private StringComponent groupName;
@@ -306,5 +309,19 @@ public class GridAgent extends AbstractComponent implements
 		} catch(DynamicException e) {
 			generator.addMethod("setup",null,null, null, "getAgentList().clear();" );
 		}
+	}
+
+	/**
+	 * @return the agentProp
+	 */
+	public GridAgentProp getAgentProp() {
+		return agentProp;
+	}
+
+	/**
+	 * @param agentProp the agentProp to set
+	 */
+	public void setAgentProp(GridAgentProp agentProp) {
+		this.agentProp = agentProp;
 	}
 }

@@ -12,7 +12,7 @@ import java.util.EventListener;
 
 /**
  * Component listener listens for editor events
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public interface ComponentListener extends EventListener {

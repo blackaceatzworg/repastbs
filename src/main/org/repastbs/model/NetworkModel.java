@@ -82,6 +82,7 @@ public class NetworkModel extends AbstractModel {
 		add(agents);
 		agents.addAgent(agent);
 		agent.createNew();
+		networkModelProp.setAgents(agents.getAgentsProp());
 		
 		MasterSchedule masterSchedule = new MasterSchedule();
 		add(masterSchedule);

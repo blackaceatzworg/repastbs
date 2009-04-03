@@ -10,22 +10,20 @@ package org.repastbs.generated;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for CircularLayoutProp complex type.
+ * <p>Java class for GridAgentProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="CircularLayoutProp">
+ * &lt;complexType name="GridAgentProp">
  *   &lt;complexContent>
- *     &lt;extension base="{http://repastbs/components}NetworkLayoutProp">
- *       &lt;sequence>
- *         &lt;element name="margin" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *       &lt;/sequence>
+ *     &lt;extension base="{http://repastbs/components}AgentProp">
+ *       &lt;attribute name="groupName" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -34,38 +32,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CircularLayoutProp", propOrder = {
-    "margin"
-})
-public class CircularLayoutProp
-    extends NetworkLayoutProp
+@XmlType(name = "GridAgentProp")
+public class GridAgentProp
+    extends AgentProp
 {
 
-    @XmlElement(required = true, type = Integer.class, nillable = true)
-    protected Integer margin;
+    @XmlAttribute(required = true)
+    protected String groupName;
 
     /**
-     * Gets the value of the margin property.
+     * Gets the value of the groupName property.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getMargin() {
-        return margin;
+    public String getGroupName() {
+        return groupName;
     }
 
     /**
-     * Sets the value of the margin property.
+     * Sets the value of the groupName property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setMargin(Integer value) {
-        this.margin = value;
+    public void setGroupName(String value) {
+        this.groupName = value;
     }
 
 }

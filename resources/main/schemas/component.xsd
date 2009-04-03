@@ -138,4 +138,93 @@
 			<xsd:element name="layout" type="com:NetworkLayoutProp" />
 		</xsd:sequence>
 	</xsd:complexType>
+	
+	<xsd:complexType name="AgentsProp">
+        <xsd:sequence>
+        	<xsd:element name="agent" type="com:AgentProp" minOccurs="0" maxOccurs="unbounded" nillable="false"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="AgentProp">
+    	<xsd:complexContent>
+			<xsd:extension base="com:AbstractComponentProp">
+			</xsd:extension>
+		</xsd:complexContent>
+    </xsd:complexType>
+
+	<xsd:complexType name="DefaultAgentProp" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="com:AgentProp">
+				<xsd:sequence>
+					<xsd:element name="actions" type="com:ActionsProp"
+						minOccurs="1" maxOccurs="1" nillable="false" />
+					<xsd:element name="schedule" type="com:ScheduleProp"
+						minOccurs="1" maxOccurs="1" nillable="false" />
+					<xsd:element name="variables" type="com:VariablesProp"
+						minOccurs="1" maxOccurs="1" nillable="false" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="NetworkAgentProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:DefaultAgentProp">
+				<xsd:sequence>
+					<xsd:element name="networkType" type="com:NetworkTypeProp" maxOccurs="1" minOccurs="1" nillable="false"/>
+				</xsd:sequence>
+				<xsd:attribute name="groupName" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GridAgentProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:AgentProp">
+				<xsd:attribute name="groupName" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="NetworkTypeProp" abstract="true"/>
+	
+	<xsd:complexType name="UnlinkedNetworkProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:NetworkTypeProp">
+				<xsd:sequence>
+					<xsd:element name="countVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="RandomDensityNetworkProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:NetworkTypeProp">
+				<xsd:sequence>
+					<xsd:element name="sizeVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="densityVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="allowLoopsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="symmetricVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+				</xsd:sequence>
+				<xsd:attribute name="agentName" type="xsd:string" use="required"/>
+				<xsd:attribute name="groupName" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SquareLatticeNetworkProp">
+		<xsd:complexContent>
+			<xsd:extension base="com:NetworkTypeProp">
+				<xsd:sequence>
+					<xsd:element name="sizeVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="densityVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="allowLoopsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="symmetricVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+				</xsd:sequence>
+				<xsd:attribute name="agentName" type="xsd:string" use="required"/>
+				<xsd:attribute name="groupName" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 </xsd:schema>

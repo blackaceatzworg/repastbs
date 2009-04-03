@@ -15,16 +15,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for CircularLayoutProp complex type.
+ * <p>Java class for UnlinkedNetworkProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="CircularLayoutProp">
+ * &lt;complexType name="UnlinkedNetworkProp">
  *   &lt;complexContent>
- *     &lt;extension base="{http://repastbs/components}NetworkLayoutProp">
+ *     &lt;extension base="{http://repastbs/components}NetworkTypeProp">
  *       &lt;sequence>
- *         &lt;element name="margin" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="countVar" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -34,38 +34,38 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CircularLayoutProp", propOrder = {
-    "margin"
+@XmlType(name = "UnlinkedNetworkProp", propOrder = {
+    "countVar"
 })
-public class CircularLayoutProp
-    extends NetworkLayoutProp
+public class UnlinkedNetworkProp
+    extends NetworkTypeProp
 {
 
-    @XmlElement(required = true, type = Integer.class, nillable = true)
-    protected Integer margin;
+    @XmlElement(required = true)
+    protected String countVar;
 
     /**
-     * Gets the value of the margin property.
+     * Gets the value of the countVar property.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getMargin() {
-        return margin;
+    public String getCountVar() {
+        return countVar;
     }
 
     /**
-     * Sets the value of the margin property.
+     * Sets the value of the countVar property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setMargin(Integer value) {
-        this.margin = value;
+    public void setCountVar(String value) {
+        this.countVar = value;
     }
 
 }

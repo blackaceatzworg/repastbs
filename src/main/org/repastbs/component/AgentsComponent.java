@@ -15,6 +15,7 @@ import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.dynamic.DynamicHolder;
+import org.repastbs.generated.AgentsProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
 import org.repastbs.xml.XMLSerializationException;
@@ -24,7 +25,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Agents component is container, which contains agents
- * @author Ľudovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class AgentsComponent extends AbstractComponent implements DynamicChanger, XMLSerializable {
@@ -33,6 +34,8 @@ public class AgentsComponent extends AbstractComponent implements DynamicChanger
 	private static final long serialVersionUID = 5683751005691247209L;
 	/** */
 	public static final String ID = "AGENTS";
+	
+	private AgentsProp agentsProp = new AgentsProp();
 
 	/**
 	 * Default empty constructor
@@ -49,6 +52,7 @@ public class AgentsComponent extends AbstractComponent implements DynamicChanger
 		if(a==null)
 			return;
 		super.add(a);
+		agentsProp.getAgent().add(a.getAgentProp());
 	}
 
 	/**
@@ -96,6 +100,7 @@ public class AgentsComponent extends AbstractComponent implements DynamicChanger
 	 */
 	public void createNew() {
 		removeAllChildren();
+		agentsProp = new AgentsProp();
 	}
 
 	/**
@@ -130,5 +135,19 @@ public class AgentsComponent extends AbstractComponent implements DynamicChanger
 				holder.generateMethods();
 			}
 		}
+	}
+
+	/**
+	 * @return the agentsProp
+	 */
+	public AgentsProp getAgentsProp() {
+		return agentsProp;
+	}
+
+	/**
+	 * @param agentsProp the agentsProp to set
+	 */
+	public void setAgentsProp(AgentsProp agentsProp) {
+		this.agentsProp = agentsProp;
 	}
 }

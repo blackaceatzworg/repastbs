@@ -9,6 +9,7 @@
 package org.repastbs.component;
 
 import org.repastbs.dynamic.DynamicHolder;
+import org.repastbs.generated.AgentProp;
 import org.repastbs.xml.XMLSerializable;
 
 /**
@@ -22,4 +23,9 @@ public interface Agent extends Schedulable, Component, XMLSerializable, DynamicH
 
 	/** */
 	public static final String ID = "AGENT";
+	
+	/**
+	 * @return agent properties
+	 */
+	public AgentProp getAgentProp();
 }

@@ -21,6 +21,7 @@
 						<xsd:element name="actions" type="com:ActionsProp" />
 						<xsd:element name="schedule" type="com:ScheduleProp" />
 						<xsd:element name="networkDisplay" type="com:NetworkDisplayProp" />
+						<xsd:element name="agents" type="com:AgentsProp" />
 					</xsd:sequence>
 				</xsd:extension>
 			</xsd:complexContent>

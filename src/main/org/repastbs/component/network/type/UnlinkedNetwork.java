@@ -18,6 +18,7 @@ import org.repastbs.component.VariablesComponent;
 import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.UnlinkedNetworkProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializationException;
@@ -27,12 +28,14 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Implementation of Unlinked network type, used in network agent
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class UnlinkedNetwork extends AbstractComponent implements NetworkType, ComponentListener {	
 
 	/** */
 	private static final long serialVersionUID = -2907826650030007648L;
+	
+	private UnlinkedNetworkProp networkTypeProp = new UnlinkedNetworkProp();
 	
 	private Variable nodeCount;
 	
@@ -67,6 +70,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	 */
 	public void setNodeCount(Variable nodeCount) {
 		this.nodeCount = nodeCount;
+		networkTypeProp.setCountVar(nodeCount.getName());
 	}
 
 	/**
@@ -119,6 +123,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 			group.addComponentListener(this);
 		nodeCount = v.createVariable(group!=null?group.getValue()+"Count":"count",
 				"int","40",true,true, false);
+		networkTypeProp.setCountVar(nodeCount.getName());
 	}
 	
 	/**
@@ -138,6 +143,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	 */
 	public void componentChanged(ComponentEvent e) {
 		nodeCount.setName(((StringComponent)e.getSource()).getValue()+"Count");
+		networkTypeProp.setCountVar(nodeCount.getName());
 	}
 
 	/**
@@ -168,4 +174,18 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 			generator.addMethod("begin",null,null, null, createNetwork.toString() );
 		}
 	}
+
+	/**
+	 * @return the networkProp
+	 */
+	public UnlinkedNetworkProp getNetworkTypeProp() {
+		return networkTypeProp;
+	}
+
+	/**
+	 * @param networkProp the networkProp to set
+	 */
+	public void setNetworkTypeProp(UnlinkedNetworkProp networkProp) {
+		this.networkTypeProp = networkProp;
+	}	
 }

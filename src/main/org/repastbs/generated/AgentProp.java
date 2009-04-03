@@ -15,15 +15,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for NetworkLayoutProp complex type.
+ * <p>Java class for AgentProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="NetworkLayoutProp">
+ * &lt;complexType name="AgentProp">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *     &lt;/restriction>
+ *     &lt;extension base="{http://repastbs/components}AbstractComponentProp">
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -31,12 +31,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "NetworkLayoutProp")
+@XmlType(name = "AgentProp")
 @XmlSeeAlso({
-    FruchmanReingoldLayoutProp.class,
-    CircularLayoutProp.class
+    DefaultAgentProp.class,
+    GridAgentProp.class
 })
-public class NetworkLayoutProp {
+public class AgentProp
+    extends AbstractComponentProp
+{
 
 
 }

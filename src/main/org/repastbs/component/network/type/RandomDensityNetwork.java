@@ -18,6 +18,7 @@ import org.repastbs.component.VariablesComponent;
 import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.RandomDensityNetworkProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializationException;
@@ -33,6 +34,8 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 
 	/** */
 	private static final long serialVersionUID = 1857953851235595976L;
+	
+	private RandomDensityNetworkProp networkTypeProp = new RandomDensityNetworkProp();
 	
 	private Variable size;
 	private Variable density;
@@ -251,5 +254,19 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 		} catch(DynamicException e) {
 			generator.addMethod("begin",null,null, null, createNetwork.toString() );
 		}
+	}
+
+	/**
+	 * @return the networkTypeProp
+	 */
+	public RandomDensityNetworkProp getNetworkTypeProp() {
+		return networkTypeProp;
+	}
+
+	/**
+	 * @param networkTypeProp the networkTypeProp to set
+	 */
+	public void setNetworkTypeProp(RandomDensityNetworkProp networkTypeProp) {
+		this.networkTypeProp = networkTypeProp;
 	}
 }

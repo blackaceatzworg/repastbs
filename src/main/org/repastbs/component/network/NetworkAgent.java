@@ -27,6 +27,7 @@ import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.dynamic.JavassistGenerator;
+import org.repastbs.generated.NetworkAgentProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializationException;
 import org.xml.sax.ContentHandler;
@@ -43,6 +44,8 @@ public class NetworkAgent extends AbstractComponent implements
 
 	/** */
 	private static final long serialVersionUID = 3761529881265810264L;
+	
+	private NetworkAgentProp agentProp = new NetworkAgentProp();
 	
 	private StringComponent agentName;
 	private StringComponent groupName;
@@ -65,6 +68,7 @@ public class NetworkAgent extends AbstractComponent implements
 	 */
 	public NetworkAgent(String groupName) {
 		super("NetworkAgent");
+		setName("NetworkAgent");
 		setId(ID);
 	}
 
@@ -78,29 +82,34 @@ public class NetworkAgent extends AbstractComponent implements
 		//if(groupName == null)
 		groupName = new StringComponent("Group name","nodes");
 		add(groupName);
+		agentProp.setGroupName(groupName.getValue());
 		
 		agentName = new StringComponent("Agent name","NetworkAgent");
 		agentName.addComponentListener(this);
 		add(agentName);
+		agentProp.setName(agentName.getValue());
 		
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
-		
+		agentProp.setActions(actions.getActionsProp());
 		
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
 		variables.createNew();
+		agentProp.setVariables(variables.getVariablesProp());
 		
 		ScheduleComponent schedule = new ScheduleComponent();
 		add(schedule);
 		schedule.createNew();
+		agentProp.setSchedule(schedule.getScheduleProp());
 		
 		buildSupportedTypes();
 		if(getSupportedTypes().size()>0) {
 			networkType = (NetworkType)getSupportedTypes().get(0);
 			add(networkType);
 			networkType.createNew();
+			agentProp.setNetworkType(networkType.getNetworkTypeProp());
 		}
 		
 		GameAgentInterface behavior = new GameAgentInterface();
@@ -197,8 +206,8 @@ public class NetworkAgent extends AbstractComponent implements
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute("", "class", "class", "CDATA", getClass().getName());
-		atts.addAttribute("", "group", "group", "CDATA", groupName.getValue());
-		atts.addAttribute("", "name", "name", "CDATA", agentName.getValue());
+		atts.addAttribute("", "group", "group", "CDATA", agentProp.getGroupName());
+		atts.addAttribute("", "name", "name", "CDATA", agentProp.getName());
 		try {
 			SAXUtils.start(handler, "agent", atts);
 			SAXUtils.serializeChildren(handler,this);
@@ -306,5 +315,27 @@ public class NetworkAgent extends AbstractComponent implements
 		} catch(DynamicException e) {
 			generator.addMethod("setup",null,null, null, "getAgentList().clear();" );
 		}
+	}
+
+	/**
+	 * @return the agentProp
+	 */
+	public NetworkAgentProp getAgentProp() {
+		return agentProp;
+	}
+
+	/**
+	 * @param agentProp the agentProp to set
+	 */
+	public void setAgentProp(NetworkAgentProp agentProp) {
+		this.agentProp = agentProp;
+	}
+	
+	/**
+	 * @see org.repastbs.component.AbstractComponent#setName(java.lang.String)
+	 */
+	public void setName(String name) {
+		super.setName(name);
+		agentProp.setName(name);
 	}
 }

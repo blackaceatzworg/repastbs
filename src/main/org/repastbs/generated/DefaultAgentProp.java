@@ -11,24 +11,25 @@ package org.repastbs.generated;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for GridDisplayProp complex type.
+ * <p>Java class for DefaultAgentProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="GridDisplayProp">
+ * &lt;complexType name="DefaultAgentProp">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://repastbs/components}AgentProp">
  *       &lt;sequence>
- *         &lt;element name="color" type="{http://repastbs/components}ColorComponentProp"/>
  *         &lt;element name="actions" type="{http://repastbs/components}ActionsProp"/>
  *         &lt;element name="schedule" type="{http://repastbs/components}ScheduleProp"/>
+ *         &lt;element name="variables" type="{http://repastbs/components}VariablesProp"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -36,43 +37,24 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GridDisplayProp", propOrder = {
-    "color",
+@XmlType(name = "DefaultAgentProp", propOrder = {
     "actions",
-    "schedule"
+    "schedule",
+    "variables"
 })
-public class GridDisplayProp {
+@XmlSeeAlso({
+    NetworkAgentProp.class
+})
+public abstract class DefaultAgentProp
+    extends AgentProp
+{
 
-    @XmlElement(required = true)
-    protected ColorComponentProp color;
     @XmlElement(required = true)
     protected ActionsProp actions;
     @XmlElement(required = true)
     protected ScheduleProp schedule;
-
-    /**
-     * Gets the value of the color property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ColorComponentProp }
-     *     
-     */
-    public ColorComponentProp getColor() {
-        return color;
-    }
-
-    /**
-     * Sets the value of the color property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ColorComponentProp }
-     *     
-     */
-    public void setColor(ColorComponentProp value) {
-        this.color = value;
-    }
+    @XmlElement(required = true)
+    protected VariablesProp variables;
 
     /**
      * Gets the value of the actions property.
@@ -120,6 +102,30 @@ public class GridDisplayProp {
      */
     public void setSchedule(ScheduleProp value) {
         this.schedule = value;
+    }
+
+    /**
+     * Gets the value of the variables property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link VariablesProp }
+     *     
+     */
+    public VariablesProp getVariables() {
+        return variables;
+    }
+
+    /**
+     * Sets the value of the variables property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link VariablesProp }
+     *     
+     */
+    public void setVariables(VariablesProp value) {
+        this.variables = value;
     }
 
 }
