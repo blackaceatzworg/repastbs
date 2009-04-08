@@ -17,6 +17,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import org.repastbs.RepastBS;
+import org.repastbs.Utils;
 import org.repastbs.generated.NetworkModelProp;
 import org.repastbs.gui.XMLFileFilter;
 
@@ -37,7 +38,7 @@ public class MarshallAction extends AbstractAction {
 			saveAs = false;
 		else
 			saveAs = ((Boolean) parameters).booleanValue();
-		File modelFile = (File) repastBS.getProperty("modelFile");
+		File modelFile = (File)repastBS.getProperty("modelFile");
 		if (!saveAs && modelFile == null)
 			saveAs = true;
 		int returnVal = JFileChooser.APPROVE_OPTION;
@@ -47,6 +48,8 @@ public class MarshallAction extends AbstractAction {
 		}
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			// Component data = repastBS.getModel();
+			if(Utils.getExtension(modelFile)==null || !Utils.getExtension(modelFile).equals(Utils.xml))
+				modelFile = new File(modelFile.getAbsolutePath()+".xml");
 			JAXBContext context;
 			FileWriter fw = null;
 			try {
