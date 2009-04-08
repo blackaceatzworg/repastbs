@@ -28,7 +28,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Implementation of Random density network type, used in network agent
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class RandomDensityNetwork extends AbstractComponent implements NetworkType, ComponentListener {	
 
@@ -241,7 +241,6 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void generateFields(DynamicGenerator generator) throws DynamicException {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**

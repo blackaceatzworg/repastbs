@@ -58,6 +58,7 @@ public class AgentsComponent extends AbstractComponent implements DynamicChanger
 	/**
 	 * @return actions
 	 */
+	@SuppressWarnings("unchecked")
 	public Enumeration getAgents() {
 		return children();
 	}

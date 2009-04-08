@@ -10,7 +10,7 @@ package org.repastbs.dynamic;
 
 /**
  * Interface representig dynamic generator of class,  it has methods to easily generate classes
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
 public interface DynamicGenerator {
 	
@@ -39,6 +39,7 @@ public interface DynamicGenerator {
 	 * @return dynamically created class
 	 * @throws DynamicException 
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getDynamicClass() throws DynamicException;
 	
 	/**

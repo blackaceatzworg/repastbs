@@ -18,7 +18,7 @@ import org.repastbs.component.IntegerComponent;
 
 /**
  * Editor used for editing Integer components
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class IntegerEditor extends StringEditor implements ActionListener {
@@ -76,6 +76,7 @@ public class IntegerEditor extends StringEditor implements ActionListener {
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		return IntegerComponent.class;
 	}

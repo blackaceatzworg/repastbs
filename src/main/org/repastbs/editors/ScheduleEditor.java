@@ -31,7 +31,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing Schedule components
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
 public class ScheduleEditor extends AbstractEditor implements ActionListener, ItemListener {
 	
@@ -99,6 +99,7 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 	/**
 	 * @see org.repastbs.editors.Editor#setEditedValue(org.repastbs.component.Component)
 	 */
+	@SuppressWarnings("unchecked")
 	public void setEditedValue(org.repastbs.component.Component component) {
 		this.actions.removeAllItems();
 		Component parent = (Component)component.getParent();
@@ -164,6 +165,7 @@ public class ScheduleEditor extends AbstractEditor implements ActionListener, It
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		if(creator)
 			return ScheduleComponent.class;

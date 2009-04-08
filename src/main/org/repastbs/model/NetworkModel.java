@@ -131,17 +131,19 @@ public class NetworkModel extends AbstractModel {
 		variables.setVariablesProp(networkModelProp.getVariables());
 		//networkModelProp.setVariables(variables.getVariablesProp());
 		
-		/*ActionsComponent actions = new ActionsComponent();
+		
+		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
-		Action a = actions.createAction("initAgents","void");
-		a.setRemovable(false);
-		networkModelProp.setActions(actions.getActionsProp());
+		//Action a = actions.createAction("initAgents","void");
+		//a.setRemovable(false);
+		actions.setActionsProp(networkModelProp.getActions());
+		//networkModelProp.setActions(actions.getActionsProp());
 		
 		ScheduleComponent scheduleComponent = new ScheduleComponent();
 		add(scheduleComponent);
-		networkModelProp.setSchedule(scheduleComponent.getScheduleProp());
-		
+		//networkModelProp.setSchedule(scheduleComponent.getScheduleProp());
+		/*
 		AgentsComponent agents = new AgentsComponent();
 		NetworkAgent agent = new NetworkAgent("group");
 		add(agents);

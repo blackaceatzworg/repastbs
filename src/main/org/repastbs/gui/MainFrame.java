@@ -11,7 +11,6 @@ package org.repastbs.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.lang.reflect.Method;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
@@ -44,7 +43,7 @@ import org.repastbs.gui.models.ModelComponentsCellRenderer;
 
 /**
  * Main frame window
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
 public class MainFrame extends JFrame implements TreeSelectionListener, TreeModelListener, EditorListener {
 

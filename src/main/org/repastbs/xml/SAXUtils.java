@@ -23,7 +23,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Helper class which contains static method used for xml manipulation
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class SAXUtils {
@@ -103,6 +103,7 @@ public class SAXUtils {
 	 * @param node
 	 * @param parent
 	 */
+	@SuppressWarnings("unchecked")
 	public static void createChildren(Node node, Component parent) {
 		for (Iterator iter = node.selectNodes("./*").iterator(); iter.hasNext();) {
 			Node element = (Node) iter.next();
@@ -141,6 +142,7 @@ public class SAXUtils {
 	 * @param toCast class of newly added component
 	 * @param parent
 	 */
+	@SuppressWarnings("unchecked")
 	public static void createChildren(Node node, Class toCast, Component parent) {
 		for (Iterator iter = node.selectNodes("./*").iterator(); iter.hasNext();) {
 			Node element = (Node) iter.next();

@@ -1,10 +1,10 @@
 /**
  * File: NetworkModelTest.java
  * Program: Repast BS
- * Author:  ¼udovít Hajzer
- * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
+ * Author:  ï¿½udovï¿½t Hajzer
+ * Masterï¿½S Thesis:	Development of a Modular Modeling Environment for Repast
  * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: László Gulyás, Ph.D.
+ * Consultant: Lï¿½szlï¿½ Gulyï¿½s, Ph.D.
  */
 package org.repastbs.test.models;
 
@@ -41,7 +41,7 @@ import org.xml.sax.ContentHandler;
 
 /**
  * Network model template unit test
- * @author ¼udovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 @RunWith(JMock.class)
@@ -140,6 +140,7 @@ public class NetworkModelTest {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void testRead(String fileName) throws Exception {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(new File(fileName));

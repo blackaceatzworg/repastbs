@@ -12,8 +12,9 @@ import org.repastbs.component.AbstractComponent;
 
 /**
  * Abstract implementation of NetworkLayout interface,  all network layouts should extend this class
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
+@SuppressWarnings("serial")
 public abstract class AbstractNetworkLayout extends AbstractComponent implements NetworkLayout {
 
 	private String variableName;

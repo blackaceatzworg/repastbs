@@ -26,7 +26,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing String components
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class StringEditor extends AbstractEditor implements ActionListener {
 	
@@ -125,6 +125,7 @@ public class StringEditor extends AbstractEditor implements ActionListener {
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		return StringComponent.class;
 	}

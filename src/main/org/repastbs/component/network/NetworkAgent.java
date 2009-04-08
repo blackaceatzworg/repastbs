@@ -258,7 +258,6 @@ public class NetworkAgent extends AbstractComponent implements
 			networkType.createNew();
 			agentProp.setNetworkType(networkType.getNetworkTypeProp());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

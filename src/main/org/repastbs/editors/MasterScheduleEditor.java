@@ -34,7 +34,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing Master Schedule components
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class MasterScheduleEditor extends AbstractEditor implements ActionListener, TreeSelectionListener {
 
@@ -192,6 +192,7 @@ public class MasterScheduleEditor extends AbstractEditor implements ActionListen
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		return MasterSchedule.class;
 	}

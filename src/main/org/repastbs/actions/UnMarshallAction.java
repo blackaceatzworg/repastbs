@@ -10,12 +10,9 @@ package org.repastbs.actions;
 
 import javax.swing.JFileChooser;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.repastbs.RepastBS;
-import org.repastbs.component.AbstractComponent;
-import org.repastbs.component.Component;
 import org.repastbs.generated.ModelProp;
 import org.repastbs.generated.NetworkModelProp;
 import org.repastbs.gui.XMLFileFilter;
@@ -30,6 +27,7 @@ public class UnMarshallAction extends AbstractAction {
 		this.repastBS = repastBS;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Object execute(Object component) {		
 		JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
 		fc.setFileFilter(new XMLFileFilter());

@@ -1,10 +1,10 @@
 /**
  * File: JavassistGeneratorTest.java
  * Program: Repast BS
- * Author:  ¼udovít Hajzer
- * Master’S Thesis:	Development of a Modular Modeling Environment for Repast
+ * Author:  ï¿½udovï¿½t Hajzer
+ * Masterï¿½S Thesis:	Development of a Modular Modeling Environment for Repast
  * Supervisor: MSc. Ladislav Samuelis, CSc.
- * Consultant: László Gulyás, Ph.D.
+ * Consultant: Lï¿½szlï¿½ Gulyï¿½s, Ph.D.
  */
 package org.repastbs.test;
 
@@ -25,7 +25,7 @@ import org.repastbs.dynamic.JavassistGenerator;
 
 /**
  * Test unit for Javasisst generator implementation
- * @author ¼udovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class JavassistGeneratorTest {
@@ -59,6 +59,7 @@ public class JavassistGeneratorTest {
 	 * @throws Exception 
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@Test
 	public void basicGenerationTest() throws Exception {
 		Class c;
@@ -363,6 +364,7 @@ public class JavassistGeneratorTest {
 		generator.saveToByteCode(dir);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Class loadClass(String name) throws Exception {
 		URLClassLoader cl = new URLClassLoader(new URL[]{new File(dir).toURI().toURL()});
 		return cl.loadClass(name);

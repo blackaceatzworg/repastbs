@@ -24,7 +24,7 @@ import jode.decompiler.Decompiler;
 
 /**
  * Implementation of dynamic generator, it uses Javassist and Jode
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
 public class JavassistGenerator implements DynamicGenerator {
 
@@ -80,6 +80,7 @@ public class JavassistGenerator implements DynamicGenerator {
 	 * @see  org.repastbs.dynamic.DynamicGenerator#getDynamicClass()
 	 * @uml.property  name="dynamicClass"
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getDynamicClass() throws DynamicException {
 		try {
 			Class c = dynamicClass.toClass();

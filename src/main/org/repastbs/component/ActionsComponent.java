@@ -14,6 +14,7 @@ import org.dom4j.Node;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.ActionProp;
 import org.repastbs.generated.ActionsProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
@@ -24,7 +25,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Actions component is container, which contains action components
- * @author Ľudovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class ActionsComponent extends AbstractComponent implements DynamicChanger, XMLSerializable {
@@ -93,6 +94,7 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	/**
 	 * @return actions
 	 */
+	@SuppressWarnings("unchecked")
 	public Enumeration getActions() {
 		return children();
 	}
@@ -132,11 +134,13 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	public void createNew() {
 		removeAllChildren();
 		actionsProp = new ActionsProp();
+		setRemovable(false);
 	}
 
 	/**
 	 * @see org.repastbs.dynamic.DynamicChanger#generateFields(org.repastbs.dynamic.DynamicGenerator)
 	 */
+	@SuppressWarnings("unchecked")
 	public void generateFields(DynamicGenerator generator) throws DynamicException {
 		Enumeration e = getActions();
 		while(e.hasMoreElements())
@@ -146,6 +150,7 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	/**
 	 * @see org.repastbs.dynamic.DynamicChanger#generateMethods(org.repastbs.dynamic.DynamicGenerator)
 	 */
+	@SuppressWarnings("unchecked")
 	public void generateMethods(DynamicGenerator generator) throws DynamicException {
 		Enumeration e = getActions();
 		while(e.hasMoreElements())
@@ -164,6 +169,10 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	 */
 	public void setActionsProp(ActionsProp actionsProp) {
 		this.actionsProp = actionsProp;
+		for (ActionProp actionProp : actionsProp.getAction()) {
+			Action a = new Action(actionProp);
+			add(a);
+		}
 	}
 	
 	/**

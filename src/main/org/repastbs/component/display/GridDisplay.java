@@ -8,8 +8,6 @@
  */
 package org.repastbs.component.display;
 
-import java.awt.Color;
-
 import org.dom4j.Node;
 import org.repastbs.component.AbstractComponent;
 import org.repastbs.component.Action;
@@ -32,7 +30,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Component which creates simple grid display in result model
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
 public class GridDisplay extends AbstractComponent implements DynamicChanger, XMLSerializable, Schedulable {
 

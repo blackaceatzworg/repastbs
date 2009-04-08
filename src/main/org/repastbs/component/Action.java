@@ -25,7 +25,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Basic model action, action is generated as method in generated class
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
 public class Action extends AbstractComponent implements DynamicChanger, XMLSerializable {
 	
@@ -67,6 +67,15 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 		this.actionProp.setImports(imports==null?"":imports);
 		this.actionProp.setSource(source);
 		this.actionProp.setReturnType(returnType);
+		setId(ID);
+	}
+
+	/**
+	 * @param actionProp
+	 */
+	public Action(ActionProp actionProp) {
+		super(actionProp.getName());
+		this.actionProp = actionProp;
 		setId(ID);
 	}
 
@@ -125,6 +134,7 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 	/**
 	 * @see org.repastbs.xml.XMLSerializable#createFromXML(org.dom4j.Node)
 	 */
+	@SuppressWarnings("unchecked")
 	public void createFromXML(Node node) throws XMLSerializationException {
 		this.setName(node.valueOf("@name"));
 		this.actionProp.setReturnType(node.valueOf("@returnType"));

@@ -13,8 +13,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.tree.DefaultTreeModel;
-
 import org.dom4j.Node;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
@@ -29,11 +27,9 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 /**
  * Variables component is container holding Variable components
- * @author Ľudovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class VariablesComponent extends AbstractComponent implements DynamicChanger, XMLSerializable {
@@ -115,10 +111,12 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	/**
 	 * @return actions
 	 */
+	@SuppressWarnings("unchecked")
 	public Enumeration getVariables() {
 		return children();
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<Variable> getParameters() {
 		List<Variable> result = new ArrayList<Variable>();
 		Enumeration e = children();
@@ -134,6 +132,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	/**
 	 * @see org.repastbs.xml.XMLSerializable#writeToXML(org.xml.sax.ContentHandler)
 	 */
+	@SuppressWarnings("unchecked")
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		try {
 			AttributesImpl atts = new AttributesImpl();
@@ -154,6 +153,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	/**
 	 * @see org.repastbs.xml.XMLSerializable#createFromXML(org.dom4j.Node)
 	 */
+	@SuppressWarnings("unchecked")
 	public void createFromXML(Node node) throws XMLSerializationException {
 		List variableNodes = node.selectNodes("variable");
 		for(int i=0;i<variableNodes.size();i++) {
@@ -199,6 +199,7 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	/**
 	 * @see org.repastbs.dynamic.DynamicChanger#generateFields(org.repastbs.dynamic.DynamicGenerator)
 	 */
+	@SuppressWarnings("unchecked")
 	public void generateFields(DynamicGenerator generator) throws DynamicException {
 		Enumeration e = getVariables();
 		while(e.hasMoreElements())

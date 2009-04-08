@@ -25,7 +25,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing Color components
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class ColorEditor extends AbstractEditor implements ActionListener, ChangeListener {
 	
@@ -87,6 +87,7 @@ public class ColorEditor extends AbstractEditor implements ActionListener, Chang
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		return ColorComponent.class;
 	}

@@ -16,7 +16,7 @@ import org.repastbs.component.Component;
 
 /**
  * No editor is returned for every component that has no associated editor 
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class NoEditor extends AbstractEditor {
@@ -48,6 +48,7 @@ public class NoEditor extends AbstractEditor {
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		return null;
 	}

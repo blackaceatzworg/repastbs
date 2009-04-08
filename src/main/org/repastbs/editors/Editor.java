@@ -13,7 +13,7 @@ import org.repastbs.component.Component;
 
 /**
  * Editor interface, which all editors for components must implement
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public interface Editor {
 	
@@ -21,6 +21,7 @@ public interface Editor {
 	 * Gsts supported class for this editor
 	 * @return type of object this editor edits
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass();
 	
 	/**

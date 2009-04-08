@@ -21,9 +21,10 @@ import javax.swing.JComponent;
 /**
  * Abstract implementation of Editor interface, 
  * all concrete editors should extend this class
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
+@SuppressWarnings("serial")
 public abstract class AbstractEditor extends JComponent implements Editor {
 
 	private List<EditorListener> listeners = new ArrayList<EditorListener>();
@@ -48,6 +49,7 @@ public abstract class AbstractEditor extends JComponent implements Editor {
 	/**
 	 * @see org.repastbs.editors.Editor#fireValueChanged(org.repastbs.editors.EditorEvent)
 	 */
+	@SuppressWarnings("unchecked")
 	public void fireValueChanged(EditorEvent e) {
 		for (Iterator iter = listeners.iterator(); iter.hasNext();) {
 			EditorListener listener = (EditorListener) iter.next();

@@ -16,7 +16,7 @@ import org.repastbs.xml.XMLSerializable;
  * Every agent in Repast BS must implement this interface, 
  * every agent must be schedulable, component, xml serializable, 
  * and must be dynamic holder, to generate its class
- * @author Ľudovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public interface Agent extends Schedulable, Component, XMLSerializable, DynamicHolder {

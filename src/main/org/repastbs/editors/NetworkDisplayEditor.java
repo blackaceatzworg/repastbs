@@ -24,7 +24,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing NetworkDisplay components
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class NetworkDisplayEditor extends AbstractEditor implements ActionListener {
 	
@@ -99,6 +99,7 @@ public class NetworkDisplayEditor extends AbstractEditor implements ActionListen
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		return NetworkDisplay.class;
 	}

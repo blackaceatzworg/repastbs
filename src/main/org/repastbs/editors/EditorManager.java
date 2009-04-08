@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * Editor manager manages editors registered in Repast BS
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class EditorManager {
 	
@@ -40,6 +40,7 @@ public class EditorManager {
 	 * @param editorFor 
 	 * @param editor 
 	 */
+	@SuppressWarnings("unchecked")
 	public void registerEditor(Class editorFor, Editor editor) {
 		editors.put(editorFor.getName(), editor);
 		System.out.println("Registering editor: "+editor.getClass().toString()
@@ -51,6 +52,7 @@ public class EditorManager {
 	 * @param editorFor
 	 * @return editors container
 	 */
+	@SuppressWarnings("unchecked")
 	public Container getEditorPanel(Class editorFor) {
 		Editor e = editors.get(editorFor.getName());
 		if(e == null)
@@ -63,6 +65,7 @@ public class EditorManager {
 	 * @param editorFor
 	 * @return editor
 	 */
+	@SuppressWarnings("unchecked")
 	public Editor getEditor(Class editorFor) {
 		Editor e = editors.get(editorFor.getName());
 		if(e == null)

@@ -27,8 +27,9 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Abstract implementation of Model interface,  all model templates should extend this class to implement specific model templates
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
+@SuppressWarnings("serial")
 public abstract class AbstractModel extends AbstractComponent implements Model, ComponentListener {
 
 	private DynamicGenerator generator;

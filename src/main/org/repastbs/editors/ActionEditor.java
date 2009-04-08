@@ -36,7 +36,7 @@ import org.repastbs.gui.models.VariablesModel;
 
 /**
  * Editor used for editing/creating Action components
- * @author  Ľudovít Hajzer
+ * @author  Ludovit Hajzer
  */
 public class ActionEditor extends AbstractEditor implements ActionListener, 
 	ItemListener, Editor {
@@ -173,6 +173,7 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 	/**
 	 * @see org.repastbs.editors.Editor#setEditedValue(org.repastbs.component.Component)
 	 */
+	@SuppressWarnings("unchecked")
 	public void setEditedValue(org.repastbs.component.Component component) {
 		if(creator && component instanceof ActionsComponent)
 			return;
@@ -207,7 +208,6 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 	 */
 	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -227,6 +227,7 @@ public class ActionEditor extends AbstractEditor implements ActionListener,
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		if(creator)
 			return ActionsComponent.class;

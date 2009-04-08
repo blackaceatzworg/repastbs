@@ -152,7 +152,6 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	 */
 	public void generateFields(DynamicGenerator generator) throws DynamicException {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**

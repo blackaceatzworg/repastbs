@@ -15,7 +15,7 @@ import uchicago.src.sim.engine.SimModelImpl;
 
 /**
  * Simple basic, no funcionality Sim Model for Repast,  this class should be extended by dynamically created models
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class DefaultModel extends SimModelImpl {
 
@@ -25,6 +25,7 @@ public class DefaultModel extends SimModelImpl {
 	
 	protected String initParam[] = new String[0];
 	
+	@SuppressWarnings("unchecked")
 	private List agentList = new ArrayList();
 	
 	/**
@@ -75,6 +76,7 @@ public class DefaultModel extends SimModelImpl {
 	 * @return  agent list
 	 * @uml.property  name="agentList"
 	 */
+	@SuppressWarnings("unchecked")
 	public List getAgentList() {
 		return agentList;
 	}
@@ -84,6 +86,7 @@ public class DefaultModel extends SimModelImpl {
 	 * @param  agentList
 	 * @uml.property  name="agentList"
 	 */
+	@SuppressWarnings("unchecked")
 	public void setAgentList(List agentList) {
 		this.agentList = agentList;
 	}

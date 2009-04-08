@@ -25,7 +25,7 @@ import org.repastbs.gui.SwingUtils;
 
 /**
  * Editor used for editing CircularLayout components
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class CircularLayoutEditor extends AbstractEditor implements ActionListener {
 	
@@ -118,6 +118,7 @@ public class CircularLayoutEditor extends AbstractEditor implements ActionListen
 	/**
 	 * @see org.repastbs.editors.Editor#getSupportedClass()
 	 */
+	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		//CircularLayout.class;
 		return RepastBS.getComponentManager()
