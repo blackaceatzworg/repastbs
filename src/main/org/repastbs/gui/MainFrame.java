@@ -11,9 +11,11 @@ package org.repastbs.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.lang.reflect.Method;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -31,6 +33,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
+
 import org.repastbs.RepastBS;
 import org.repastbs.component.Component;
 import org.repastbs.editors.Editor;
@@ -337,6 +340,7 @@ public class MainFrame extends JFrame implements TreeSelectionListener, TreeMode
 	 * @param c component to remove
 	 */
 	public void removeComponent(Component c) {
+		c.getParent().removeChildProp(c);
 		((DefaultTreeModel)modelComponents.getModel()).removeNodeFromParent(c);
 		//c.getParent().remove(c);
 		//c.removeFromParent();

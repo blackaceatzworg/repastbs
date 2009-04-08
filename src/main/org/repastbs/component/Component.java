@@ -115,4 +115,10 @@ public interface Component extends MutableTreeNode {
 	 * @return associated editor
 	 */
 	public Editor getEditor();
+	
+	/**
+	 * @param comp 
+	 * 
+	 */
+	public void removeChildProp(Component comp);
 }

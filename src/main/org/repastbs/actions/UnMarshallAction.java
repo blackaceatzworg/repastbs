@@ -8,36 +8,63 @@
  */
 package org.repastbs.actions;
 
+import javax.swing.JFileChooser;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.repastbs.RepastBS;
 import org.repastbs.component.AbstractComponent;
 import org.repastbs.component.Component;
+import org.repastbs.generated.ModelProp;
+import org.repastbs.generated.NetworkModelProp;
+import org.repastbs.gui.XMLFileFilter;
+import org.repastbs.model.Model;
 
 public class UnMarshallAction extends AbstractAction {
+	
+	private RepastBS repastBS;
 
-	public UnMarshallAction() {
+	public UnMarshallAction(RepastBS repastBS) {
 		super("Unmarshaller");
+		this.repastBS = repastBS;
 	}
 
-	public Object execute(Object component) {
-
-		@SuppressWarnings("unused")
-		Component data = (Component)component;
-        JAXBContext context;
-        try {
-            context = JAXBContext.newInstance(AbstractComponent.class);
-            @SuppressWarnings("unused")
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-//            unmarshaller.setProperty(Unmarshaller.JAXB_FORMATTED_OUTPUT, true);
-//            unmarshaller.unmarshal(data, System.out);
-        } catch (JAXBException e) {
-            // TODO Auto-generated catch block
-        	System.out.println("unmarshalling model exception");
-        	e.printStackTrace();
-        }
-        System.out.println("UnMarshalling model");
-		return null;
+	public Object execute(Object component) {		
+		JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
+		fc.setFileFilter(new XMLFileFilter());
+		int returnVal = fc.showOpenDialog(repastBS.getMainFrame());
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				JAXBContext context = JAXBContext.newInstance(NetworkModelProp.class);
+	            Unmarshaller unmarshaller = context.createUnmarshaller();
+	            ModelProp modelProp = (ModelProp)unmarshaller.unmarshal(fc.getSelectedFile());
+				Class clazz = Class.forName(modelProp.getModelClass());
+				Model model = (Model)clazz.newInstance();
+				model.setModelProp(modelProp);
+				repastBS.setModel(model);
+				repastBS.setProperty("modelFile",fc.getSelectedFile());
+				repastBS.setProperty("modelSaved",true);
+				repastBS.getActionManager().executeAction("UpdateFrameTitle");
+				//using DOM
+				/*SAXReader reader = new SAXReader();
+				Document document = reader.read(fc.getSelectedFile());
+				document.normalize();
+				Node root = document.selectSingleNode("//model");
+				Class modelClass = Class.forName(root.valueOf("@class"));
+				model = (Model)modelClass.newInstance();
+				model.createFromXML(root);
+				global.repast.setModel(model);
+				global.repast.setProperty("modelFile",fc.getSelectedFile());
+				global.repast.setProperty("modelSaved",true);
+				global.repast.getActionManager().executeAction("UpdateFrameTitle");*/
+			} catch (Exception e) {
+				repastBS.showErrorDialog("Error occured while loading model: "+e.getMessage());
+				e.printStackTrace();
+			}
+		}		
+		if(repastBS.getModel()!=null)
+			repastBS.getMainFrame().refreshModel();
+		return repastBS.getModel();
 	}
 }

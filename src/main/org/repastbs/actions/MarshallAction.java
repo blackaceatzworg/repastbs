@@ -8,17 +8,17 @@
  */
 package org.repastbs.actions;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
 import javax.xml.bind.JAXBContext;
-//import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.repastbs.RepastBS;
-//import org.repastbs.generated.StringComponentProp;
 import org.repastbs.generated.NetworkModelProp;
-//import org.repastbs.generated.ScheduledActionProp;
-//import org.repastbs.generated.VariableProp;
-//import org.repastbs.model.NetworkModel;
-//import org.repastbs.test.models.NetworkModelTest;
+import org.repastbs.gui.XMLFileFilter;
 
 public class MarshallAction extends AbstractAction {
 	
@@ -29,25 +29,54 @@ public class MarshallAction extends AbstractAction {
 		this.repastBS = repastBS;
 	}
 
-	public Object execute(Object component) {
-		System.out.println("Marshalling model");
-		//Component data = repastBS.getModel();
-        JAXBContext context;
-        try {
-            context = JAXBContext.newInstance(NetworkModelProp.class);
-            
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            /*NetworkModelProp toMarshall = new NetworkModelProp();    
-			toMarshall.setDescription(abcopr);
-			variable.setDefaultValue("sdifklsdjfkl");*/
-            /*toMarshall.setVariable(variable);
-            toMarshall.setScheduledAction(schedule);*/
-            
-            marshaller.marshal(repastBS.getModel().getModelProp(), System.out);
-        } catch (Exception e) {
-        	System.out.println("marshalling model exception");
-        	e.printStackTrace();
+	public Object execute(Object parameters) {
+		JFileChooser fc = new JFileChooser();
+		fc.setFileFilter(new XMLFileFilter());
+		boolean saveAs = false;
+		if (parameters == null)
+			saveAs = false;
+		else
+			saveAs = ((Boolean) parameters).booleanValue();
+		File modelFile = (File) repastBS.getProperty("modelFile");
+		if (!saveAs && modelFile == null)
+			saveAs = true;
+		int returnVal = JFileChooser.APPROVE_OPTION;
+		if (saveAs) {
+			returnVal = fc.showSaveDialog(repastBS.getMainFrame());
+			modelFile = fc.getSelectedFile();
+		}
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			// Component data = repastBS.getModel();
+			JAXBContext context;
+			FileWriter fw = null;
+			try {
+				context = JAXBContext.newInstance(NetworkModelProp.class);
+
+				Marshaller marshaller = context.createMarshaller();
+				marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+				/*
+				 * NetworkModelProp toMarshall = new NetworkModelProp();
+				 * toMarshall.setDescription(abcopr);
+				 * variable.setDefaultValue("sdifklsdjfkl");
+				 */
+				/*
+				 * toMarshall.setVariable(variable);
+				 * toMarshall.setScheduledAction(schedule);
+				 */
+				fw = new FileWriter(modelFile);
+				marshaller.marshal(repastBS.getModel().getModelProp(), fw);
+			} catch (Exception e) {
+				System.out.println("marshalling model exception");
+				e.printStackTrace();
+			} finally {
+				if (fw != null) {
+					try {
+						fw.close();
+					} catch (IOException e) {
+						// IGNORE
+					}
+				}
+			}
 		}
 		return null;
 	}

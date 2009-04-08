@@ -19,6 +19,7 @@ import org.dom4j.Node;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.VariableProp;
 import org.repastbs.generated.VariablesProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
@@ -184,7 +185,8 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	 */
 	public void createNew() {
 		removeAllChildren();
-		variablesProp = new VariablesProp(); 
+		variablesProp = new VariablesProp();
+		setRemovable(false);
 	}
 	
 	/**
@@ -240,6 +242,17 @@ public class VariablesComponent extends AbstractComponent implements DynamicChan
 	 */
 	public void setVariablesProp(VariablesProp variablesProp) {
 		this.variablesProp = variablesProp;
+		for (VariableProp variableProp : variablesProp.getVariable()) {
+			Variable v = new Variable(variableProp);
+			add(v);
+		}
 	}
-	
+
+	/**
+	 * @see org.repastbs.component.AbstractComponent#removeChildProp(org.repastbs.component.Component)
+	 */
+	public void removeChildProp(Component comp) {
+		Variable v = (Variable) comp;
+		variablesProp.getVariable().remove(v.getVariableProp());
+	}
 }

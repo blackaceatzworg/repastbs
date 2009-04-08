@@ -184,9 +184,13 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void removeFromParent() {
 		VariablesComponent v = (VariablesComponent)cols.getParent();
+		v.removeChildProp(connectRadius);
 		v.remove(connectRadius);
+		v.removeChildProp(rows);
 		v.remove(rows);
+		v.removeChildProp(wrapAround);
 		v.remove(wrapAround);
+		v.removeChildProp(cols);
 		v.remove(cols);
 		super.removeFromParent();
 	}

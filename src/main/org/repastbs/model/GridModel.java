@@ -119,4 +119,11 @@ public class GridModel extends AbstractModel {
 	public ModelProp getModelProp() {
 		return gridModelProp;
 	}
+	
+	/**
+	 * @see org.repastbs.model.Model#setModelProp(org.repastbs.generated.ModelProp)
+	 */
+	public void setModelProp(ModelProp modelProp) {
+		
+	}
 }

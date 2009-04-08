@@ -132,6 +132,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	public void removeFromParent() {
 		//Model m = (Model)getRoot();
 		VariablesComponent v = (VariablesComponent)nodeCount.getParent();
+		v.removeChildProp(nodeCount);
 		v.remove(nodeCount);
 		super.removeFromParent();
 		/*((DefaultTreeModel)m.getTreeModel()).nodeChanged(this);

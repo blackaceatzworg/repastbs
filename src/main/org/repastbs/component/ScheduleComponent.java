@@ -156,4 +156,12 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	public void setScheduleProp(ScheduleProp scheduleProp) {
 		this.scheduleProp = scheduleProp;
 	}
+	
+	/**
+	 * @see org.repastbs.component.AbstractComponent#removeChildProp(org.repastbs.component.Component)
+	 */
+	public void removeChildProp(Component comp) {
+		ScheduledAction sa = (ScheduledAction) comp;
+		scheduleProp.getScheduledAction().remove(sa.getScheduledActionProp());
+	}
 }

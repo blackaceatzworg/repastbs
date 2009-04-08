@@ -39,4 +39,10 @@ public interface Model extends Component, DynamicHolder, XMLSerializable, Schedu
 	 * @return model prop
 	 */
 	public ModelProp getModelProp();
+
+	/**
+	 * @param modelProp
+	 * @throws Exception 
+	 */
+	public void setModelProp(ModelProp modelProp) throws Exception;
 }

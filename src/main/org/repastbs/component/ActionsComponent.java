@@ -165,4 +165,12 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	public void setActionsProp(ActionsProp actionsProp) {
 		this.actionsProp = actionsProp;
 	}
+	
+	/**
+	 * @see org.repastbs.component.AbstractComponent#removeChildProp(org.repastbs.component.Component)
+	 */
+	public void removeChildProp(Component comp) {
+		Action a = (Action) comp;
+		actionsProp.getAction().remove(a.getActionProp());
+	}
 }

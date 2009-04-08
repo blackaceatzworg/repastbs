@@ -348,4 +348,11 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 			}
 		}
 	}
+	
+	/**
+	 * @see org.repastbs.component.Component#removeChildProp()
+	 */
+	public void removeChildProp(Component comp) {
+		//DO NOTHING
+	}
 }

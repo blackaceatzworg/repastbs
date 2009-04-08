@@ -6,13 +6,10 @@
 	<xsd:import namespace="http://repastbs/components"
 		schemaLocation="component.xsd" />
 
-	<xsd:complexType name="ModelProp">
-	</xsd:complexType>
-
 	<xsd:element name="GridModelProp">
 		<xsd:complexType>
 			<xsd:complexContent>
-				<xsd:extension base="grid:ModelProp">
+				<xsd:extension base="com:ModelProp">
 					<xsd:sequence>
 						<xsd:element name="name" type="com:StringComponentProp" />
 						<xsd:element name="displayName" type="com:StringComponentProp" />

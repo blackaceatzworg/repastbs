@@ -62,6 +62,15 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 		this.variableProp.setName(name);
 		setId(ID);
 	}
+	
+	/**
+	 * @param variableProp 
+	 */
+	public Variable(VariableProp variableProp) {
+		super(variableProp.getName());
+		this.variableProp = variableProp;
+		setId(ID);
+	}
 
 	/**
 	 * @return  the type

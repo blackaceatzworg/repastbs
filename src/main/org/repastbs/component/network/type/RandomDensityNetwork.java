@@ -223,9 +223,13 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	public void removeFromParent() {
 		//Model m = (Model)getRoot();
 		VariablesComponent v = (VariablesComponent)size.getParent();
+		v.removeChildProp(density);
 		v.remove(density);
+		v.removeChildProp(allowLoops);
 		v.remove(allowLoops);
+		v.removeChildProp(symmetric);
 		v.remove(symmetric);
+		v.removeChildProp(size);
 		v.remove(size);
 		super.removeFromParent();
 		/*((DefaultTreeModel)m.getTreeModel()).nodeStructureChanged(v);

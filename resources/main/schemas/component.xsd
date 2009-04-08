@@ -223,4 +223,8 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
+	<xsd:complexType name="ModelProp">
+		<xsd:attribute name="modelClass" type="xsd:string" use="required"/>
+	</xsd:complexType>
 </xsd:schema>

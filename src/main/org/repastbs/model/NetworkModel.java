@@ -59,6 +59,7 @@ public class NetworkModel extends AbstractModel {
 	public void createNew() throws Exception {
 		super.createNew("NetworkModel","Network model");
 		networkModelProp = new NetworkModelProp();
+		networkModelProp.setModelClass(this.getClass().getName());
 		displayName.addComponentListener(this);
 		
 		VariablesComponent variables = new VariablesComponent();
@@ -114,6 +115,52 @@ public class NetworkModel extends AbstractModel {
 	public ModelProp getModelProp() {
 		return networkModelProp;
 	}
-	
-	
+
+	/**
+	 * @see org.repastbs.model.Model#setModelProp(org.repastbs.generated.ModelProp)
+	 */
+	public void setModelProp(ModelProp modelProp) throws Exception {
+		NetworkModelProp props = (NetworkModelProp) modelProp;
+		networkModelProp = props;
+		super.createNew("NetworkModel","Network model");
+		displayName.addComponentListener(this);
+		
+		VariablesComponent variables = new VariablesComponent();
+		add(variables);
+		variables.createNew();
+		variables.setVariablesProp(networkModelProp.getVariables());
+		//networkModelProp.setVariables(variables.getVariablesProp());
+		
+		/*ActionsComponent actions = new ActionsComponent();
+		add(actions);
+		actions.createNew();
+		Action a = actions.createAction("initAgents","void");
+		a.setRemovable(false);
+		networkModelProp.setActions(actions.getActionsProp());
+		
+		ScheduleComponent scheduleComponent = new ScheduleComponent();
+		add(scheduleComponent);
+		networkModelProp.setSchedule(scheduleComponent.getScheduleProp());
+		
+		AgentsComponent agents = new AgentsComponent();
+		NetworkAgent agent = new NetworkAgent("group");
+		add(agents);
+		agents.addAgent(agent);
+		agent.createNew();
+		networkModelProp.setAgents(agents.getAgentsProp());
+		
+		MasterSchedule masterSchedule = new MasterSchedule();
+		add(masterSchedule);
+		masterSchedule.createNew();
+		
+		NetworkDisplay networkDisplay = new NetworkDisplay();
+		add(networkDisplay);
+		networkDisplay.createNew();
+		networkModelProp.setNetworkDisplay(networkDisplay.getNetworkDisplayProp());
+		*/
+		
+		//finally add master schedule
+		MasterSchedule masterSchedule = new MasterSchedule();
+		add(masterSchedule);
+	}
 }

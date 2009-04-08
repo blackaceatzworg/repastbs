@@ -1,3 +1,3 @@
 import org.repastbs.actions.UnMarshallAction;
 
-return new UnMarshallAction();
+return new UnMarshallAction(global.repast);
