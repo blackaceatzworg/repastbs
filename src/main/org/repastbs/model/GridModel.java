@@ -121,11 +121,49 @@ public class GridModel extends AbstractModel {
 	public ModelProp getModelProp() {
 		return gridModelProp;
 	}
-	
+
 	/**
 	 * @see org.repastbs.model.Model#setModelProp(org.repastbs.generated.ModelProp)
 	 */
-	public void setModelProp(ModelProp modelProp) {
+	public void setModelProp(ModelProp modelProp) throws Exception {
+		GridModelProp props = (GridModelProp)modelProp;
+		gridModelProp = props;
+		super.createNew("GridModel","Grid model");
+		displayName.addComponentListener(this);
+
+		VariablesComponent variables = new VariablesComponent();
+		add(variables);
+		variables.createNew();
+		variables.setVariablesProp(gridModelProp.getVariables());
+
+		ActionsComponent actions = new ActionsComponent();
+		add(actions);
+		actions.createNew();
+		actions.setActionsProp(gridModelProp.getActions());
+
+		ScheduleComponent scheduleComponent = new ScheduleComponent();
+		add(scheduleComponent);
+		scheduleComponent.setScheduleProp(gridModelProp.getSchedule());
+
+		/*
+		AgentsComponent agents = new AgentsComponent();
+		GridAgent agent = new GridAgent("group");
+		add(agents);
+		agents.addAgent(agent);
+		agent.createNew();
+		gridModelProp.setAgents(agents.getAgentsProp());
 		
+		GridSpace gridSpace = new GridSpace();
+		add(gridSpace);
+		gridSpace.createNew();
+		gridModelProp.setGridSpace(gridSpace.getGridSpaceProp());
+		
+		GridDisplay display = new GridDisplay();
+		add(display);
+		display.createNew();
+		gridModelProp.setGridDisplay(display.getGridDisplayProp());
+		*/
+		MasterSchedule masterSchedule = new MasterSchedule();
+		add(masterSchedule);
 	}
 }
