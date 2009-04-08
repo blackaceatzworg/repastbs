@@ -37,10 +37,11 @@ import org.xml.sax.helpers.AttributesImpl;
  * Component which creates simple network display in result model
  * @author  Ľudovít Hajzer
  */
+@SuppressWarnings("serial")
 public class NetworkDisplay extends AbstractComponent implements DynamicChanger, XMLSerializable, Schedulable {
 
 	/** */
-	private static final long serialVersionUID = 3761529881265810264L;
+	//private static final long serialVersionUID = 3761529881265810264L;
 	
 	private NetworkDisplayProp networkDisplayProp = new NetworkDisplayProp();
 	

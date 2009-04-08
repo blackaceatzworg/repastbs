@@ -37,7 +37,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Class representing grid agent
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class GridAgent extends AbstractComponent implements 
 	Agent, ComponentListener, DynamicChanger {

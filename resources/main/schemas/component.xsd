@@ -139,6 +139,9 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
+	<xsd:complexType name="GameAgentInterfaceProp">
+	</xsd:complexType>
+	
 	<xsd:complexType name="AgentsProp">
         <xsd:sequence>
         	<xsd:element name="agent" type="com:AgentProp" minOccurs="0" maxOccurs="unbounded" nillable="false"/>
@@ -172,6 +175,7 @@
 			<xsd:extension base="com:DefaultAgentProp">
 				<xsd:sequence>
 					<xsd:element name="networkType" type="com:NetworkTypeProp" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="interface" type="com:GameAgentInterfaceProp" maxOccurs="1" minOccurs="1" nillable="false"/>
 				</xsd:sequence>
 				<xsd:attribute name="groupName" type="xsd:string" use="required"/>
 			</xsd:extension>

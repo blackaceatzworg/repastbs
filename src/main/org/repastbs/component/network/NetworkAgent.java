@@ -115,6 +115,7 @@ public class NetworkAgent extends AbstractComponent implements
 		GameAgentInterface behavior = new GameAgentInterface();
 		add(behavior);
 		behavior.createNew();
+		agentProp.setInterface(behavior.getGaip());
 	}
 
 	/**

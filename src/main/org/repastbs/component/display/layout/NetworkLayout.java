@@ -12,7 +12,7 @@ import org.repastbs.generated.NetworkLayoutProp;
 
 /**
  * Common interface for all network layouts
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public interface NetworkLayout extends DisplayLayout {

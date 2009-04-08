@@ -19,7 +19,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * Abstract implementation of ComponentInterface, 
  * all component interfaces should extend this class
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public abstract class AbstractComponentInterface extends AbstractComponent implements ComponentInterface {

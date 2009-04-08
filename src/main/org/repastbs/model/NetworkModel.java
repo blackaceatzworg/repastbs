@@ -23,7 +23,7 @@ import org.repastbs.generated.NetworkModelProp;
 
 /**
  * Network model template
- * @author Ľudovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class NetworkModel extends AbstractModel {

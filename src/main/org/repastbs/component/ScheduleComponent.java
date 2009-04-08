@@ -22,7 +22,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Container for holding scheduled actions
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class ScheduleComponent extends AbstractComponent implements XMLSerializable {

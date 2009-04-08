@@ -16,7 +16,7 @@ import org.repastbs.xml.XMLSerializable;
  * Interface for implementing interfaces on dynamic classes
  * Every component interface is component, dynamic changer and xml serializable
  * 
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public interface ComponentInterface extends Component,DynamicChanger,XMLSerializable {
