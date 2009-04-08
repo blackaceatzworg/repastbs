@@ -59,6 +59,7 @@ public class GridModel extends AbstractModel {
 	public void createNew() throws Exception {
 		super.createNew("GridModel","Grid model");
 		gridModelProp = new GridModelProp();
+		gridModelProp.setModelClass(this.getClass().getName());
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
 		variables.createNew();

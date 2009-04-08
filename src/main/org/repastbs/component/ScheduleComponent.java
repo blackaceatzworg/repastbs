@@ -159,7 +159,10 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 		this.scheduleProp = scheduleProp;
 		for (ScheduledActionProp scheduledActionProp : scheduleProp.getScheduledAction()) {
 			ScheduledAction s = new ScheduledAction(scheduledActionProp);
+			Action a = (Action)getParent().getChildById(ActionsComponent.ID).getChildByName(
+					scheduledActionProp.getAction());
 			add(s);
+			s.setAction(a);
 		}
 	}
 	
