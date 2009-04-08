@@ -28,7 +28,7 @@
 	<xsd:complexType name="ScheduleProp">
 		<xsd:sequence>
 			<xsd:element name="scheduledAction" type="com:ScheduledActionProp"
-				maxOccurs="unbounded" minOccurs="0" nillable="true" />
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -43,7 +43,7 @@
 	<xsd:complexType name="VariablesProp">
 		<xsd:sequence>
 			<xsd:element name="variable" type="com:VariableProp"
-				maxOccurs="unbounded" minOccurs="0" nillable="true" />
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -61,7 +61,7 @@
 	<xsd:complexType name="ActionsProp">
 		<xsd:sequence>
 			<xsd:element name="action" type="com:ActionProp"
-				maxOccurs="unbounded" minOccurs="0" nillable="true" />
+				minOccurs="0" maxOccurs="unbounded" nillable="true" />
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -92,8 +92,8 @@
 		<xsd:complexContent>
 			<xsd:extension base="com:NetworkLayoutProp">
 				<xsd:sequence>
-					<xsd:element name="margin" type="xsd:int" maxOccurs="1"
-						minOccurs="1" nillable="true" />
+					<xsd:element name="margin" type="xsd:int" minOccurs="1"
+						maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -104,11 +104,11 @@
 			<xsd:extension base="com:NetworkLayoutProp">
 				<xsd:sequence>
 					<xsd:element name="animate" type="xsd:boolean"
-						maxOccurs="1" minOccurs="1" nillable="false" />
+						minOccurs="1" maxOccurs="1" nillable="false" />
 					<xsd:element name="rescale" type="xsd:boolean"
-						maxOccurs="1" minOccurs="1" nillable="false" />
+						minOccurs="1" maxOccurs="1" nillable="false" />
 					<xsd:element name="updateEveryN" type="xsd:int"
-						maxOccurs="1" minOccurs="1" nillable="false" />
+						minOccurs="1" maxOccurs="1" nillable="false" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -174,8 +174,8 @@
 		<xsd:complexContent>
 			<xsd:extension base="com:DefaultAgentProp">
 				<xsd:sequence>
-					<xsd:element name="networkType" type="com:NetworkTypeProp" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="interface" type="com:GameAgentInterfaceProp" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="networkType" type="com:NetworkTypeProp" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xsd:element name="interface" type="com:GameAgentInterfaceProp" minOccurs="1" maxOccurs="1" nillable="false"/>
 				</xsd:sequence>
 				<xsd:attribute name="groupName" type="xsd:string" use="required"/>
 			</xsd:extension>
@@ -196,7 +196,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="com:NetworkTypeProp">
 				<xsd:sequence>
-					<xsd:element name="countVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="countVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -206,10 +206,10 @@
 		<xsd:complexContent>
 			<xsd:extension base="com:NetworkTypeProp">
 				<xsd:sequence>
-					<xsd:element name="sizeVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="densityVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="allowLoopsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="symmetricVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="sizeVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xsd:element name="densityVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xsd:element name="allowLoopsVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xsd:element name="symmetricVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -219,10 +219,10 @@
 		<xsd:complexContent>
 			<xsd:extension base="com:NetworkTypeProp">
 				<xsd:sequence>
-					<xsd:element name="colsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="connectRadiusVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="rowsVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
-					<xsd:element name="wrapAroundVar" type="xsd:string" maxOccurs="1" minOccurs="1" nillable="false"/>
+					<xsd:element name="colsVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xsd:element name="connectRadiusVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xsd:element name="rowsVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xsd:element name="wrapAroundVar" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

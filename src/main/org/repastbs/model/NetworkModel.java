@@ -130,8 +130,7 @@ public class NetworkModel extends AbstractModel {
 		variables.createNew();
 		variables.setVariablesProp(networkModelProp.getVariables());
 		//networkModelProp.setVariables(variables.getVariablesProp());
-		
-		
+
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
@@ -142,6 +141,7 @@ public class NetworkModel extends AbstractModel {
 		
 		ScheduleComponent scheduleComponent = new ScheduleComponent();
 		add(scheduleComponent);
+		scheduleComponent.setScheduleProp(networkModelProp.getSchedule());
 		//networkModelProp.setSchedule(scheduleComponent.getScheduleProp());
 		/*
 		AgentsComponent agents = new AgentsComponent();

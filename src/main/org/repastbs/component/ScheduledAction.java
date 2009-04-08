@@ -45,7 +45,8 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 	
 	/** */
 	public ScheduledAction () {
-		this(null);
+		//this(null);
+		super(null);
 	}
 	
 	/**
@@ -74,6 +75,13 @@ public class ScheduledAction extends AbstractComponent implements XMLSerializabl
 		this.scheduledActionProp.setTick(tick);
 		this.scheduledActionProp.setExecuteLast(executeLast);
 		this.scheduledActionProp.setIndex(index);
+		setId(ID);
+	}
+
+	public ScheduledAction(ScheduledActionProp scheduledActionProp) {
+		//TODO repair this block
+		super(scheduledActionProp.getAction());
+		this.scheduledActionProp = scheduledActionProp;
 		setId(ID);
 	}
 

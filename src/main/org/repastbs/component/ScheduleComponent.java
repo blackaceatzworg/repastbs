@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.dom4j.Node;
+import org.repastbs.generated.ScheduledActionProp;
 import org.repastbs.generated.ScheduleProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
@@ -133,7 +134,8 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	 */
 	public void createNew() {
 		removeAllChildren();
-		scheduleProp = new ScheduleProp(); 
+		scheduleProp = new ScheduleProp();
+		setRemovable(false);
 	}
 
 	/**
@@ -155,6 +157,10 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	 */
 	public void setScheduleProp(ScheduleProp scheduleProp) {
 		this.scheduleProp = scheduleProp;
+		for (ScheduledActionProp scheduledActionProp : scheduleProp.getScheduledAction()) {
+			ScheduledAction s = new ScheduledAction(scheduledActionProp);
+			add(s);
+		}
 	}
 	
 	/**
