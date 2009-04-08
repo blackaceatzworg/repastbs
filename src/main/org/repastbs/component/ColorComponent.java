@@ -20,7 +20,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Simple component holding Color, as its value
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class ColorComponent extends AbstractComponent implements XMLSerializable {
 	
@@ -30,8 +30,7 @@ public class ColorComponent extends AbstractComponent implements XMLSerializable
 	/** */
 	public static final String ID = "COLOR";
 
-	@SuppressWarnings("unused")
-	private ColorComponentProp ccp = new ColorComponentProp();
+	private ColorComponentProp colorComponentProp = new ColorComponentProp();
 
 	private Color color;
 
@@ -56,7 +55,7 @@ public class ColorComponent extends AbstractComponent implements XMLSerializable
 	 */
 	public ColorComponent(String name, Color color) {
 		super(name);
-		this.color = color;
+		setColor(color);
 		setId(ID);
 	}
 
@@ -74,6 +73,9 @@ public class ColorComponent extends AbstractComponent implements XMLSerializable
 	 */
 	public void setColor(Color color) {
 		this.color = color;
+		colorComponentProp.setBlue(color.getBlue());
+		colorComponentProp.setGreen(color.getGreen());
+		colorComponentProp.setRed(color.getRed());
 	}
 
 	/**
@@ -114,5 +116,19 @@ public class ColorComponent extends AbstractComponent implements XMLSerializable
 	 * @see org.repastbs.component.Component#createNew()
 	 */
 	public void createNew() {
+	}
+
+	/**
+	 * @return the colorComponentProp
+	 */
+	public ColorComponentProp getColorComponentProp() {
+		return colorComponentProp;
+	}
+
+	/**
+	 * @param colorComponentProp the colorComponentProp to set
+	 */
+	public void setColorComponentProp(ColorComponentProp colorComponentProp) {
+		this.colorComponentProp = colorComponentProp;
 	}
 }

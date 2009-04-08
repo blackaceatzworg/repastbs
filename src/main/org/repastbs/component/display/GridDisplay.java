@@ -57,6 +57,7 @@ public class GridDisplay extends AbstractComponent implements DynamicChanger, XM
 		backGroundColor = new ColorComponent();
 		add(backGroundColor);
 		gridDisplayProp.setColor(null);
+		gridDisplayProp.setColor(backGroundColor.getColorComponentProp());
 		
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
