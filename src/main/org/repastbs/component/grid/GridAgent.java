@@ -45,7 +45,7 @@ public class GridAgent extends AbstractComponent implements
 	/** */
 	private static final long serialVersionUID = 3761529881265810264L;
 	
-	private GridAgentProp agentProp;
+	private GridAgentProp agentProp = new GridAgentProp();
 	
 	private StringComponent agentName;
 	private StringComponent groupName;
@@ -67,6 +67,7 @@ public class GridAgent extends AbstractComponent implements
 	 */
 	public GridAgent(String groupName) {
 		super("GridAgent");
+		setName("GridAgent");
 		setId(ID);
 	}
 
@@ -81,10 +82,12 @@ public class GridAgent extends AbstractComponent implements
 		groupName = new StringComponent("Group name","agentGroup");
 		groupName.addComponentListener(this);
 		add(groupName);
+		agentProp.setGroupName(groupName.getValue());
 		
 		agentName = new StringComponent("Agent name","GridAgent");
 		agentName.addComponentListener(this);
 		add(agentName);
+		agentProp.setName(agentName.getValue());
 		
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
@@ -120,6 +123,7 @@ public class GridAgent extends AbstractComponent implements
 				"y = $2;\n",  "void");
 		move.addParameter("int");
 		move.addParameter("int");
+		agentProp.setActions(actions.getActionsProp());
 		
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
@@ -129,6 +133,7 @@ public class GridAgent extends AbstractComponent implements
 		variables.createVariable("x", "int", null, true, false, false);
 		variables.createVariable("y", "int", null, true, false, false);
 		variables.createVariable("torus", "boolean", "false", true, false, false);
+		agentProp.setVariables(variables.getVariablesProp());
 		
 		groupNumAgents = ((VariablesComponent)getModel().getChildById(VariablesComponent.ID))
 			.createVariable(groupName.getValue()+"NumAgents", "int", "5000", true, true, false);
@@ -137,6 +142,7 @@ public class GridAgent extends AbstractComponent implements
 		ScheduleComponent schedule = new ScheduleComponent();
 		add(schedule);
 		schedule.createNew();
+		agentProp.setSchedule(schedule.getScheduleProp());
 	}
 
 	/**
@@ -222,8 +228,8 @@ public class GridAgent extends AbstractComponent implements
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute("", "class", "class", "CDATA", getClass().getName());
-		atts.addAttribute("", "group", "group", "CDATA", groupName.getValue());
-		atts.addAttribute("", "name", "name", "CDATA", agentName.getValue());
+		atts.addAttribute("", "group", "group", "CDATA", agentProp.getGroupName());
+		atts.addAttribute("", "name", "name", "CDATA", agentProp.getName());
 		try {
 			SAXUtils.start(handler, "agent", atts);
 			SAXUtils.serializeChildren(handler,this);
@@ -323,5 +329,13 @@ public class GridAgent extends AbstractComponent implements
 	 */
 	public void setAgentProp(GridAgentProp agentProp) {
 		this.agentProp = agentProp;
+	}
+
+	/**
+	 * @see org.repastbs.component.AbstractComponent#setName(java.lang.String)
+	 */
+	public void setName(String name) {
+		super.setName(name);
+		agentProp.setName(name);
 	}
 }

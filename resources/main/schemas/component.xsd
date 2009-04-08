@@ -184,7 +184,7 @@
 	
 	<xsd:complexType name="GridAgentProp">
 		<xsd:complexContent>
-			<xsd:extension base="com:AgentProp">
+			<xsd:extension base="com:DefaultAgentProp">
 				<xsd:attribute name="groupName" type="xsd:string" use="required"/>
 			</xsd:extension>
 		</xsd:complexContent>

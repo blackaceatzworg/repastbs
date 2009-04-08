@@ -83,6 +83,7 @@ public class GridModel extends AbstractModel {
 		add(agents);
 		agents.addAgent(agent);
 		agent.createNew();
+		gridModelProp.setAgents(agents.getAgentsProp());
 		
 		GridSpace gridSpace = new GridSpace();
 		add(gridSpace);

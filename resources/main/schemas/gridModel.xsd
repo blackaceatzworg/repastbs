@@ -17,6 +17,7 @@
 						<xsd:element name="variables" type="com:VariablesProp" />
 						<xsd:element name="actions" type="com:ActionsProp" />
 						<xsd:element name="schedule" type="com:ScheduleProp" />
+						<xsd:element name="agents" type="com:AgentsProp" />
 						<xsd:element name="gridSpace" type="com:GridSpaceProp" />
 						<xsd:element name="gridDisplay" type="com:GridDisplayProp" />
 					</xsd:sequence>
