@@ -143,24 +143,21 @@ public class NetworkModel extends AbstractModel {
 		add(scheduleComponent);
 		scheduleComponent.setScheduleProp(networkModelProp.getSchedule());
 		//networkModelProp.setSchedule(scheduleComponent.getScheduleProp());
-		/*
+		
 		AgentsComponent agents = new AgentsComponent();
 		NetworkAgent agent = new NetworkAgent("group");
 		add(agents);
 		agents.addAgent(agent);
 		agent.createNew();
-		networkModelProp.setAgents(agents.getAgentsProp());
-		
-		MasterSchedule masterSchedule = new MasterSchedule();
-		add(masterSchedule);
-		masterSchedule.createNew();
+		agents.setAgentsProp(networkModelProp.getAgents());
+		//networkModelProp.setAgents(agents.getAgentsProp());
 		
 		NetworkDisplay networkDisplay = new NetworkDisplay();
 		add(networkDisplay);
 		networkDisplay.createNew();
-		networkModelProp.setNetworkDisplay(networkDisplay.getNetworkDisplayProp());
-		*/
-		
+		networkDisplay.setNetworkDisplayProp(networkModelProp.getNetworkDisplay());
+		//networkModelProp.setNetworkDisplay(networkDisplay.getNetworkDisplayProp());
+
 		//finally add master schedule
 		MasterSchedule masterSchedule = new MasterSchedule();
 		add(masterSchedule);

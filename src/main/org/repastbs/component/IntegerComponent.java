@@ -12,7 +12,7 @@ import org.repastbs.generated.IntegerComponentProp;
 
 /**
  * Simple object component, holding Integer as its value
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class IntegerComponent extends ObjectComponent {
@@ -39,7 +39,17 @@ public class IntegerComponent extends ObjectComponent {
 	 * @param name
 	 */
 	public IntegerComponent(String name) {
-		this(name,null);
+		this(name,(Integer)null);
+	}
+
+	/** 
+	 * @param name
+	 * @param value
+	 */
+	public IntegerComponent(String name, IntegerComponentProp value) {
+		super(name,value.getValue());
+		this.integerComponentProp = value;
+		setId(ID);
 	}
 
 	/**

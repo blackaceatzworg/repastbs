@@ -17,8 +17,6 @@ import org.repastbs.component.AbstractComponent;
 @SuppressWarnings("serial")
 public abstract class AbstractNetworkLayout extends AbstractComponent implements NetworkLayout {
 
-	private String variableName;
-	
 	/** */
 	public static final String ID = "NETWORK_LAYOUT";
 	
@@ -28,21 +26,5 @@ public abstract class AbstractNetworkLayout extends AbstractComponent implements
 	public AbstractNetworkLayout(String name) {
 		super(name);
 	}
-	
-	/**
-	 * @see  org.repastbs.component.display.layout.NetworkLayout#getVariableName()
-	 * @uml.property  name="variableName"
-	 */
-	public String getVariableName() {
-		return variableName;
-	}
-	
-	/**
-	 * Sets variable name of this network layout component
-	 * @param  variableName
-	 * @uml.property  name="variableName"
-	 */
-	public void setVariableName(String variableName) {
-		this.variableName = variableName;
-	}
+
 }

@@ -63,12 +63,12 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 	/**
 	 * @see org.repastbs.component.Component#createNew()
 	 */
-	public void createNew() throws Exception {		
+	public void createNew() throws Exception {
+		removeAllChildren(); // TODO remove this
 		if(width == null)
 			width = new IntegerComponent("Width",400);
 		add(this.width);
 		networkDisplayProp.setWidth(width.getIntegerComponentProp());
-		
 
 		if(height == null)
 			height = new IntegerComponent("Height",400);
@@ -103,7 +103,7 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 			add(displayLayout);
 			displayLayout.createNew();
 			networkDisplayProp.setLayout(displayLayout.getNetworkLayoutProp());
-		}		
+		}
 	}
 
 	/**
@@ -280,5 +280,43 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 	 */
 	public void setNetworkDisplayProp(NetworkDisplayProp networkDisplayProp) {
 		this.networkDisplayProp = networkDisplayProp;
+		removeAllChildren();
+		IntegerComponent width = new IntegerComponent("Width",networkDisplayProp.getWidth());
+		add(width);
+		IntegerComponent height = new IntegerComponent("Height",networkDisplayProp.getHeight());
+		add(height);
+		
+		ActionsComponent ac = new ActionsComponent();
+		ac.createNew();
+		add(ac);
+		ac.setActionsProp(networkDisplayProp.getActions());
+		ac.setRemovable(false);
+		ac.setEditable(false);
+		
+		ScheduleComponent sc = new ScheduleComponent();
+		sc.createNew();
+		add(sc);
+		sc.setScheduleProp(networkDisplayProp.getSchedule());
+		sc.setRemovable(false);
+		sc.setEditable(false);
+		
+		
+		String networkLayoutClassName = this.networkDisplayProp.getLayout().getNetworkLayoutClass();
+		try {
+			Class<?> networkLayoutClass = Class.forName(networkLayoutClassName);
+			NetworkLayout layout = (NetworkLayout)networkLayoutClass.newInstance();
+			layout.setNetworkLayoutProp(this.networkDisplayProp.getLayout());
+			add(layout);
+		} catch (Exception e) {
+			System.out.println("could not recreate network display layout");
+		}
+		buildSupportedLayouts();
+		for(int i=0;i<supportedLayouts.size();i++) {
+			DisplayLayout curr = (DisplayLayout)supportedLayouts.get(i);
+			if(curr.getClass().equals(displayLayout.getClass())) {
+				supportedLayouts.set(i,displayLayout);
+				break;
+			}	
+		}
 	}	
 }

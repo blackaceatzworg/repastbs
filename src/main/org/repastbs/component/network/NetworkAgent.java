@@ -330,6 +330,9 @@ public class NetworkAgent extends AbstractComponent implements
 	 */
 	public void setAgentProp(NetworkAgentProp agentProp) {
 		this.agentProp = agentProp;
+		groupName = new StringComponent("Group name","nodes");
+		add(groupName);
+		agentProp.setGroupName(groupName.getValue());
 	}
 	
 	/**

@@ -86,6 +86,8 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="NetworkLayoutProp">
+		<xsd:attribute name="networkLayoutClass" type="xsd:string" use="required"/>
+		<xsd:attribute name="variableName" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="CircularLayoutProp">

@@ -11,6 +11,7 @@ package org.repastbs.component;
 import java.util.Enumeration;
 
 import org.dom4j.Node;
+import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
@@ -150,5 +151,8 @@ public class AgentsComponent extends AbstractComponent implements DynamicChanger
 	 */
 	public void setAgentsProp(AgentsProp agentsProp) {
 		this.agentsProp = agentsProp;
+		removeAllChildren();
+		NetworkAgent networkAgent = new NetworkAgent();
+		add(networkAgent);
 	}
 }

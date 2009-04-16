@@ -29,4 +29,9 @@ public interface NetworkLayout extends DisplayLayout {
 	 * @return properties for this layout
 	 */
 	public NetworkLayoutProp getNetworkLayoutProp();
+	
+	/**
+	 * @param networkLayoutProp
+	 */
+	public void setNetworkLayoutProp(NetworkLayoutProp networkLayoutProp);
 }

@@ -23,7 +23,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * Concrete implementation of network layout, 
  * represents Fruchman Reingold network layout
- * @author �udov�t Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class FruchmanReingoldLayout extends AbstractNetworkLayout {	
@@ -45,7 +45,8 @@ public class FruchmanReingoldLayout extends AbstractNetworkLayout {
 	 */
 	public FruchmanReingoldLayout() {
 		super("Fruchman Reingold");
-		setVariableName("fruchmanReingoldLayout");
+		fruchmanReingoldLayoutProp.setVariableName("fruchmanReingoldLayout");
+		fruchmanReingoldLayoutProp.setNetworkLayoutClass(this.getClass().getName());
 		setId(ID);
 	}
 	
@@ -133,17 +134,18 @@ public class FruchmanReingoldLayout extends AbstractNetworkLayout {
 	}
 
 	/**
-	 * @return the fruchmanReingoldLayoutProp
+	 * @see org.repastbs.component.display.layout.NetworkLayout#setNetworkLayoutProp(org.repastbs.generated.NetworkLayoutProp)
 	 */
-	public FruchmanReingoldLayoutProp getFruchmanReingoldLayoutProp() {
-		return fruchmanReingoldLayoutProp;
+	@Override
+	public void setNetworkLayoutProp(NetworkLayoutProp networkLayoutProp) {
+		this.fruchmanReingoldLayoutProp = (FruchmanReingoldLayoutProp)fruchmanReingoldLayoutProp;
 	}
 
 	/**
-	 * @param fruchmanReingoldLayoutProp the fruchmanReingoldLayoutProp to set
+	 * @see org.repastbs.component.display.layout.NetworkLayout#getVariableName()
 	 */
-	public void setFruchmanReingoldLayoutProp(
-			FruchmanReingoldLayoutProp fruchmanReingoldLayoutProp) {
-		this.fruchmanReingoldLayoutProp = fruchmanReingoldLayoutProp;
+	@Override
+	public String getVariableName() {
+		return this.fruchmanReingoldLayoutProp.getVariableName();
 	}
 }

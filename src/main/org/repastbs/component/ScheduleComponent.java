@@ -36,6 +36,7 @@ public class ScheduleComponent extends AbstractComponent implements XMLSerializa
 	public static final String ID = "SCHEDULE";
 
 	private ScheduleProp scheduleProp = new ScheduleProp();
+
 	/**
 	 * default constructor
 	 */

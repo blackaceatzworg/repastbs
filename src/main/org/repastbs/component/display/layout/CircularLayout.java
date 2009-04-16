@@ -31,7 +31,8 @@ public class CircularLayout extends AbstractNetworkLayout {
 	 */
 	public CircularLayout() {
 		super("Circular Layout");
-		setVariableName("circularLayout");
+		circularLayoutProp.setVariableName("circularLayout");
+		circularLayoutProp.setNetworkLayoutClass(this.getClass().getName());
 		setId(ID);
 	}
 
@@ -125,16 +126,18 @@ public class CircularLayout extends AbstractNetworkLayout {
 	}
 
 	/**
-	 * @return the circularLayoutProp
+	 * @see org.repastbs.component.display.layout.NetworkLayout#setNetworkLayoutProp(org.repastbs.generated.NetworkLayoutProp)
 	 */
-	public CircularLayoutProp getCircularLayoutProp() {
-		return circularLayoutProp;
+	@Override
+	public void setNetworkLayoutProp(NetworkLayoutProp networkLayoutProp) {
+		this.circularLayoutProp = (CircularLayoutProp)networkLayoutProp;
 	}
 
 	/**
-	 * @param circularLayoutProp the circularLayoutProp to set
+	 * @see org.repastbs.component.display.layout.NetworkLayout#getVariableName()
 	 */
-	public void setCircularLayoutProp(CircularLayoutProp circularLayoutProp) {
-		this.circularLayoutProp = circularLayoutProp;
+	@Override
+	public String getVariableName() {
+		return this.circularLayoutProp.getVariableName();
 	}
 }
