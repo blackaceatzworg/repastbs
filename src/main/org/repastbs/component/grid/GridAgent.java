@@ -26,6 +26,7 @@ import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.dynamic.JavassistGenerator;
+import org.repastbs.generated.AgentProp;
 import org.repastbs.generated.GridAgentProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
@@ -45,7 +46,7 @@ public class GridAgent extends AbstractComponent implements
 	/** */
 	private static final long serialVersionUID = 3761529881265810264L;
 	
-	private GridAgentProp agentProp = new GridAgentProp();
+	private GridAgentProp gridAgentProp = new GridAgentProp();
 	
 	private StringComponent agentName;
 	private StringComponent groupName;
@@ -82,12 +83,12 @@ public class GridAgent extends AbstractComponent implements
 		groupName = new StringComponent("Group name","agentGroup");
 		groupName.addComponentListener(this);
 		add(groupName);
-		agentProp.setGroupName(groupName.getValue());
+		gridAgentProp.setGroupName(groupName.getValue());
 		
 		agentName = new StringComponent("Agent name","GridAgent");
 		agentName.addComponentListener(this);
 		add(agentName);
-		agentProp.setName(agentName.getValue());
+		gridAgentProp.setName(agentName.getValue());
 		
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
@@ -123,7 +124,7 @@ public class GridAgent extends AbstractComponent implements
 				"y = $2;\n",  "void");
 		move.addParameter("int");
 		move.addParameter("int");
-		agentProp.setActions(actions.getActionsProp());
+		gridAgentProp.setActions(actions.getActionsProp());
 		
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
@@ -133,7 +134,7 @@ public class GridAgent extends AbstractComponent implements
 		variables.createVariable("x", "int", null, true, false, false);
 		variables.createVariable("y", "int", null, true, false, false);
 		variables.createVariable("torus", "boolean", "false", true, false, false);
-		agentProp.setVariables(variables.getVariablesProp());
+		gridAgentProp.setVariables(variables.getVariablesProp());
 		
 		groupNumAgents = ((VariablesComponent)getModel().getChildById(VariablesComponent.ID))
 			.createVariable(groupName.getValue()+"NumAgents", "int", "5000", true, true, false);
@@ -142,7 +143,7 @@ public class GridAgent extends AbstractComponent implements
 		ScheduleComponent schedule = new ScheduleComponent();
 		add(schedule);
 		schedule.createNew();
-		agentProp.setSchedule(schedule.getScheduleProp());
+		gridAgentProp.setSchedule(schedule.getScheduleProp());
 	}
 
 	/**
@@ -228,8 +229,8 @@ public class GridAgent extends AbstractComponent implements
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute("", "class", "class", "CDATA", getClass().getName());
-		atts.addAttribute("", "group", "group", "CDATA", agentProp.getGroupName());
-		atts.addAttribute("", "name", "name", "CDATA", agentProp.getName());
+		atts.addAttribute("", "group", "group", "CDATA", gridAgentProp.getGroupName());
+		atts.addAttribute("", "name", "name", "CDATA", gridAgentProp.getName());
 		try {
 			SAXUtils.start(handler, "agent", atts);
 			SAXUtils.serializeChildren(handler,this);
@@ -318,24 +319,27 @@ public class GridAgent extends AbstractComponent implements
 	}
 
 	/**
-	 * @return the agentProp
-	 */
-	public GridAgentProp getAgentProp() {
-		return agentProp;
-	}
-
-	/**
-	 * @param agentProp the agentProp to set
-	 */
-	public void setAgentProp(GridAgentProp agentProp) {
-		this.agentProp = agentProp;
-	}
-
-	/**
 	 * @see org.repastbs.component.AbstractComponent#setName(java.lang.String)
 	 */
 	public void setName(String name) {
 		super.setName(name);
-		agentProp.setName(name);
+		gridAgentProp.setName(name);
+	}
+
+	/**
+	 * @see org.repastbs.component.Agent#setAgentProp(org.repastbs.generated.AgentProp)
+	 */
+	@Override
+	public void setAgentProp(AgentProp agentProp) {
+		this.gridAgentProp = (GridAgentProp)agentProp;
+		
+	}
+
+	/**
+	 * @see org.repastbs.component.Agent#getAgentProp()
+	 */
+	@Override
+	public AgentProp getAgentProp() {
+		return gridAgentProp;
 	}
 }

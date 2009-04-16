@@ -168,6 +168,7 @@
 					<xsd:element name="variables" type="com:VariablesProp"
 						minOccurs="1" maxOccurs="1" nillable="false" />
 				</xsd:sequence>
+				<xsd:attribute name="agentTypeClass" type="xsd:string" use="required"/>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -192,7 +193,10 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 	
-	<xsd:complexType name="NetworkTypeProp" abstract="true"/>
+	<xsd:complexType name="NetworkTypeProp" abstract="true">
+		<xsd:attribute name="networkTypeClass" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	
 	
 	<xsd:complexType name="UnlinkedNetworkProp">
 		<xsd:complexContent>

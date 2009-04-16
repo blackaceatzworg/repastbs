@@ -13,6 +13,7 @@ import org.repastbs.component.VariablesComponent;
 import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.NetworkTypeProp;
 import org.repastbs.generated.SquareLatticeNetworkProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
@@ -31,7 +32,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	/** */
 	private static final long serialVersionUID = 4787760316023623923L;
 	
-	private SquareLatticeNetworkProp networkTypeProp = new SquareLatticeNetworkProp();
+	private SquareLatticeNetworkProp squareLatticeNetworkProp = new SquareLatticeNetworkProp();
 	
 	private Variable cols;
 	private Variable connectRadius;
@@ -43,6 +44,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public SquareLatticeNetwork() {
 		super("Square Lattice");
+		squareLatticeNetworkProp.setNetworkTypeClass(this.getClass().getName());
 		setId(ID);
 	}
 
@@ -58,7 +60,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setCols(Variable cols) {
 		this.cols = cols;
-		networkTypeProp.setColsVar(cols.getName());
+		squareLatticeNetworkProp.setColsVar(cols.getName());
 	}
 
 	/**
@@ -73,7 +75,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setConnectRadius(Variable connectRadius) {
 		this.connectRadius = connectRadius;
-		networkTypeProp.setConnectRadiusVar(connectRadius.getName());
+		squareLatticeNetworkProp.setConnectRadiusVar(connectRadius.getName());
 	}
 
 	/**
@@ -88,7 +90,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setRows(Variable rows) {
 		this.rows = rows;
-		networkTypeProp.setRowsVar(rows.getName());
+		squareLatticeNetworkProp.setRowsVar(rows.getName());
 	}
 
 	/**
@@ -103,7 +105,7 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setWrapAround(Variable wrapAround) {
 		this.wrapAround = wrapAround;
-		networkTypeProp.setWrapAroundVar(wrapAround.getName());
+		squareLatticeNetworkProp.setWrapAroundVar(wrapAround.getName());
 	}
 
 	/**
@@ -167,16 +169,16 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 			group.addComponentListener(this);
 		cols = v.createVariable(group!=null?group.getValue()+"Cols":"cols",
 				"int","10",true,true, false);
-		networkTypeProp.setColsVar(cols.getName());
+		squareLatticeNetworkProp.setColsVar(cols.getName());
 		connectRadius = v.createVariable(group!=null?group.getValue()+"ConnectRadius":"connectRadius",
 				"int","1",true,true, false);
-		networkTypeProp.setConnectRadiusVar(connectRadius.getName());
+		squareLatticeNetworkProp.setConnectRadiusVar(connectRadius.getName());
 		rows = v.createVariable(group!=null?group.getValue()+"Rows":"rows",
 				"int","5",true,true, false);
-		networkTypeProp.setRowsVar(rows.getName());
+		squareLatticeNetworkProp.setRowsVar(rows.getName());
 		wrapAround = v.createVariable(group!=null?group.getValue()+"WrapAround":"wrapAround",
 				"boolean","false",true,true, false);
-		networkTypeProp.setWrapAroundVar(wrapAround.getName());
+		squareLatticeNetworkProp.setWrapAroundVar(wrapAround.getName());
 	}
 	
 	/**
@@ -200,13 +202,13 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void componentChanged(ComponentEvent e) {
 		cols.setName(((StringComponent)e.getSource()).getValue()+"Cols");
-		networkTypeProp.setColsVar(cols.getName());
+		squareLatticeNetworkProp.setColsVar(cols.getName());
 		connectRadius.setName(((StringComponent)e.getSource()).getValue()+"ConnectRadius");
-		networkTypeProp.setConnectRadiusVar(connectRadius.getName());
+		squareLatticeNetworkProp.setConnectRadiusVar(connectRadius.getName());
 		rows.setName(((StringComponent)e.getSource()).getValue()+"Rows");
-		networkTypeProp.setRowsVar(rows.getName());
+		squareLatticeNetworkProp.setRowsVar(rows.getName());
 		wrapAround.setName(((StringComponent)e.getSource()).getValue()+"WrapAround");
-		networkTypeProp.setWrapAroundVar(wrapAround.getName());
+		squareLatticeNetworkProp.setWrapAroundVar(wrapAround.getName());
 	}
 
 	/**
@@ -242,16 +244,18 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	}
 
 	/**
-	 * @return the networkTypeProp
+	 * @see org.repastbs.component.network.type.NetworkType#getNetworkTypeProp()
 	 */
-	public SquareLatticeNetworkProp getNetworkTypeProp() {
-		return networkTypeProp;
+	@Override
+	public NetworkTypeProp getNetworkTypeProp() {
+		return squareLatticeNetworkProp;
 	}
 
 	/**
-	 * @param networkTypeProp the networkTypeProp to set
+	 * @see org.repastbs.component.network.type.NetworkType#setNetworkTypeProp(org.repastbs.generated.NetworkTypeProp)
 	 */
-	public void setNetworkTypeProp(SquareLatticeNetworkProp networkTypeProp) {
-		this.networkTypeProp = networkTypeProp;
+	@Override
+	public void setNetworkTypeProp(NetworkTypeProp networkTypeProp) {
+		this.squareLatticeNetworkProp = (SquareLatticeNetworkProp)networkTypeProp;
 	}
 }

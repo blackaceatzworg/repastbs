@@ -27,6 +27,7 @@ import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.dynamic.JavassistGenerator;
+import org.repastbs.generated.AgentProp;
 import org.repastbs.generated.NetworkAgentProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializationException;
@@ -37,7 +38,7 @@ import uchicago.src.sim.network.DefaultDrawableNode;
 
 /**
  * Implementation of network agent
- * @author  �udov�t Hajzer
+ * @author  Ludovit Hajzer
  */
 public class NetworkAgent extends AbstractComponent implements 
 	Agent, ComponentListener, DynamicChanger {
@@ -45,7 +46,7 @@ public class NetworkAgent extends AbstractComponent implements
 	/** */
 	private static final long serialVersionUID = 3761529881265810264L;
 	
-	private NetworkAgentProp agentProp = new NetworkAgentProp();
+	private NetworkAgentProp networkAgentProp = new NetworkAgentProp();
 	
 	private StringComponent agentName;
 	private StringComponent groupName;
@@ -82,40 +83,40 @@ public class NetworkAgent extends AbstractComponent implements
 		//if(groupName == null)
 		groupName = new StringComponent("Group name","nodes");
 		add(groupName);
-		agentProp.setGroupName(groupName.getValue());
+		networkAgentProp.setGroupName(groupName.getValue());
 		
 		agentName = new StringComponent("Agent name","NetworkAgent");
 		agentName.addComponentListener(this);
 		add(agentName);
-		agentProp.setName(agentName.getValue());
+		networkAgentProp.setName(agentName.getValue());
 		
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
-		agentProp.setActions(actions.getActionsProp());
+		networkAgentProp.setActions(actions.getActionsProp());
 		
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
 		variables.createNew();
-		agentProp.setVariables(variables.getVariablesProp());
+		networkAgentProp.setVariables(variables.getVariablesProp());
 		
 		ScheduleComponent schedule = new ScheduleComponent();
 		add(schedule);
 		schedule.createNew();
-		agentProp.setSchedule(schedule.getScheduleProp());
+		networkAgentProp.setSchedule(schedule.getScheduleProp());
 		
 		buildSupportedTypes();
 		if(getSupportedTypes().size()>0) {
 			networkType = (NetworkType)getSupportedTypes().get(0);
 			add(networkType);
 			networkType.createNew();
-			agentProp.setNetworkType(networkType.getNetworkTypeProp());
+			networkAgentProp.setNetworkType(networkType.getNetworkTypeProp());
 		}
 		
 		GameAgentInterface behavior = new GameAgentInterface();
 		add(behavior);
 		behavior.createNew();
-		agentProp.setInterface(behavior.getGaip());
+		networkAgentProp.setInterface(behavior.getGaip());
 	}
 
 	/**
@@ -207,8 +208,8 @@ public class NetworkAgent extends AbstractComponent implements
 	public void writeToXML(ContentHandler handler) throws XMLSerializationException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute("", "class", "class", "CDATA", getClass().getName());
-		atts.addAttribute("", "group", "group", "CDATA", agentProp.getGroupName());
-		atts.addAttribute("", "name", "name", "CDATA", agentProp.getName());
+		atts.addAttribute("", "group", "group", "CDATA", networkAgentProp.getGroupName());
+		atts.addAttribute("", "name", "name", "CDATA", networkAgentProp.getName());
 		try {
 			SAXUtils.start(handler, "agent", atts);
 			SAXUtils.serializeChildren(handler,this);
@@ -257,7 +258,7 @@ public class NetworkAgent extends AbstractComponent implements
 		add(networkType);
 		try {
 			networkType.createNew();
-			agentProp.setNetworkType(networkType.getNetworkTypeProp());
+			networkAgentProp.setNetworkType(networkType.getNetworkTypeProp());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -317,29 +318,45 @@ public class NetworkAgent extends AbstractComponent implements
 			generator.addMethod("setup",null,null, null, "getAgentList().clear();" );
 		}
 	}
-
-	/**
-	 * @return the agentProp
-	 */
-	public NetworkAgentProp getAgentProp() {
-		return agentProp;
-	}
-
-	/**
-	 * @param agentProp the agentProp to set
-	 */
-	public void setAgentProp(NetworkAgentProp agentProp) {
-		this.agentProp = agentProp;
-		groupName = new StringComponent("Group name","nodes");
-		add(groupName);
-		agentProp.setGroupName(groupName.getValue());
-	}
 	
 	/**
 	 * @see org.repastbs.component.AbstractComponent#setName(java.lang.String)
 	 */
 	public void setName(String name) {
 		super.setName(name);
-		agentProp.setName(name);
+		networkAgentProp.setName(name);
+	}
+
+	/**
+	 * @see org.repastbs.component.Agent#setAgentProp(org.repastbs.generated.AgentProp)
+	 */
+	@Override
+	public void setAgentProp(AgentProp agentProp) {
+		this.networkAgentProp = (NetworkAgentProp)agentProp;
+		String networkTypeClassName = this.networkAgentProp.getNetworkType().getNetworkTypeClass();
+		try {
+			Class<?> networkTypeClass = Class.forName(networkTypeClassName);
+			NetworkType type = (NetworkType)networkTypeClass.newInstance();
+			type.setNetworkTypeProp(this.networkAgentProp.getNetworkType());
+			add(type);
+		} catch (Exception e) {
+			System.out.println("could not recreate network agent type");
+		}
+		buildSupportedTypes();
+		for(int i=0;i<supportedTypes.size();i++) {
+			NetworkType curr = (NetworkType)supportedTypes.get(i);
+			if(curr.getClass().equals(networkType.getClass())) {
+				supportedTypes.set(i,networkType);
+				break;
+			}	
+		}
+	}
+
+	/**
+	 * @see org.repastbs.component.Agent#getAgentProp()
+	 */
+	@Override
+	public AgentProp getAgentProp() {
+		return networkAgentProp;
 	}
 }

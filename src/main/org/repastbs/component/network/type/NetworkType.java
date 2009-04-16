@@ -28,4 +28,9 @@ public interface NetworkType extends Component, DynamicChanger, XMLSerializable 
 	 * @return properties of this network type
 	 */
 	public NetworkTypeProp getNetworkTypeProp();
+	
+	/**
+	 * @param networkTypeProp
+	 */
+	public void setNetworkTypeProp(NetworkTypeProp networkTypeProp);
 }

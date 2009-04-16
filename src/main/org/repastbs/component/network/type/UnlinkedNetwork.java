@@ -18,6 +18,7 @@ import org.repastbs.component.VariablesComponent;
 import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.NetworkTypeProp;
 import org.repastbs.generated.UnlinkedNetworkProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
@@ -35,7 +36,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	/** */
 	private static final long serialVersionUID = -2907826650030007648L;
 	
-	private UnlinkedNetworkProp networkTypeProp = new UnlinkedNetworkProp();
+	private UnlinkedNetworkProp unlinkedNetworkProp = new UnlinkedNetworkProp();
 	
 	private Variable nodeCount;
 	
@@ -53,6 +54,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	 */
 	public UnlinkedNetwork(String name, int nodeCount) {
 		super(name);
+		unlinkedNetworkProp.setNetworkTypeClass(this.getClass().getName());
 		setId(ID);
 	}
 
@@ -70,7 +72,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	 */
 	public void setNodeCount(Variable nodeCount) {
 		this.nodeCount = nodeCount;
-		networkTypeProp.setCountVar(nodeCount.getName());
+		unlinkedNetworkProp.setCountVar(nodeCount.getName());
 	}
 
 	/**
@@ -123,7 +125,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 			group.addComponentListener(this);
 		nodeCount = v.createVariable(group!=null?group.getValue()+"Count":"count",
 				"int","40",true,true, false);
-		networkTypeProp.setCountVar(nodeCount.getName());
+		unlinkedNetworkProp.setCountVar(nodeCount.getName());
 	}
 	
 	/**
@@ -144,7 +146,7 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	 */
 	public void componentChanged(ComponentEvent e) {
 		nodeCount.setName(((StringComponent)e.getSource()).getValue()+"Count");
-		networkTypeProp.setCountVar(nodeCount.getName());
+		unlinkedNetworkProp.setCountVar(nodeCount.getName());
 	}
 
 	/**
@@ -176,16 +178,18 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	}
 
 	/**
-	 * @return the networkProp
+	 * @see org.repastbs.component.network.type.NetworkType#getNetworkTypeProp()
 	 */
-	public UnlinkedNetworkProp getNetworkTypeProp() {
-		return networkTypeProp;
+	@Override
+	public NetworkTypeProp getNetworkTypeProp() {
+		return unlinkedNetworkProp;
 	}
 
 	/**
-	 * @param networkProp the networkProp to set
+	 * @see org.repastbs.component.network.type.NetworkType#setNetworkTypeProp(org.repastbs.generated.NetworkTypeProp)
 	 */
-	public void setNetworkTypeProp(UnlinkedNetworkProp networkProp) {
-		this.networkTypeProp = networkProp;
-	}	
+	@Override
+	public void setNetworkTypeProp(NetworkTypeProp networkTypeProp) {
+		this.unlinkedNetworkProp = (UnlinkedNetworkProp)networkTypeProp;
+	}
 }

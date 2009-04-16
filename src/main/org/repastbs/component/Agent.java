@@ -28,4 +28,9 @@ public interface Agent extends Schedulable, Component, XMLSerializable, DynamicH
 	 * @return agent properties
 	 */
 	public AgentProp getAgentProp();
+	
+	/**
+	 * @param agentProp
+	 */
+	public void setAgentProp(AgentProp agentProp);
 }

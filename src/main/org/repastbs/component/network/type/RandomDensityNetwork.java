@@ -18,6 +18,7 @@ import org.repastbs.component.VariablesComponent;
 import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
+import org.repastbs.generated.NetworkTypeProp;
 import org.repastbs.generated.RandomDensityNetworkProp;
 import org.repastbs.model.Model;
 import org.repastbs.xml.SAXUtils;
@@ -35,7 +36,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	/** */
 	private static final long serialVersionUID = 1857953851235595976L;
 	
-	private RandomDensityNetworkProp networkTypeProp = new RandomDensityNetworkProp();
+	private RandomDensityNetworkProp randomDensityNetworkProp = new RandomDensityNetworkProp();
 	
 	private Variable size;
 	private Variable density;
@@ -72,7 +73,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setAllowLoops(Variable allowLoops) {
 		this.allowLoops = allowLoops;
-		networkTypeProp.setAllowLoopsVar(allowLoops.getName());
+		randomDensityNetworkProp.setAllowLoopsVar(allowLoops.getName());
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setDensity(Variable density) {
 		this.density = density;
-		networkTypeProp.setDensityVar(density.getName());
+		randomDensityNetworkProp.setDensityVar(density.getName());
 	}
 
 	/**
@@ -106,7 +107,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setSize(Variable size) {
 		this.size = size;
-		networkTypeProp.setSizeVar(size.getName());
+		randomDensityNetworkProp.setSizeVar(size.getName());
 	}
 
 	/**
@@ -123,7 +124,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void setSymmetric(Variable symmetric) {
 		this.symmetric = symmetric;
-		networkTypeProp.setSymmetricVar(symmetric.getName());
+		randomDensityNetworkProp.setSymmetricVar(symmetric.getName());
 	}
 	
 	/**
@@ -191,16 +192,16 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 			group.addComponentListener(this);
 		size=v.createVariable(group!=null?group.getValue()+"Size":"size",
 			"int","40",true,true, false);
-		networkTypeProp.setSizeVar(size.getName());
+		randomDensityNetworkProp.setSizeVar(size.getName());
 		density=v.createVariable(group!=null?group.getValue()+"Density":"density",
 				"double","0.3",true,true, false);
-		networkTypeProp.setDensityVar(density.getName());
+		randomDensityNetworkProp.setDensityVar(density.getName());
 		allowLoops=v.createVariable(group!=null?group.getValue()+"AllowLoops":"allowLoops",
 				"boolean","false",true,true, false);
-		networkTypeProp.setAllowLoopsVar(allowLoops.getName());
+		randomDensityNetworkProp.setAllowLoopsVar(allowLoops.getName());
 		symmetric=v.createVariable(group!=null?group.getValue()+"Symmetric":"symmetric",
 				"boolean","false",true,true, false);
-		networkTypeProp.setSymmetricVar(symmetric.getName());
+		randomDensityNetworkProp.setSymmetricVar(symmetric.getName());
 	}
 
 	/**
@@ -208,13 +209,13 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public void componentChanged(ComponentEvent e) {
 		size.setName(((StringComponent)e.getSource()).getValue()+"Size");
-		networkTypeProp.setSizeVar(size.getName());
+		randomDensityNetworkProp.setSizeVar(size.getName());
 		density.setName(((StringComponent)e.getSource()).getValue()+"Density");
-		networkTypeProp.setDensityVar(density.getName());
+		randomDensityNetworkProp.setDensityVar(density.getName());
 		allowLoops.setName(((StringComponent)e.getSource()).getValue()+"AllowLoops");
-		networkTypeProp.setAllowLoopsVar(allowLoops.getName());
+		randomDensityNetworkProp.setAllowLoopsVar(allowLoops.getName());
 		symmetric.setName(((StringComponent)e.getSource()).getValue()+"Symmetric");
-		networkTypeProp.setSymmetricVar(symmetric.getName());
+		randomDensityNetworkProp.setSymmetricVar(symmetric.getName());
 	}
 	
 	/**
@@ -272,16 +273,18 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	}
 
 	/**
-	 * @return the networkTypeProp
+	 * @see org.repastbs.component.network.type.NetworkType#getNetworkTypeProp()
 	 */
-	public RandomDensityNetworkProp getNetworkTypeProp() {
-		return networkTypeProp;
+	@Override
+	public NetworkTypeProp getNetworkTypeProp() {
+		return randomDensityNetworkProp;
 	}
 
 	/**
-	 * @param networkTypeProp the networkTypeProp to set
+	 * @see org.repastbs.component.network.type.NetworkType#setNetworkTypeProp(org.repastbs.generated.NetworkTypeProp)
 	 */
-	public void setNetworkTypeProp(RandomDensityNetworkProp networkTypeProp) {
-		this.networkTypeProp = networkTypeProp;
+	@Override
+	public void setNetworkTypeProp(NetworkTypeProp networkTypeProp) {
+		this.randomDensityNetworkProp = (RandomDensityNetworkProp)networkTypeProp;
 	}
 }
