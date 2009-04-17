@@ -145,10 +145,7 @@ public class NetworkModel extends AbstractModel {
 		//networkModelProp.setSchedule(scheduleComponent.getScheduleProp());
 		
 		AgentsComponent agents = new AgentsComponent();
-		NetworkAgent agent = new NetworkAgent("group");
 		add(agents);
-		agents.addAgent(agent);
-		agent.createNew();
 		agents.setAgentsProp(networkModelProp.getAgents());
 		//networkModelProp.setAgents(agents.getAgentsProp());
 		

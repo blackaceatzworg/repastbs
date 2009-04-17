@@ -70,6 +70,7 @@ public class NetworkAgent extends AbstractComponent implements
 	public NetworkAgent(String groupName) {
 		super("NetworkAgent");
 		setName("NetworkAgent");
+		networkAgentProp.setAgentClass(getClass().getName());
 		setId(ID);
 	}
 
@@ -331,16 +332,40 @@ public class NetworkAgent extends AbstractComponent implements
 	 * @see org.repastbs.component.Agent#setAgentProp(org.repastbs.generated.AgentProp)
 	 */
 	@Override
-	public void setAgentProp(AgentProp agentProp) {
+	public void setAgentProp(AgentProp agentProp) throws Exception {
 		this.networkAgentProp = (NetworkAgentProp)agentProp;
+		generator = new JavassistGenerator(new DefaultDrawableNode());
+		generator.addImport("uchicago.src.sim.engine");
+		generator.setClassName(getName());
+		
+		groupName = new StringComponent("Group name",networkAgentProp.getGroupName());
+		add(groupName);
+		
+		agentName = new StringComponent("Agent name",networkAgentProp.getName());
+		agentName.addComponentListener(this);
+		add(agentName);
+
+		ActionsComponent actions = new ActionsComponent();
+		add(actions);
+		actions.setActionsProp(networkAgentProp.getActions());
+		
+		VariablesComponent variables = new VariablesComponent();
+		add(variables);
+		variables.setVariablesProp(networkAgentProp.getVariables());
+		
+		ScheduleComponent schedule = new ScheduleComponent();
+		add(schedule);
+		schedule.setScheduleProp(networkAgentProp.getSchedule());
+		
 		String networkTypeClassName = this.networkAgentProp.getNetworkType().getNetworkTypeClass();
 		try {
 			Class<?> networkTypeClass = Class.forName(networkTypeClassName);
-			NetworkType type = (NetworkType)networkTypeClass.newInstance();
-			type.setNetworkTypeProp(this.networkAgentProp.getNetworkType());
-			add(type);
+			networkType = (NetworkType)networkTypeClass.newInstance();
+			add(networkType);
+			networkType.setNetworkTypeProp(this.networkAgentProp.getNetworkType());
 		} catch (Exception e) {
 			System.out.println("could not recreate network agent type");
+			e.printStackTrace();
 		}
 		buildSupportedTypes();
 		for(int i=0;i<supportedTypes.size();i++) {
@@ -348,8 +373,13 @@ public class NetworkAgent extends AbstractComponent implements
 			if(curr.getClass().equals(networkType.getClass())) {
 				supportedTypes.set(i,networkType);
 				break;
-			}	
+			}
 		}
+		
+		GameAgentInterface behavior = new GameAgentInterface();
+		add(behavior);
+		behavior.createNew();
+		networkAgentProp.setInterface(behavior.getGaip());
 	}
 
 	/**

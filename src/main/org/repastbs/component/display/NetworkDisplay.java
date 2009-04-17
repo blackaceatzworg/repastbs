@@ -305,8 +305,8 @@ public class NetworkDisplay extends AbstractComponent implements DynamicChanger,
 		try {
 			Class<?> networkLayoutClass = Class.forName(networkLayoutClassName);
 			NetworkLayout layout = (NetworkLayout)networkLayoutClass.newInstance();
-			layout.setNetworkLayoutProp(this.networkDisplayProp.getLayout());
 			add(layout);
+			layout.setNetworkLayoutProp(this.networkDisplayProp.getLayout());
 		} catch (Exception e) {
 			System.out.println("could not recreate network display layout");
 		}

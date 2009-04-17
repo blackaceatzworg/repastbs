@@ -31,6 +31,7 @@ public interface Agent extends Schedulable, Component, XMLSerializable, DynamicH
 	
 	/**
 	 * @param agentProp
+	 * @throws Exception 
 	 */
-	public void setAgentProp(AgentProp agentProp);
+	public void setAgentProp(AgentProp agentProp) throws Exception;
 }

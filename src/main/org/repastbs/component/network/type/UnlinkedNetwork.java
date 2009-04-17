@@ -191,5 +191,6 @@ public class UnlinkedNetwork extends AbstractComponent implements NetworkType, C
 	@Override
 	public void setNetworkTypeProp(NetworkTypeProp networkTypeProp) {
 		this.unlinkedNetworkProp = (UnlinkedNetworkProp)networkTypeProp;
+		this.nodeCount = Variable.findVariable(this,this.unlinkedNetworkProp.getCountVar());
 	}
 }

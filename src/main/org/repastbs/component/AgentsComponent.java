@@ -11,11 +11,11 @@ package org.repastbs.component;
 import java.util.Enumeration;
 
 import org.dom4j.Node;
-import org.repastbs.component.network.NetworkAgent;
 import org.repastbs.dynamic.DynamicChanger;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.dynamic.DynamicHolder;
+import org.repastbs.generated.AgentProp;
 import org.repastbs.generated.AgentsProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializable;
@@ -152,7 +152,16 @@ public class AgentsComponent extends AbstractComponent implements DynamicChanger
 	public void setAgentsProp(AgentsProp agentsProp) {
 		this.agentsProp = agentsProp;
 		removeAllChildren();
-		NetworkAgent networkAgent = new NetworkAgent();
-		add(networkAgent);
+		for (AgentProp agentProp : agentsProp.getAgent()) {
+			String agentClassName = agentProp.getAgentClass();
+			try {
+				Class<?> agentClass = Class.forName(agentClassName);
+				Agent agent = (Agent)agentClass.newInstance();
+				add(agent);
+				agent.setAgentProp(agentProp);
+			} catch (Exception e) {
+				System.out.println("could not recreate agent");
+			}
+		} 
 	}
 }

@@ -42,6 +42,7 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	private Variable density;
 	private Variable allowLoops;
 	private Variable symmetric;
+	private Variable nodeCount;
 	
 	/**
 	 * Default empty constructor
@@ -56,7 +57,25 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	 */
 	public RandomDensityNetwork(String name) {
 		super(name);
+		randomDensityNetworkProp.setNetworkTypeClass(this.getClass().getName());
 		setId(ID);
+	}
+
+	/**
+	 * @return  the nodeCount
+	 * @uml.property  name="nodeCount"
+	 */
+	public Variable getNodeCount() {
+		return nodeCount;
+	}
+
+	/**
+	 * @param nodeCount  the nodeCount to set
+	 * @uml.property  name="nodeCount"
+	 */
+	public void setNodeCount(Variable nodeCount) {
+		this.nodeCount = nodeCount;
+		//randomDensityNetworkProp.setCountVar(nodeCount.getName());
 	}
 
 	/**
@@ -286,5 +305,6 @@ public class RandomDensityNetwork extends AbstractComponent implements NetworkTy
 	@Override
 	public void setNetworkTypeProp(NetworkTypeProp networkTypeProp) {
 		this.randomDensityNetworkProp = (RandomDensityNetworkProp)networkTypeProp;
+	//	this.nodeCount = Variable.findVariable(this,this.randomDensityNetworkProp.getCountVar());
 	}
 }

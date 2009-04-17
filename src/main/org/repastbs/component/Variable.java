@@ -162,5 +162,27 @@ public class Variable extends AbstractComponent implements DynamicChanger, XMLSe
 	public void setName(String name) {
 		super.setName(name);
 		variableProp.setName(name);
-	}	
+	}
+	
+	/**
+	 * Find variable in tree, searching from current component towards root
+	 * @param component
+	 * @param variableName
+	 * @return variable if found, otherwise null
+	 */
+	public static Variable findVariable(Component component, String variableName) {
+		Component parent = component.getParent();
+		while(parent!=null) {
+			Component variables = parent.getChildById(VariablesComponent.ID);
+			if(variables!=null) {
+				Component variable = variables.getChildByName(variableName);
+				if(variable!=null) {
+					//found variable
+					return (Variable)variable;
+				}
+			}
+			parent = parent.getParent();
+		}
+		return null;
+	}
 }

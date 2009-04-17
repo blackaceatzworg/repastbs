@@ -190,6 +190,8 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @see org.repastbs.component.Component#getChildByName(java.lang.String)
 	 */
 	public AbstractComponent getChildByName(String name) {
+		if(children == null)
+			return null;
 		for (int i = 0; i < children.size(); i++) {
 			AbstractComponent curr = (AbstractComponent)getChildAt(i);
 			if(curr.getName()!=null) {

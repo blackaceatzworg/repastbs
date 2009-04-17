@@ -153,6 +153,7 @@
     <xsd:complexType name="AgentProp">
     	<xsd:complexContent>
 			<xsd:extension base="com:AbstractComponentProp">
+				<xsd:attribute name="agentClass" type="xsd:string" use="required"/>
 			</xsd:extension>
 		</xsd:complexContent>
     </xsd:complexType>
@@ -168,7 +169,6 @@
 					<xsd:element name="variables" type="com:VariablesProp"
 						minOccurs="1" maxOccurs="1" nillable="false" />
 				</xsd:sequence>
-				<xsd:attribute name="agentTypeClass" type="xsd:string" use="required"/>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

@@ -69,6 +69,7 @@ public class GridAgent extends AbstractComponent implements
 	public GridAgent(String groupName) {
 		super("GridAgent");
 		setName("GridAgent");
+		gridAgentProp.setAgentClass(getClass().getName());
 		setId(ID);
 	}
 
@@ -330,7 +331,7 @@ public class GridAgent extends AbstractComponent implements
 	 * @see org.repastbs.component.Agent#setAgentProp(org.repastbs.generated.AgentProp)
 	 */
 	@Override
-	public void setAgentProp(AgentProp agentProp) {
+	public void setAgentProp(AgentProp agentProp) throws Exception {
 		this.gridAgentProp = (GridAgentProp)agentProp;
 		
 	}
