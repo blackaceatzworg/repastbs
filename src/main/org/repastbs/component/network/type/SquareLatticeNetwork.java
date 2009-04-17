@@ -257,5 +257,9 @@ public class SquareLatticeNetwork extends AbstractComponent implements NetworkTy
 	@Override
 	public void setNetworkTypeProp(NetworkTypeProp networkTypeProp) {
 		this.squareLatticeNetworkProp = (SquareLatticeNetworkProp)networkTypeProp;
+		this.cols = Variable.findVariable(this,this.squareLatticeNetworkProp.getColsVar());
+		this.connectRadius = Variable.findVariable(this,this.squareLatticeNetworkProp.getConnectRadiusVar());
+		this.rows = Variable.findVariable(this,this.squareLatticeNetworkProp.getRowsVar());
+		this.wrapAround = Variable.findVariable(this,this.squareLatticeNetworkProp.getWrapAroundVar());
 	}
 }
