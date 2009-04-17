@@ -35,7 +35,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-
 /**
  * Class representing grid agent
  * @author  Ludovit Hajzer
@@ -333,7 +332,29 @@ public class GridAgent extends AbstractComponent implements
 	@Override
 	public void setAgentProp(AgentProp agentProp) throws Exception {
 		this.gridAgentProp = (GridAgentProp)agentProp;
+		generator = new JavassistGenerator(new DefaultGridAgent());
+		generator.addImport("uchicago.src.sim.engine");
+		generator.setClassName(getName());
+
+		groupName = new StringComponent("Group name",gridAgentProp.getGroupName());
+		groupName.addComponentListener(this);
+		add(groupName);
 		
+		agentName = new StringComponent("Agent name",gridAgentProp.getName());
+		agentName.addComponentListener(this);
+		add(agentName);
+
+		ActionsComponent actions = new ActionsComponent();
+		add(actions);
+		actions.setActionsProp(gridAgentProp.getActions());
+
+		VariablesComponent variables = new VariablesComponent();
+		add(variables);
+		variables.setVariablesProp(gridAgentProp.getVariables());
+
+		ScheduleComponent schedule = new ScheduleComponent();
+		add(schedule);
+		schedule.setScheduleProp(gridAgentProp.getSchedule());
 	}
 
 	/**

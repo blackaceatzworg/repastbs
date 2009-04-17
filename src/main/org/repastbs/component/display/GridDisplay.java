@@ -191,5 +191,22 @@ public class GridDisplay extends AbstractComponent implements DynamicChanger, XM
 	 */
 	public void setGridDisplayProp(GridDisplayProp gridDisplayProp) {
 		this.gridDisplayProp = gridDisplayProp;
+		removeAllChildren();
+		ColorComponent backGroundColor = new ColorComponent("Color",gridDisplayProp.getColor());
+		add(backGroundColor);
+
+		ActionsComponent ac = new ActionsComponent();
+		ac.createNew();
+		add(ac);
+		ac.setActionsProp(gridDisplayProp.getActions());
+		ac.setRemovable(false);
+		ac.setEditable(false);
+
+		ScheduleComponent sc = new ScheduleComponent();
+		sc.createNew();
+		add(sc);
+		sc.setScheduleProp(gridDisplayProp.getSchedule());
+		sc.setRemovable(false);
+		sc.setEditable(false);
 	}
 }

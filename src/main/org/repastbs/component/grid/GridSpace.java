@@ -47,11 +47,11 @@ public class GridSpace extends AbstractComponent implements XMLSerializable, Dyn
 	 * @see org.repastbs.component.Component#createNew()
 	 */
 	public void createNew() throws Exception {
-		spaceHeight = new IntegerComponent("Space Height");
-		spaceHeight.setValue(new Integer(100));
+		spaceHeight = new IntegerComponent("Space Height",100);
+		//spaceHeight.setValue(new Integer(100));
 		gridSpaceProp.setHeight(spaceHeight.getIntegerComponentProp());
-		spaceWidth = new IntegerComponent("Space Height");
-		spaceWidth.setValue(new Integer(100));
+		spaceWidth = new IntegerComponent("Space Width",100);
+		//spaceWidth.setValue(new Integer(100));
 		gridSpaceProp.setWidth(spaceWidth.getIntegerComponentProp());
 		add(spaceHeight);
 		add(spaceWidth);
@@ -86,7 +86,7 @@ public class GridSpace extends AbstractComponent implements XMLSerializable, Dyn
 	public void createFromXML(Node node) throws XMLSerializationException {
 		spaceHeight = new IntegerComponent("Space Height");
 		spaceHeight.setValue(new Integer(100));
-		spaceWidth = new IntegerComponent("Space Height");
+		spaceWidth = new IntegerComponent("Space Width");
 		spaceWidth.setValue(new Integer(100));
 		spaceHeight.setValue(new Integer(node.valueOf("@height")));
 		spaceWidth.setValue(new Integer(node.valueOf("@width")));
@@ -143,5 +143,10 @@ public class GridSpace extends AbstractComponent implements XMLSerializable, Dyn
 	 */
 	public void setGridSpaceProp(GridSpaceProp gridSpaceProp) {
 		this.gridSpaceProp = gridSpaceProp;
+		removeAllChildren();
+		IntegerComponent spaceHeight = new IntegerComponent("Space Height",gridSpaceProp.getHeight());
+		add(spaceHeight);
+		IntegerComponent spaceWidth = new IntegerComponent("Space Width",gridSpaceProp.getWidth());
+		add(spaceWidth);
 	}
 }

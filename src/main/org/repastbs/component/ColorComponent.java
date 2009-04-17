@@ -60,6 +60,16 @@ public class ColorComponent extends AbstractComponent implements XMLSerializable
 	}
 
 	/**
+	 * @param name
+	 * @param color
+	 */
+	public ColorComponent(String name, ColorComponentProp color) {
+		super(name);
+		this.colorComponentProp = color;
+		setId(ID);
+	}
+
+	/**
 	 * @return  the color
 	 * @uml.property  name="color"
 	 */

@@ -145,24 +145,20 @@ public class GridModel extends AbstractModel {
 		add(scheduleComponent);
 		scheduleComponent.setScheduleProp(gridModelProp.getSchedule());
 
-		/*
 		AgentsComponent agents = new AgentsComponent();
-		GridAgent agent = new GridAgent("group");
 		add(agents);
-		agents.addAgent(agent);
-		agent.createNew();
-		gridModelProp.setAgents(agents.getAgentsProp());
-		
+		agents.setAgentsProp(gridModelProp.getAgents());
+
 		GridSpace gridSpace = new GridSpace();
 		add(gridSpace);
 		gridSpace.createNew();
-		gridModelProp.setGridSpace(gridSpace.getGridSpaceProp());
-		
-		GridDisplay display = new GridDisplay();
-		add(display);
-		display.createNew();
-		gridModelProp.setGridDisplay(display.getGridDisplayProp());
-		*/
+		gridSpace.setGridSpaceProp(gridModelProp.getGridSpace());
+
+		GridDisplay gridDisplay = new GridDisplay();
+		add(gridDisplay);
+		gridDisplay.createNew();
+		gridDisplay.setGridDisplayProp(gridModelProp.getGridDisplay());
+
 		MasterSchedule masterSchedule = new MasterSchedule();
 		add(masterSchedule);
 	}
