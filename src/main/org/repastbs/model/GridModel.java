@@ -28,10 +28,8 @@ import org.repastbs.generated.GridModelProp;
  * @author Ľudovít Hajzer
  *
  */
+@SuppressWarnings("serial")
 public class GridModel extends AbstractModel {
-
-	/** */
-	private static final long serialVersionUID = 6147610689058660846L;
 	
 	private GridModelProp gridModelProp;
 	
@@ -151,7 +149,7 @@ public class GridModel extends AbstractModel {
 
 		GridSpace gridSpace = new GridSpace();
 		add(gridSpace);
-		gridSpace.createNew();
+		//gridSpace.createNew();
 		gridSpace.setGridSpaceProp(gridModelProp.getGridSpace());
 
 		GridDisplay gridDisplay = new GridDisplay();
