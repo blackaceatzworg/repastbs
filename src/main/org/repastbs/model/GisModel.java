@@ -8,14 +8,22 @@
  */
 package org.repastbs.model;
 
+import org.repastbs.component.Action;
+import org.repastbs.component.ActionsComponent;
+import org.repastbs.component.AgentsComponent;
+import org.repastbs.component.MasterSchedule;
+import org.repastbs.component.ScheduleComponent;
+import org.repastbs.component.VariablesComponent;
+import org.repastbs.component.gis.GisAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.JavassistGenerator;
 import org.repastbs.generated.GisModelProp;
 import org.repastbs.generated.ModelProp;
 
-@SuppressWarnings("serial")
 public class GisModel extends AbstractModel {
 	
+	/** */
+	private static final long serialVersionUID = -1752626690061068002L;
 	private GisModelProp gisModelProp;
 
 	/**
@@ -25,7 +33,6 @@ public class GisModel extends AbstractModel {
 		this("Model name");
 	}
 
-	
 	/**
 	 * @param modelName
 	 * @throws DynamicException
@@ -44,6 +51,47 @@ public class GisModel extends AbstractModel {
 		super.createNew("GisModel","Gis model");
 		gisModelProp = new GisModelProp();
 		gisModelProp.setModelClass(this.getClass().getName());
+		
+		VariablesComponent variables = new VariablesComponent();
+		add(variables);
+		variables.createNew();
+		gisModelProp.setVariables(variables.getVariablesProp());
+		
+		ActionsComponent actions = new ActionsComponent();
+		add(actions);
+		actions.createNew();
+		Action initAgents = actions.createAction("initAgents");
+		initAgents.setRemovable(false);
+		gisModelProp.setActions(actions.getActionsProp());
+				
+		ScheduleComponent scheduleComponent = new ScheduleComponent();
+		add(scheduleComponent);
+		gisModelProp.setSchedule(scheduleComponent.getScheduleProp());
+		
+		AgentsComponent agents = new AgentsComponent();
+		GisAgent agent = new GisAgent("group");
+		add(agents);
+		agents.addAgent(agent);
+		agent.createNew();
+		gisModelProp.setAgents(agents.getAgentsProp());
+		
+		MasterSchedule masterSchedule = new MasterSchedule();
+		add(masterSchedule);
+		masterSchedule.createNew();
+	}
+
+	/**
+	 * @see org.repastbs.component.Component#isEditable()
+	 */
+	public boolean isEditable() {
+		return true;
+	}
+
+	/**
+	 * @param gisModelProp the gisModelProp to set
+	 */
+	public void setGisModelProp(GisModelProp gisModelProp) {
+		this.gisModelProp = gisModelProp;
 	}
 
 	/**

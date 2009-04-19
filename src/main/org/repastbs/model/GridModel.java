@@ -28,9 +28,10 @@ import org.repastbs.generated.GridModelProp;
  * @author Ľudovít Hajzer
  *
  */
-@SuppressWarnings("serial")
 public class GridModel extends AbstractModel {
 	
+	/** */
+	private static final long serialVersionUID = -8643103595595877830L;
 	private GridModelProp gridModelProp;
 	
 	/**
@@ -58,6 +59,7 @@ public class GridModel extends AbstractModel {
 		super.createNew("GridModel","Grid model");
 		gridModelProp = new GridModelProp();
 		gridModelProp.setModelClass(this.getClass().getName());
+
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
 		variables.createNew();

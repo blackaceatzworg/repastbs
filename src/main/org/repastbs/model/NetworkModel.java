@@ -26,9 +26,10 @@ import org.repastbs.generated.NetworkModelProp;
  * @author Ludovit Hajzer
  *
  */
-@SuppressWarnings("serial")
 public class NetworkModel extends AbstractModel {
 
+	/** */
+	private static final long serialVersionUID = -7418010550889110843L;
 	private NetworkModelProp networkModelProp;
 	
 	/**
