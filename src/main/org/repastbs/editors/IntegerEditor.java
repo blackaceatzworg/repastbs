@@ -26,6 +26,8 @@ public class IntegerEditor extends StringEditor implements ActionListener {
 	/** */
 	private static final long serialVersionUID = 2593612224649361192L;
 	
+	protected IntegerComponent integerComponent;
+
 	/** */
 	public IntegerEditor() {
 		super("Integer editor",false);
@@ -50,15 +52,14 @@ public class IntegerEditor extends StringEditor implements ActionListener {
 		if (e.getActionCommand() == "Ok") {
 			fireValueChanged(new EditorEvent(this,getEditedValue()));
 		}
-		if (e.getActionCommand()== "Cancel"  && objectComponent != null)
-			setEditedValue(objectComponent);
+		if (e.getActionCommand()== "Cancel" && integerComponent != null)
+			setEditedValue(integerComponent);
 	}
 
 	/**
 	 * @see org.repastbs.editors.Editor#getEditedValue()
 	 */
 	public IntegerComponent getEditedValue() {
-		IntegerComponent integerComponent = (IntegerComponent)getObjectComponent();
 		integerComponent.setValue(new Integer(valueField.getText()));
 		return integerComponent;
 	}
@@ -69,8 +70,8 @@ public class IntegerEditor extends StringEditor implements ActionListener {
 	public void setEditedValue(Component component) {
 		if(!(component instanceof IntegerComponent))
 			throw new IllegalArgumentException("Edited value not supported by Integer Editor");
-		setObjectComponent((IntegerComponent)component);
-		valueField.setText(objectComponent.getValue().toString());
+		integerComponent = ((IntegerComponent)component);
+		valueField.setText(integerComponent.getValue().toString());
 	}
 
 	/**
@@ -79,5 +80,19 @@ public class IntegerEditor extends StringEditor implements ActionListener {
 	@SuppressWarnings("unchecked")
 	public Class getSupportedClass() {
 		return IntegerComponent.class;
+	}
+
+	/**
+	 * @return the integerComponent
+	 */
+	public IntegerComponent getIntegerComponent() {
+		return integerComponent;
+	}
+
+	/**
+	 * @param integerComponent the integerComponent to set
+	 */
+	public void setIntegerComponent(IntegerComponent integerComponent) {
+		this.integerComponent = integerComponent;
 	}
 }

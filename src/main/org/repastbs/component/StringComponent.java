@@ -14,7 +14,7 @@ import org.repastbs.generated.StringComponentProp;
  * Simple object component holding String value
  * @author  Ľudovít Hajzer
  */
-public class StringComponent extends ObjectComponent {
+public class StringComponent extends AbstractComponent {
 	
 	/** */
 	private static final long serialVersionUID = 8604534808303868199L;
@@ -22,7 +22,7 @@ public class StringComponent extends ObjectComponent {
 	/** */
 	public static final String ID = "STRING";
 	
-	private StringComponentProp scp = new StringComponentProp();
+	private StringComponentProp stringComponentProp = new StringComponentProp();
 	//private boolean large = false;
 	//private String value;
 	
@@ -33,8 +33,8 @@ public class StringComponent extends ObjectComponent {
 	 */
 	public StringComponent(String name, String value, boolean large) {
 		super(name);
-		this.scp.setValue(value);
-		this.scp.setLarge(large);
+		this.stringComponentProp.setValue(value);
+		this.stringComponentProp.setLarge(large);
 		setId(ID);
 	}
 	
@@ -62,14 +62,14 @@ public class StringComponent extends ObjectComponent {
 	}
 
 	public String getValue() {
-		return scp.getValue();
+		return stringComponentProp.getValue();
 	}
 
 	/**
 	 * @param value the value to set
 	 */
 	public void setValue(String value) {
-		this.scp.setValue(value);
+		this.stringComponentProp.setValue(value);
 		fireComponentChanged(new ComponentEvent(this,ComponentEvent.COMPONENT_CHANGED));
 	}
 	
@@ -77,8 +77,15 @@ public class StringComponent extends ObjectComponent {
 	 * @see org.repastbs.component.Component#toString()
 	 */
 	public String toString() {
-		if(scp.isLarge())
+		if(stringComponentProp.isLarge())
 			return getName();
 		return getName()+" = '"+getValue()+"'";
+	}
+
+	/**
+	 * @see org.repastbs.component.Component#createNew()
+	 */
+	@Override
+	public void createNew() throws Exception {
 	}
 }

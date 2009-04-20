@@ -153,7 +153,11 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 		
 		descriptionComp = new StringComponent("Description","",true);
 		add(descriptionComp);
-		descriptionComp.createNew();
+		try {
+			descriptionComp.createNew();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		descriptionComp.setValue(node.valueOf("description/text()"));
 		descriptionComp.setEditor(new StringEditor(true));
 		

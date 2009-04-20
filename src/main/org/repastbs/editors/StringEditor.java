@@ -20,7 +20,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 import org.repastbs.component.Component;
-import org.repastbs.component.ObjectComponent;
 import org.repastbs.component.StringComponent;
 import org.repastbs.gui.SwingUtils;
 
@@ -33,7 +32,7 @@ public class StringEditor extends AbstractEditor implements ActionListener {
 	/** */
 	private static final long serialVersionUID = -7247360427084314668L;
 	
-	protected ObjectComponent objectComponent;
+	protected StringComponent stringComponent;
 	
 	protected JTextComponent valueField = new JTextField();
 	protected JLabel valueLabel = new JLabel("Value :",JLabel.RIGHT);
@@ -77,7 +76,7 @@ public class StringEditor extends AbstractEditor implements ActionListener {
 		gbc.anchor = GridBagConstraints.NORTH;
 		add(0,1,1,1,100,textEditor?1:100, SwingUtils
 				.createOkCancelPanel("Ok", "Cancel", this), this);
-		objectComponent = new StringComponent("");
+		stringComponent = new StringComponent("");
 	}
 	
 	/**
@@ -93,16 +92,16 @@ public class StringEditor extends AbstractEditor implements ActionListener {
 		if (e.getActionCommand() == "Ok") {
 			fireValueChanged(new EditorEvent(this,getEditedValue()));
 		}
-		if (e.getActionCommand()== "Cancel" && objectComponent != null)
-			setEditedValue(objectComponent);
+		if (e.getActionCommand()== "Cancel" && stringComponent != null)
+			setEditedValue(stringComponent);
 	}
 
 	/**
 	 * @see org.repastbs.editors.Editor#getEditedValue()
 	 */
 	public Component getEditedValue() {
-		objectComponent.setValue(valueField.getText());
-		return objectComponent;
+		stringComponent.setValue(valueField.getText());
+		return stringComponent;
 	}
 
 	/**
@@ -118,8 +117,8 @@ public class StringEditor extends AbstractEditor implements ActionListener {
 	public void setEditedValue(Component component) {
 		if(!(component instanceof StringComponent))
 			throw new IllegalArgumentException("Edited value not supported by String Editor");
-		objectComponent = (StringComponent)component;
-		valueField.setText(objectComponent.getValue().toString());
+		stringComponent = (StringComponent)component;
+		valueField.setText(stringComponent.getValue().toString());
 	}
 
 	/**
@@ -137,20 +136,18 @@ public class StringEditor extends AbstractEditor implements ActionListener {
 		valueLabel.setText(newLabel);
 	}
 
+	
 	/**
-	 * @return  associated object component
-	 * @uml.property  name="objectComponent"
+	 * @return the stringComponent
 	 */
-	public ObjectComponent getObjectComponent() {
-		return objectComponent;
+	public StringComponent getStringComponent() {
+		return stringComponent;
 	}
 
 	/**
-	 * Accesor for object component allows other editor types to change object component to any type, e.g. Integer component
-	 * @param  objectComponent
-	 * @uml.property  name="objectComponent"
+	 * @param stringComponent the stringComponent to set
 	 */
-	public void setObjectComponent(ObjectComponent objectComponent) {
-		this.objectComponent = objectComponent;
+	public void setStringComponent(StringComponent stringComponent) {
+		this.stringComponent = stringComponent;
 	}
 }

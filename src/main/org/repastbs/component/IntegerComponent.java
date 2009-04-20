@@ -15,7 +15,7 @@ import org.repastbs.generated.IntegerComponentProp;
  * @author Ludovit Hajzer
  *
  */
-public class IntegerComponent extends ObjectComponent {
+public class IntegerComponent extends AbstractComponent {
 	
 	/** */
 	private static final long serialVersionUID = 8604534808303868199L;
@@ -30,7 +30,7 @@ public class IntegerComponent extends ObjectComponent {
 	 * @param value 
 	 */
 	public IntegerComponent(String name, Integer value) {
-		super(name,value);
+		super(name);
 		this.integerComponentProp.setValue(value);
 		setId(ID);
 	}
@@ -47,7 +47,7 @@ public class IntegerComponent extends ObjectComponent {
 	 * @param value
 	 */
 	public IntegerComponent(String name, IntegerComponentProp value) {
-		super(name,value.getValue());
+		super(name);
 		this.integerComponentProp = value;
 		setId(ID);
 	}
@@ -79,5 +79,12 @@ public class IntegerComponent extends ObjectComponent {
 	 */
 	public void setIntegerComponentProp(IntegerComponentProp integerComponentProp) {
 		this.integerComponentProp = integerComponentProp;
+	}
+
+	/**
+	 * @see org.repastbs.component.Component#createNew()
+	 */
+	@Override
+	public void createNew() throws Exception {
 	}
 }
