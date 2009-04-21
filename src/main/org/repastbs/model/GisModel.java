@@ -24,7 +24,7 @@ public class GisModel extends AbstractModel {
 	
 	/** */
 	private static final long serialVersionUID = -1752626690061068002L;
-	private GisModelProp gisModelProp;
+	private GisModelProp gisModelProp = new GisModelProp();
 
 	/**
 	 * @throws DynamicException
@@ -39,7 +39,6 @@ public class GisModel extends AbstractModel {
 	 */
 	public GisModel(String modelName) throws DynamicException {
 		super("Gis model");
-		setDescription("Gis is geographic information system type model");
 		setGenerator(new JavassistGenerator(new DefaultModel()));
 	}
 
@@ -49,7 +48,7 @@ public class GisModel extends AbstractModel {
 	@Override
 	public void createNew() throws Exception {
 		super.createNew("GisModel","Gis model");
-		gisModelProp = new GisModelProp();
+		gisModelProp.getDescription().setValue("Gis is geographic information system type model");
 		gisModelProp.setModelClass(this.getClass().getName());
 		
 		VariablesComponent variables = new VariablesComponent();
@@ -107,5 +106,6 @@ public class GisModel extends AbstractModel {
 	 */
 	@Override
 	public void setModelProp(ModelProp modelProp) throws Exception {
+		super.setModelProp(modelProp);
 	}	
 }

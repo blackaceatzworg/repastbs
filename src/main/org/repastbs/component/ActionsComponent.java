@@ -170,8 +170,9 @@ public class ActionsComponent extends AbstractComponent implements DynamicChange
 	public void setActionsProp(ActionsProp actionsProp) {
 		this.actionsProp = actionsProp;
 		for (ActionProp actionProp : actionsProp.getAction()) {
-			Action a = new Action(actionProp);
+			Action a = new Action();
 			add(a);
+			a.setActionProp(actionProp);
 		}
 	}
 	

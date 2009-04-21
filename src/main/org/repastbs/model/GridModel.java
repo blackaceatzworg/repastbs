@@ -1,10 +1,10 @@
 /**
  * File: GridModel.java
  * Program: Repast BS
- * Author:  Ľudovít Hajzer, Zdenko Osina
+ * Author:  Ludovit Hajzer, Zdenko Osina
  * Master's Thesis:	System Repast
  * Supervisor: Ing. Ladislav Samuelis, CSc.
- * Consultant: László Gulyás, Ph.D.
+ * Consultant: Laszlo Gulyas, Ph.D.
  */
 package org.repastbs.model;
 
@@ -25,14 +25,14 @@ import org.repastbs.generated.GridModelProp;
 
 /**
  * Grid model template
- * @author Ľudovít Hajzer
+ * @author Ludovit Hajzer
  *
  */
 public class GridModel extends AbstractModel {
 	
 	/** */
 	private static final long serialVersionUID = -8643103595595877830L;
-	private GridModelProp gridModelProp;
+	private GridModelProp gridModelProp = new GridModelProp();
 	
 	/**
 	 * @throws DynamicException 
@@ -47,7 +47,6 @@ public class GridModel extends AbstractModel {
 	 */
 	public GridModel(String modelName) throws DynamicException {
 		super("Grid model");
-		setDescription("Grid type model in which agents operate on a two dimensional matrix grid or torus.");
 		setGenerator(new JavassistGenerator(new DefaultModel()));
 	}
 	
@@ -57,7 +56,7 @@ public class GridModel extends AbstractModel {
 	 */
 	public void createNew() throws Exception {
 		super.createNew("GridModel","Grid model");
-		gridModelProp = new GridModelProp();
+		gridModelProp.getDescription().setValue("Grid type model in which agents operate on a two dimensional matrix grid or torus.");	
 		gridModelProp.setModelClass(this.getClass().getName());
 
 		VariablesComponent variables = new VariablesComponent();
@@ -128,7 +127,7 @@ public class GridModel extends AbstractModel {
 	public void setModelProp(ModelProp modelProp) throws Exception {
 		GridModelProp props = (GridModelProp)modelProp;
 		gridModelProp = props;
-		super.createNew("GridModel","Grid model");
+		super.setModelProp(gridModelProp);
 		displayName.addComponentListener(this);
 
 		VariablesComponent variables = new VariablesComponent();

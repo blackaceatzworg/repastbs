@@ -11,9 +11,6 @@
 			<xsd:complexContent>
 				<xsd:extension base="com:ModelProp">
 					<xsd:sequence>
-						<xsd:element name="name" type="com:StringComponentProp" />
-						<xsd:element name="displayName" type="com:StringComponentProp" />
-						<xsd:element name="description" type="com:StringComponentProp" />
 						<xsd:element name="variables" type="com:VariablesProp" />
 						<xsd:element name="actions" type="com:ActionsProp" />
 						<xsd:element name="schedule" type="com:ScheduleProp" />

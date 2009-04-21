@@ -1,5 +1,6 @@
 import org.repastbs.actions.AbstractAction;
 import org.repastbs.gui.XMLFileFilter;
+import org.repastbs.model.Model;
 
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;

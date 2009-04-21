@@ -87,4 +87,14 @@ public class IntegerComponent extends AbstractComponent {
 	@Override
 	public void createNew() throws Exception {
 	}
+	
+	/**
+	 * @see org.repastbs.component.AbstractComponent#toString()
+	 */
+	@Override
+	public String toString() {
+		if(integerComponentProp.getValue()==null)
+			return getName();
+		return getName()+" = '"+getValue().toString()+"'";
+	}
 }

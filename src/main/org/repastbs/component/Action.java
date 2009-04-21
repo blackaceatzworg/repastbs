@@ -71,20 +71,23 @@ public class Action extends AbstractComponent implements DynamicChanger, XMLSeri
 	}
 
 	/**
-	 * @param actionProp
+	 * @return actionProp
 	 */
-	public Action(ActionProp actionProp) {
-		super(actionProp.getName());
-		this.actionProp = actionProp;
-		setId(ID);
-	}
-
 	public ActionProp getActionProp() {
 		return actionProp;
 	}
 
-	public void setActionProp(ActionProp actionprop) {
-		this.actionProp = actionprop;
+	/**
+	 * @param actionProp
+	 */
+	public void setActionProp(ActionProp actionProp) {
+		this.actionProp = actionProp;
+		for (ActionParameterProp paramProp : actionProp.getParameters()) {
+			ActionParameter param = new ActionParameter();
+			param.setActionparameterprop(paramProp);
+			add(param);
+		}
+		super.setName(actionProp.getName());
 	}
 
 	/**

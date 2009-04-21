@@ -233,8 +233,13 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	
+
 	<xsd:complexType name="ModelProp">
-		<xsd:attribute name="modelClass" type="xsd:string" use="required"/>
+		<xsd:sequence>
+			<xsd:element name="description" type="com:StringComponentProp" nillable="true" />
+			<xsd:element name="modelName" type="com:StringComponentProp" nillable="true" />
+			<xsd:element name="displayName" type="com:StringComponentProp" nillable="true" />
+		</xsd:sequence>
+		<xsd:attribute name="modelClass" type="xsd:string" use="required" />
 	</xsd:complexType>
 </xsd:schema>

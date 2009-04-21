@@ -9,6 +9,7 @@
 package org.repastbs.model;
 
 import javax.swing.tree.DefaultTreeModel;
+
 import org.dom4j.Node;
 import org.repastbs.component.AbstractComponent;
 import org.repastbs.component.ComponentEvent;
@@ -18,6 +19,7 @@ import org.repastbs.component.StringComponent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.DynamicGenerator;
 import org.repastbs.editors.StringEditor;
+import org.repastbs.generated.ModelProp;
 import org.repastbs.xml.SAXUtils;
 import org.repastbs.xml.XMLSerializationException;
 import org.xml.sax.ContentHandler;
@@ -34,6 +36,8 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 
 	private DynamicGenerator generator;
 	private DefaultTreeModel treeModel;
+	
+	//private ModelProp modelProp;
 
 	protected StringComponent modelName;
 	protected StringComponent displayName;
@@ -114,8 +118,9 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 	 * @see org.repastbs.component.ComponentListener#componentChanged(org.repastbs.component.ComponentEvent)
 	 */
 	public void componentChanged(ComponentEvent e) {
-		if(e.getSource()==displayName)
+		if(e.getSource()==displayName) {
 			setName(displayName.getValue());
+		}
 	}
 	
 	/**
@@ -127,15 +132,37 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 		modelName = new StringComponent("Model name",modelNameStr);
 		add(modelName);
 		modelName.createNew();
+		getModelProp().setModelName(modelName.getStringComponentProp());
 		
 		displayName = new StringComponent("Display name",displayNameStr);
 		add(displayName);
 		displayName.createNew();
+		getModelProp().setDisplayName(displayName.getStringComponentProp());
 		
 		descriptionComp = new StringComponent("Description","",true);
 		add(descriptionComp);
 		descriptionComp.createNew();
 		descriptionComp.setEditor(new StringEditor(true));
+		getModelProp().setDescription(descriptionComp.getStringComponentProp());
+	}
+	
+	/**
+	 * @param modelProp 
+	 * @throws Exception 
+	 */
+	public void setModelProp(ModelProp modelProp) throws Exception {
+		modelName = new StringComponent("Model name","");
+		add(modelName);
+		modelName.setStringComponentProp(modelProp.getModelName());
+		
+		displayName = new StringComponent("Display name","");
+		add(displayName);
+		displayName.setStringComponentProp(modelProp.getDisplayName());
+		
+		descriptionComp = new StringComponent("Description","",true);
+		add(descriptionComp);
+		descriptionComp.setEditor(new StringEditor(true));
+		descriptionComp.setStringComponentProp(modelProp.getDescription());
 	}
 	
 	/**
@@ -146,10 +173,12 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 		modelName.setValue(node.valueOf("@name"));
 		setName(modelName.getValue());
 		add(modelName);
+		getModelProp().setModelName(modelName.getStringComponentProp());
 		
 		displayName = new StringComponent("Display name","Network model");
 		displayName.setValue(node.valueOf("@displayName"));
 		add(displayName);
+		getModelProp().setDisplayName(displayName.getStringComponentProp());
 		
 		descriptionComp = new StringComponent("Description","",true);
 		add(descriptionComp);
@@ -160,6 +189,7 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 		}
 		descriptionComp.setValue(node.valueOf("description/text()"));
 		descriptionComp.setEditor(new StringEditor(true));
+		getModelProp().setDescription(descriptionComp.getStringComponentProp());
 		
 		//try to initialize all children nodes from xml
 		SAXUtils.createChildren(node, this);
@@ -177,11 +207,11 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 	    try {
 	    	AttributesImpl atts = new AttributesImpl();
 	    	atts.addAttribute("", "class", "class", "CDATA", getClass().getName());
-		    atts.addAttribute("", "displayName", "displayName", "CDATA", displayName.getValue());
-		    atts.addAttribute("", "name", "name", "CDATA", modelName.getValue());
+		    atts.addAttribute("", "displayName", "displayName", "CDATA", getModelProp().getDisplayName().getValue());
+		    atts.addAttribute("", "name", "name", "CDATA", getModelProp().getModelName().getValue());
 		    
 	    	SAXUtils.start(handler, "model", atts);
-	    	SAXUtils.text(handler,"description", descriptionComp.getValue());
+	    	SAXUtils.text(handler,"description", getModelProp().getDescription().getValue());
 
 	    	SAXUtils.serializeChildren(handler, this);
 	    	SAXUtils.end(handler, "model");
@@ -195,7 +225,7 @@ public abstract class AbstractModel extends AbstractComponent implements Model, 
 	 */
 	public void generateFields() throws DynamicException {
 		generator.init();
-		generator.setClassName(modelName.getValue());
+		generator.setClassName(getModelProp().getModelName().getValue());
 		generator.addImport(getClass().getPackage().getName());
 		
 		generator.addImport("uchicago.src.sim.engine");

@@ -30,7 +30,7 @@ public class NetworkModel extends AbstractModel {
 
 	/** */
 	private static final long serialVersionUID = -7418010550889110843L;
-	private NetworkModelProp networkModelProp;
+	private NetworkModelProp networkModelProp = new NetworkModelProp();
 	
 	/**
 	 * @throws DynamicException 
@@ -45,9 +45,6 @@ public class NetworkModel extends AbstractModel {
 	 */
 	public NetworkModel(String modelName) throws DynamicException {
 		super("Network model");
-		setDescription("Network type model in which agents are nodes" +
-				" in a network. Agents can be created " +
-				"in a variety of network topologies.");
 		setGenerator(new JavassistGenerator(new DefaultModel()));
 	}
 	
@@ -57,7 +54,9 @@ public class NetworkModel extends AbstractModel {
 	 */
 	public void createNew() throws Exception {
 		super.createNew("NetworkModel","Network model");
-		networkModelProp = new NetworkModelProp();
+		networkModelProp.getDescription().setValue("Network type model in which agents are nodes" +
+				" in a network. Agents can be created " +
+				"in a variety of network topologies.");
 		networkModelProp.setModelClass(this.getClass().getName());
 		displayName.addComponentListener(this);
 		
@@ -121,7 +120,7 @@ public class NetworkModel extends AbstractModel {
 	public void setModelProp(ModelProp modelProp) throws Exception {
 		NetworkModelProp props = (NetworkModelProp) modelProp;
 		networkModelProp = props;
-		super.createNew("NetworkModel","Network model");
+		super.setModelProp(networkModelProp);
 		displayName.addComponentListener(this);
 		
 		VariablesComponent variables = new VariablesComponent();

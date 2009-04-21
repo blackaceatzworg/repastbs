@@ -233,9 +233,10 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 	 * @param description  the description to set
 	 * @uml.property  name="description"
 	 */
-	public void setDescription(String description) {
+	/*public void setDescription(String description) {
+		grid
 		//this.acp.setDescription(description);
-	}
+	}*/
 	
 	/**
 	 * @see  org.repastbs.component.Component#isRemovable()
@@ -350,9 +351,9 @@ public abstract class AbstractComponent extends DefaultMutableTreeNode implement
 			}
 		}
 	}
-	
+
 	/**
-	 * @see org.repastbs.component.Component#removeChildProp()
+	 * @see org.repastbs.component.Component#removeChildProp(org.repastbs.component.Component)
 	 */
 	public void removeChildProp(Component comp) {
 		//DO NOTHING

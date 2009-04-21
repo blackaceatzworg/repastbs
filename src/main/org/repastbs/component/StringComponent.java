@@ -61,6 +61,9 @@ public class StringComponent extends AbstractComponent {
 		this(name,null,false);
 	}
 
+	/**
+	 * @return value
+	 */
 	public String getValue() {
 		return stringComponentProp.getValue();
 	}
@@ -87,5 +90,19 @@ public class StringComponent extends AbstractComponent {
 	 */
 	@Override
 	public void createNew() throws Exception {
+	}
+
+	/**
+	 * @return the stringComponentProp
+	 */
+	public StringComponentProp getStringComponentProp() {
+		return stringComponentProp;
+	}
+
+	/**
+	 * @param stringComponentProp the stringComponentProp to set
+	 */
+	public void setStringComponentProp(StringComponentProp stringComponentProp) {
+		this.stringComponentProp = stringComponentProp;
 	}
 }

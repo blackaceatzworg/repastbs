@@ -18,6 +18,8 @@ import javax.xml.bind.Marshaller;
 
 import org.repastbs.RepastBS;
 import org.repastbs.Utils;
+import org.repastbs.generated.GisModelProp;
+import org.repastbs.generated.GridModelProp;
 import org.repastbs.generated.NetworkModelProp;
 import org.repastbs.gui.XMLFileFilter;
 
@@ -47,29 +49,17 @@ public class MarshallAction extends AbstractAction {
 			modelFile = fc.getSelectedFile();
 		}
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			// Component data = repastBS.getModel();
 			if(Utils.getExtension(modelFile)==null || !Utils.getExtension(modelFile).equals(Utils.xml))
 				modelFile = new File(modelFile.getAbsolutePath()+".xml");
 			JAXBContext context;
 			FileWriter fw = null;
 			try {
-				context = JAXBContext.newInstance(NetworkModelProp.class);
-
+				context = JAXBContext.newInstance(repastBS.getModel().getModelProp().getClass());
 				Marshaller marshaller = context.createMarshaller();
 				marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-				/*
-				 * NetworkModelProp toMarshall = new NetworkModelProp();
-				 * toMarshall.setDescription(abcopr);
-				 * variable.setDefaultValue("sdifklsdjfkl");
-				 */
-				/*
-				 * toMarshall.setVariable(variable);
-				 * toMarshall.setScheduledAction(schedule);
-				 */
 				fw = new FileWriter(modelFile);
 				marshaller.marshal(repastBS.getModel().getModelProp(), fw);
 			} catch (Exception e) {
-				System.out.println("marshalling model exception");
 				e.printStackTrace();
 			} finally {
 				if (fw != null) {
