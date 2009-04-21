@@ -15,12 +15,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for GridAgentProp complex type.
+ * <p>Java class for GisAgentProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="GridAgentProp">
+ * &lt;complexType name="GisAgentProp">
  *   &lt;complexContent>
  *     &lt;extension base="{http://repastbs/components}DefaultAgentProp">
  *       &lt;attribute name="groupName" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GridAgentProp")
-public class GridAgentProp
+@XmlType(name = "GisAgentProp")
+public class GisAgentProp
     extends DefaultAgentProp
 {
 

@@ -14,6 +14,7 @@ import org.repastbs.component.AgentsComponent;
 import org.repastbs.component.MasterSchedule;
 import org.repastbs.component.ScheduleComponent;
 import org.repastbs.component.VariablesComponent;
+import org.repastbs.component.display.GisDisplay;
 import org.repastbs.component.gis.GisAgent;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.JavassistGenerator;
@@ -60,7 +61,9 @@ public class GisModel extends AbstractModel {
 		add(actions);
 		actions.createNew();
 		Action initAgents = actions.createAction("initAgents");
+		Action writeAgents = actions.createAction("writeAgents");
 		initAgents.setRemovable(false);
+		writeAgents.setRemovable(false);
 		gisModelProp.setActions(actions.getActionsProp());
 				
 		ScheduleComponent scheduleComponent = new ScheduleComponent();
@@ -73,7 +76,12 @@ public class GisModel extends AbstractModel {
 		agents.addAgent(agent);
 		agent.createNew();
 		gisModelProp.setAgents(agents.getAgentsProp());
-		
+
+		GisDisplay gisDisplay = new GisDisplay();
+		add(gisDisplay);
+		gisDisplay.createNew();
+		gisModelProp.setGisDisplay(gisDisplay.getGisDisplayProp());
+
 		MasterSchedule masterSchedule = new MasterSchedule();
 		add(masterSchedule);
 		masterSchedule.createNew();
@@ -106,6 +114,35 @@ public class GisModel extends AbstractModel {
 	 */
 	@Override
 	public void setModelProp(ModelProp modelProp) throws Exception {
-		super.setModelProp(modelProp);
+		GisModelProp props = (GisModelProp)modelProp;
+		gisModelProp = props;
+		super.setModelProp(gisModelProp);
+		displayName.addComponentListener(this);
+
+		VariablesComponent variables = new VariablesComponent();
+		add(variables);
+		variables.createNew();
+		variables.setVariablesProp(gisModelProp.getVariables());
+
+		ActionsComponent actions = new ActionsComponent();
+		add(actions);
+		actions.createNew();
+		actions.setActionsProp(gisModelProp.getActions());
+
+		ScheduleComponent scheduleComponent = new ScheduleComponent();
+		add(scheduleComponent);
+		scheduleComponent.setScheduleProp(gisModelProp.getSchedule());
+
+		AgentsComponent agents = new AgentsComponent();
+		add(agents);
+		agents.setAgentsProp(gisModelProp.getAgents());
+
+		GisDisplay gisDisplay = new GisDisplay();
+		add(gisDisplay);
+		gisDisplay.createNew();
+		gisDisplay.setGisDisplayProp(gisModelProp.getGisDisplay());
+
+		MasterSchedule masterSchedule = new MasterSchedule();
+		add(masterSchedule);
 	}	
 }

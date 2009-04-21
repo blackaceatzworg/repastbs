@@ -90,10 +90,10 @@ public class GridModel extends AbstractModel {
 		gridSpace.createNew();
 		gridModelProp.setGridSpace(gridSpace.getGridSpaceProp());
 		
-		GridDisplay display = new GridDisplay();
-		add(display);
-		display.createNew();
-		gridModelProp.setGridDisplay(display.getGridDisplayProp());
+		GridDisplay gridDisplay = new GridDisplay();
+		add(gridDisplay);
+		gridDisplay.createNew();
+		gridModelProp.setGridDisplay(gridDisplay.getGridDisplayProp());
 		
 		MasterSchedule masterSchedule = new MasterSchedule();
 		add(masterSchedule);

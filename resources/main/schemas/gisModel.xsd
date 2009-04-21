@@ -15,6 +15,7 @@
 						<xsd:element name="actions" type="com:ActionsProp" />
 						<xsd:element name="schedule" type="com:ScheduleProp" />
 						<xsd:element name="agents" type="com:AgentsProp" />
+						<xsd:element name="gisDisplay" type="com:GisDisplayProp" />
 					</xsd:sequence>
 				</xsd:extension>
 			</xsd:complexContent>

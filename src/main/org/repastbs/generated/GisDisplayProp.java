@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for StringComponentProp complex type.
+ * <p>Java class for GisDisplayProp complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="StringComponentProp">
+ * &lt;complexType name="GisDisplayProp">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="large" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="actions" type="{http://repastbs/components}ActionsProp"/>
+ *         &lt;element name="schedule" type="{http://repastbs/components}ScheduleProp"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,54 +35,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StringComponentProp", propOrder = {
-    "value",
-    "large"
+@XmlType(name = "GisDisplayProp", propOrder = {
+    "actions",
+    "schedule"
 })
-public class StringComponentProp {
+public class GisDisplayProp {
 
     @XmlElement(required = true)
-    protected String value;
-    protected boolean large;
+    protected ActionsProp actions;
+    @XmlElement(required = true)
+    protected ScheduleProp schedule;
 
     /**
-     * Gets the value of the value property.
+     * Gets the value of the actions property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link ActionsProp }
      *     
      */
-    public String getValue() {
-        return value;
+    public ActionsProp getActions() {
+        return actions;
     }
 
     /**
-     * Sets the value of the value property.
+     * Sets the value of the actions property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link ActionsProp }
      *     
      */
-    public void setValue(String value) {
-        this.value = value;
+    public void setActions(ActionsProp value) {
+        this.actions = value;
     }
 
     /**
-     * Gets the value of the large property.
+     * Gets the value of the schedule property.
      * 
+     * @return
+     *     possible object is
+     *     {@link ScheduleProp }
+     *     
      */
-    public boolean isLarge() {
-        return large;
+    public ScheduleProp getSchedule() {
+        return schedule;
     }
 
     /**
-     * Sets the value of the large property.
+     * Sets the value of the schedule property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link ScheduleProp }
+     *     
      */
-    public void setLarge(boolean value) {
-        this.large = value;
+    public void setSchedule(ScheduleProp value) {
+        this.schedule = value;
     }
 
 }

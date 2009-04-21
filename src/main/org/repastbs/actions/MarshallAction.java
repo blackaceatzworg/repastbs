@@ -18,9 +18,6 @@ import javax.xml.bind.Marshaller;
 
 import org.repastbs.RepastBS;
 import org.repastbs.Utils;
-import org.repastbs.generated.GisModelProp;
-import org.repastbs.generated.GridModelProp;
-import org.repastbs.generated.NetworkModelProp;
 import org.repastbs.gui.XMLFileFilter;
 
 public class MarshallAction extends AbstractAction {
