@@ -16,6 +16,7 @@ import org.repastbs.component.ScheduleComponent;
 import org.repastbs.component.VariablesComponent;
 import org.repastbs.component.display.NetworkDisplay;
 import org.repastbs.component.network.NetworkAgent;
+import org.repastbs.component.network.NetworkPlot;
 import org.repastbs.dynamic.DynamicException;
 import org.repastbs.dynamic.JavassistGenerator;
 import org.repastbs.generated.ModelProp;
@@ -91,6 +92,10 @@ public class NetworkModel extends AbstractModel {
 		add(networkDisplay);
 		networkDisplay.createNew();
 		networkModelProp.setNetworkDisplay(networkDisplay.getNetworkDisplayProp());
+		
+		NetworkPlot networkPlot = new NetworkPlot();
+		add(networkPlot);
+		networkPlot.createNew();
 	}
 	
 	/**
