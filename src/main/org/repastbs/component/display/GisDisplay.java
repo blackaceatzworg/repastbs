@@ -73,6 +73,10 @@ public class GisDisplay extends AbstractComponent implements DynamicChanger, Sch
 		generator.addImport("java.util");
 		generator.addImport("uchicago.src.sim.network");
 		generator.addImport("uchicago.src.sim.gui");
+		generator.addImport("uchicago.src.sim.engine");
+		generator.addImport("uchicago.src.sim.space");
+		generator.addImport("cern.jet.random.Uniform");
+
 	}
 
 	/**
@@ -81,7 +85,9 @@ public class GisDisplay extends AbstractComponent implements DynamicChanger, Sch
 	@Override
 	public void generateMethods(DynamicGenerator generator)
 			throws DynamicException {
-		// TODO Auto-generated method stub
+		StringBuffer displayMethod = new StringBuffer();
+		displayMethod.append("Object2DDisplay object2ddisplay = new Object2DDisplay(space);");
+		displayMethod.append("object2ddisplay.setObjectList(getAgentList());");
 		
 	}
 

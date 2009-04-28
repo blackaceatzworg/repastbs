@@ -2,6 +2,7 @@ package org.repastbs.component.gis;
 
 import org.dom4j.Node;
 import org.repastbs.component.AbstractComponent;
+import org.repastbs.component.Action;
 import org.repastbs.component.ActionsComponent;
 import org.repastbs.component.Agent;
 import org.repastbs.component.ComponentEvent;
@@ -67,11 +68,28 @@ Agent, ComponentListener, DynamicChanger {
 		ActionsComponent actions = new ActionsComponent();
 		add(actions);
 		actions.createNew();
+		Action move = actions.createAction("move", null,
+				"space.putObjectAt(x, y, null);\n"+
+				"space.putObjectAt($1, $2, this);\n"+
+				"if (torus) {\n"+
+				"$1 = ((Object2DTorus)space).xnorm($1);\n"+
+				"$2 = ((Object2DTorus)space).ynorm($2);\n" +
+				"}\n"+
+				"x = $1;\n"+
+				"y = $2;\n",  "void" +
+				"world.getObjectAt(space.getCellCol(newX), space.getCellRow(newY)) != null);" +
+				"world.putObjectAt(space.getCellCol(x), space.getCellRow(y), null)" +
+				"world.putObjectAt(space.getCellCol(newX), space.getCellRow(newY), this)");
+		move.addParameter("double");
 		gisAgentProp.setActions(actions.getActionsProp());
 		
 		VariablesComponent variables = new VariablesComponent();
 		add(variables);
 		variables.createNew();
+		variables.createVariable("space", "uchicago.src.sim.space.RasterSpace", null, true, false, false);
+		variables.createVariable("world", "uchicago.src.sim.space.Object2DGrid", null, true, false, false);
+		variables.createVariable("x", "double", null, true, false, false);
+		variables.createVariable("y", "double", null, true, false, false);
 		gisAgentProp.setVariables(variables.getVariablesProp());
 		
 		ScheduleComponent schedule = new ScheduleComponent();
@@ -82,20 +100,17 @@ Agent, ComponentListener, DynamicChanger {
 
 	@Override
 	public String getIterableClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return getName();
 	}
 
 	@Override
 	public String getSchedulableObjectName() {
-		// TODO Auto-generated method stub
-		return null;
+		return groupName.getValue();
 	}
 
 	@Override
 	public boolean isIterable() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -113,40 +128,76 @@ Agent, ComponentListener, DynamicChanger {
 
 	@Override
 	public void generateFields() throws DynamicException {
-		// TODO Auto-generated method stub
-		
+		generator.init();
+		generator.addImport("org.repastbs.model");
+		generator.addField("model", getModel().getGenerator().getClassName(), null,true);
+		generator.addImport("uchicago.src.sim.engine");
+		generator.setClassName(getName());
+		AbstractComponent.generateHolderFields(this);
+		AbstractComponent.generateChangerFields(this,generator);
 	}
 
 	@Override
 	public void generateMethods() throws DynamicException {
-		// TODO Auto-generated method stub
-		
+		AbstractComponent.generateHolderMethods(this);
+		AbstractComponent.generateChangerMethods(this,generator);
+		generator.saveToByteCode("output");
+		generator.saveSourceCode("output");
 	}
 
 	@Override
 	public DynamicGenerator getGenerator() {
-		// TODO Auto-generated method stub
-		return null;
+		return generator;
 	}
 
 	@Override
 	public void componentChanged(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getSource()==agentName)
+			setName(agentName.getValue());
 	}
 
 	@Override
 	public void generateFields(DynamicGenerator generator)
 			throws DynamicException {
-		// TODO Auto-generated method stub
-		
+		generator.addField(groupName.getValue(), "DefaultGroup", null,true);
+		generator.addImport(getName());
 	}
 
 	@Override
 	public void generateMethods(DynamicGenerator generator)
 			throws DynamicException {
-		// TODO Auto-generated method stub
+		StringBuffer initGroup = new StringBuffer();
+		initGroup.append(groupName.getValue()).append(" = new DefaultGroup(Class.forName(\""+getName()+"\"), \"step\");");
+		try {
+			generator.insertBefore("setup", null, initGroup.toString());
+		} catch (DynamicException x) {
+			generator.addMethod("setup", null, null, null, initGroup.toString());
+		}
 		
+		generator.addImport("java.util");
+		StringBuffer initAgents = new StringBuffer();
+		initAgents.append("Iterator iterator = ").append(groupName.getValue()).append(".iterator();");
+		initAgents.append("while (iterator.hasNext()) {");
+		initAgents.append("		").append(getName()).append(" agent = (")
+			.append(getName()).append(") iterator.next();");
+		initAgents.append("		agent.setModel(this);");
+		initAgents.append("}");
+		initAgents.append("initAgents();");
+		initAgents.append("getAgentList().addAll(").append(groupName.getValue()).append(");");
+		
+		
+		try {
+			generator.insertAfter("begin", null, initAgents.toString() );
+
+		} catch(DynamicException e) {
+			generator.addMethod("begin",null,null, null, initAgents.toString() );
+		}	
+		
+		try {
+			generator.insertBefore("setup", null, "getAgentList().clear();" );
+		} catch(DynamicException e) {
+			generator.addMethod("setup",null,null, null, "getAgentList().clear();" );
+		}
 	}
 
 	/**
