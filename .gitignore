@@ -6,3 +6,5 @@ package.html
 CVS
 .cvsignore
 repastbs.nsi
+.idea
+*.iml
